@@ -10,16 +10,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 py-3 px-5">
+    <nav className="bg-white py-3 px-5 shadow-xl">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo and Mobile Hamburger Icon */}
         <div className="flex items-center">
-          <Link href="/" className="text-white text-xl font-bold mr-4">
+          <Link href="/" className="text-black text-xl font-bold mr-4">
             EduNest
           </Link>
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none md:hidden"  // Hide on medium and up
+            className="text-black focus:outline-none md:hidden"  // Hide on medium and up
           >
             <svg
               className="w-6 h-6 fill-current"
@@ -44,25 +44,25 @@ const Navbar = () => {
           <div className="text-sm md:flex md:items-center md:space-x-4">
             <Link
               href="/dashboard"
-              className="block mt-4 md:inline-block md:mt-0 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+              className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
             >
               Dashboard
             </Link>
             <Link
               href="/register"
-              className="block mt-4 md:inline-block md:mt-0 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+              className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
             >
               Register
             </Link>
             <Link
               href="/login"
-              className="block mt-4 md:inline-block md:mt-0 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+              className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
             >
               Login
             </Link>
             <Link
               href="/logout"
-              className="block mt-4 md:inline-block md:mt-0 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+              className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
             >
               Logout
             </Link>
@@ -70,7 +70,7 @@ const Navbar = () => {
             {/* Profile Image (Dummy) */}
             <div className="ml-4">
               <Image
-                src="/profile.jpg" // Path to your dummy profile image
+                src="https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg"
                 alt="Profile"
                 width={32}
                 height={32}
