@@ -25,7 +25,7 @@ const page = () => {
           <div className="text-center text-gray-500 mb-4">Or</div>
 
           <form>
-            {/* Name */}
+            {/* Email */}
             <div className="mb-4">
               <label
                 htmlFor="email"

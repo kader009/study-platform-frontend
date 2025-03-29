@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white py-3 px-5 shadow-xl">
+    <nav className="bg-white py-3 px-5 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo and Mobile Hamburger Icon */}
         <div className="flex items-center">

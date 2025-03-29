@@ -63,7 +63,7 @@ const page = () => {
                 htmlFor="photo"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Photo (Direct Link or ImgBB URL)
+                Photo Url
               </label>
               <input
                 type="text"
