@@ -19,7 +19,7 @@ const SessionData = async () => {
 
   return (
     <div className="container mx-auto py-16 px-8">
-      <h2 className="text-3xl font-semibold mb-8 text-center">Approved Sessions</h2>
+      <h2 className="text-3xl font-semibold mb-8 text-center"> <span className='text-blue-600'>Approved</span> Sessions</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sessions.slice(0, 6).map((session: SessionProps) => {
           const currentTime = new Date();
@@ -29,7 +29,7 @@ const SessionData = async () => {
           return (
             <div
               key={session._id}
-              className="bg-white rounded-lg shadow-md p-4 transition transform hover:scale-105"
+              className="bg-white rounded-lg shadow-md p-4 transition transform hover:scale-95"
             >
               <h3 className="text-lg font-semibold text-blue-600 mb-2">
                 {session.sessionTitle}
@@ -59,7 +59,7 @@ const SessionData = async () => {
         })}
       </div>
       <div className="mt-10 text-center">
-        <Link href="/all-sessions">
+        <Link href="/session">
           <span className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold py-2 px-6 rounded-md transition duration-300">
             View All Sessions
           </span>

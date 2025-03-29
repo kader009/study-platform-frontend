@@ -49,7 +49,7 @@ const Navbar = () => {
               Dashboard
             </Link>
             <Link
-              href="/dashboard"
+              href="/session"
               className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
             >
               All Session
