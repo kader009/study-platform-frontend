@@ -19,7 +19,7 @@ const Navbar = () => {
           </Link>
           <button
             onClick={toggleMenu}
-            className="text-black focus:outline-none md:hidden"  // Hide on medium and up
+            className="text-black focus:outline-none md:hidden" // Hide on medium and up
           >
             <svg
               className="w-6 h-6 fill-current"
@@ -47,6 +47,12 @@ const Navbar = () => {
               className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
             >
               Dashboard
+            </Link>
+            <Link
+              href="/dashboard"
+              className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+            >
+              All Session
             </Link>
             <Link
               href="/register"
