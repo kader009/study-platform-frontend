@@ -1,5 +1,7 @@
-import { FcGoogle } from 'react-icons/fc'; 
-import { BsGithub } from 'react-icons/bs'; 
+'use client';
+import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { GooglelogIn, logIn } from '@/lib/auth';
 
 const page = () => {
   return (
@@ -12,11 +14,17 @@ const page = () => {
 
           {/* Social Login Buttons */}
           <div className="flex justify-around mb-4">
-            <button className="bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
+            <button
+              className="bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
+              onClick={() => GooglelogIn()}
+            >
               <FcGoogle className="mr-2" />
               Google
             </button>
-            <button className="bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
+            <button
+              className="bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
+              onClick={() => logIn()}
+            >
               <BsGithub className="mr-2" />
               GitHub
             </button>
