@@ -3,7 +3,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { GooglelogIn, logIn } from '@/lib/auth';
 
-const page = () => {
+const page =  () => {
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
