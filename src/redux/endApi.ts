@@ -18,15 +18,7 @@ const EduNestApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
-
-
-
-
-
   }),
 });
 
-export const {
-  useSignUpMutation,
-  useLoginMutation,
-} = EduNestApi;
+export const { useSignUpMutation, useLoginMutation } = EduNestApi;

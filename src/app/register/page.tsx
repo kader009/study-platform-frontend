@@ -2,8 +2,26 @@
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { GooglelogIn, logIn } from '@/lib/auth';
+import { FormEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
+import { SetEmail, SetName, SetPhotoUrl, SetPassword, SetRole } from '@/redux/features/authentication/registerSlice';
+import { useSignUpMutation } from '@/redux/endApi';
 
-const page = () => {
+const Page = () => {
+  const dispatch = useAppDispatch()
+  const {name, email, photoUrl, password, role} = useAppSelector((state:RootState) => state.register)
+  const [signUp] = useSignUpMutation()
+  const handleSubmit = async(e:FormEvent) =>{
+    e.preventDefault()
+
+    try {
+      const user = await signUp({name, email, photoUrl, password, role})
+      console.log('user data', user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
@@ -32,7 +50,7 @@ const page = () => {
 
           <div className="text-center text-gray-500 mb-4">Or</div>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             {/* Name */}
             <div className="mb-4">
               <label
@@ -46,6 +64,8 @@ const page = () => {
                 id="name"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Your Name"
+                value={name}
+                onChange={(e) => dispatch(SetName(e.target.value))}
               />
             </div>
 
@@ -62,6 +82,8 @@ const page = () => {
                 id="email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Your Email"
+                value={email}
+                onChange={(e) => dispatch(SetEmail(e.target.value))}
               />
             </div>
 
@@ -78,6 +100,8 @@ const page = () => {
                 id="photo"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Direct image URL or ImgBB URL"
+                value={photoUrl}
+                onChange={(e) => dispatch(SetPhotoUrl(e.target.value))}
               />
             </div>
 
@@ -94,6 +118,8 @@ const page = () => {
                 id="password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Your Password"
+                value={password}
+                onChange={(e) => dispatch(SetPassword(e.target.value))}
               />
             </div>
 
@@ -108,7 +134,10 @@ const page = () => {
               <select
                 id="role"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                value={role}
+                onChange={(e) => dispatch(SetRole(e.target.value))}
               >
+                <option value="" disabled>Select Role</option>
                 <option value="Student">Student</option>
                 <option value="Tutor">Tutor</option>
                 <option value="Admin">Admin</option>
@@ -131,4 +160,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
