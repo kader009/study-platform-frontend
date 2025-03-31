@@ -13,7 +13,7 @@ const EduNestApi = baseApi.injectEndpoints({
     // login route here
     login: build.mutation({
       query: (userInfo) => ({
-        url: '/login',
+        url: '/api/v1/login',
         method: 'POST',
         body: userInfo,
       }),

@@ -2,8 +2,30 @@
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { GooglelogIn, logIn } from '@/lib/auth';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
+import { FormEvent } from 'react';
+import { useLoginMutation } from '@/redux/endApi';
+import {
+  SetEmail,
+  SetPassword,
+} from '@/redux/features/authentication/loginSlice';
 
-const page =  () => {
+const Page = () => {
+  const dispatch = useAppDispatch();
+  const { email, password } = useAppSelector((state: RootState) => state.login);
+  const [signIn] = useLoginMutation();
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const user = await signIn({ email, password });
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
@@ -32,7 +54,7 @@ const page =  () => {
 
           <div className="text-center text-gray-500 mb-4">Or</div>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             {/* Email */}
             <div className="mb-4">
               <label
@@ -46,6 +68,8 @@ const page =  () => {
                 id="email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Your Email"
+                value={email}
+                onChange={(e) => dispatch(SetEmail(e.target.value))}
               />
             </div>
 
@@ -62,6 +86,8 @@ const page =  () => {
                 id="password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Your Password"
+                value={password}
+                onChange={(e) => dispatch(SetPassword(e.target.value))}
               />
             </div>
 
@@ -81,4 +107,4 @@ const page =  () => {
   );
 };
 
-export default page;
+export default Page;
