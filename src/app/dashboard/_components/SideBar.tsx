@@ -63,10 +63,10 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/dashboard/admin/all-material"
+              href="/dashboard/admin/all-user"
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
-              All Material
+              All User
             </Link>
           </li>
           <li>
@@ -79,12 +79,13 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/dashboard/admin/all-user"
+              href="/dashboard/admin/all-material"
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
-              All User
+              All Material
             </Link>
           </li>
+
           <li>
             <Link
               href="/dashboard/tutor/create-session"
