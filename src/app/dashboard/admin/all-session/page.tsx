@@ -21,9 +21,10 @@ const page = () => {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[80px]">No</TableHead>
-              <TableHead>Session id</TableHead>
-              <TableHead>Tutor email</TableHead>
-              <TableHead>Transaction (free/paid)</TableHead>
+              <TableHead>Session name</TableHead>
+              <TableHead>Tutor name</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>fee</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -33,11 +34,18 @@ const page = () => {
               <TableCell>Paid</TableCell>
               <TableCell>Credit Card</TableCell>
               <TableCell className="">$250.00</TableCell>
+              <TableCell className="">$250.00</TableCell>
               <Button
                 type="submit"
-                className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
+                className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2 mx-2"
               >
-                View Detail
+                Update
+              </Button>
+              <Button
+                type="submit"
+                className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
+              >
+                Delete
               </Button>
             </TableRow>
           </TableBody>
