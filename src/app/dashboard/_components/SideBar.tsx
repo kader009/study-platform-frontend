@@ -14,7 +14,7 @@ const Sidebar = () => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
-          <XMarkIcon className="h-6 w-6" />
+          <XMarkIcon className="h-6 w-6 bg-black" />
         ) : (
           <Bars3Icon className="h-6 w-6" />
         )}
@@ -22,7 +22,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-gray-900 text-white p-4 w-64 z-40 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full bg-gray-900 text-white p-4 w-48 z-40 transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : '-translate-x-64'
         } md:relative md:translate-x-0`}
       >
@@ -38,10 +38,35 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/dashboard/students"
+              href="/dashboard/student/booked-session"
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
-              Students
+              Booked Session
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/dashboard/student/create-note"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              Create Note
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/student/manage-note"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              Manage Note
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/student/study-material"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              Study Material
             </Link>
           </li>
           <li>
@@ -58,7 +83,7 @@ const Sidebar = () => {
       {/* Overlay for Mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+          className="fixed inset-0  bg-opacity-50 z-30 md:hidden"
           onClick={() => setIsOpen(false)}
         ></div>
       )}

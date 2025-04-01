@@ -3,9 +3,9 @@ import Sidebar from './_components/SideBar'
 
 const Dashbooardlayout = ({children} : {children: ReactNode}) => {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       <Sidebar/>
-      <main className="flex-1 p-6">
+      <main className="flex-1">
 
       {children}
       </main>
