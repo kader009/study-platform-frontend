@@ -96,6 +96,14 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
+              href="/dashboard/tutor/view-all-session"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              View Session
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/dashboard/tutor/upload-material"
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
@@ -108,14 +116,6 @@ const Sidebar = () => {
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
               View Material
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/dashboard/tutor/view-all-session"
-              className="block py-2 px-4 hover:bg-gray-700 rounded"
-            >
-              View Session
             </Link>
           </li>
         </ul>
