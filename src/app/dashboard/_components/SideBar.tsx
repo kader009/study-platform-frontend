@@ -30,14 +30,6 @@ const Sidebar = () => {
         <ul className="space-y-2">
           <li>
             <Link
-              href="/dashboard"
-              className="block py-2 px-4 hover:bg-gray-700 rounded"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
               href="/dashboard/student/booked-session"
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
@@ -71,10 +63,58 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/dashboard/courses"
+              href="/dashboard/admin/all-material"
               className="block py-2 px-4 hover:bg-gray-700 rounded"
             >
-              Courses
+              All Material
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/admin/all-session"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              All Session
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/admin/all-user"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              All User
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/tutor/create-session"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              Create Session
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/tutor/upload-material"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              Upload Material
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/tutor/view-all-material"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              View Material
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/tutor/view-all-session"
+              className="block py-2 px-4 hover:bg-gray-700 rounded"
+            >
+              View Session
             </Link>
           </li>
         </ul>
