@@ -15,7 +15,7 @@ const page = () => {
         <h2 className="text-center font-semibold my-6">
           Manage your notes
         </h2>
-        <div className="overflow-x-auto w-full">
+        <div className="overflow-x-auto">
 
         <Table className=' min-w-[600px] w-full '>
           <TableHeader>
