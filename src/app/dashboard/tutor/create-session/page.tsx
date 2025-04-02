@@ -22,7 +22,7 @@ const Page = () => {
   };
   return (
     <div>
-      <div className="flex justify-center items-center min-h-screen px-4 mt-4">
+      <div className="flex justify-center items-center px-4 mt-4">
         <div className="max-w-[800px] w-full mx-auto p-6 bg-white rounded-lg shadow-md">
           <h2 className="text-center text-2xl font-bold text-black mb-2">
             Create study session
@@ -36,6 +36,7 @@ const Page = () => {
                 id="session-title"
                 type="session-title"
                 disabled
+                placeholder='Session title'
                 className="border border-black"
               />
             </div>

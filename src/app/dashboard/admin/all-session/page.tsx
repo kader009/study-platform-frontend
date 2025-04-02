@@ -17,7 +17,7 @@ const page = () => {
         </h2>
         <div className="overflow-x-auto w-full">
 
-        <Table className=' min-w-[600px] w-full '>
+        <Table className='min-w-[600px] w-full '>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[80px]">No</TableHead>
