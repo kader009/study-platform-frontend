@@ -1,4 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const loginUser = createAsyncThunk('user/login', async (obj) => {
+  const request = await axios.post(`http://localhost:5000/api/v1/login`, obj);
+  const response = await request.data.data;
+  localStorage.setItem('user', JSON.stringify(response));
+  return response;
+});
 
 interface User {
   _id: string;
@@ -10,10 +18,14 @@ interface User {
 
 interface AuthState {
   user: User | null;
+  loading: boolean;
+  error: null;
 }
 
 const initialState: AuthState = {
   user: null,
+  loading: false,
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -30,5 +42,5 @@ const userSlice = createSlice({
   },
 });
 
-export const {setUser, logout} = userSlice.actions;
+export const { setUser, logout } = userSlice.actions;
 export default userSlice.reducer;

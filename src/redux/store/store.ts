@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import registerReducer from '../features/authentication/registerSlice';
 import loginReducer from '../features/authentication/loginSlice';
+import userReducer from '../features/authentication/userSlice';
 import { baseApi } from '../baseApi';
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     register: registerReducer,
     login: loginReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat(baseApi.middleware),

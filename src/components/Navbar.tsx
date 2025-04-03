@@ -2,8 +2,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
 
 const Navbar = () => {
+  const user = useAppSelector((state: RootState) => state.user.user);
+  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
