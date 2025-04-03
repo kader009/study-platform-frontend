@@ -1,15 +1,7 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-const page = () => {
+const Page = () => {
     const users = [
       { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
       { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
@@ -20,7 +12,7 @@ const page = () => {
       <div>
         <h2 className="text-center font-semibold my-6">A list of all users</h2>
         <div className="w-full">
-          <div className="flex w-full max-w-sm items-center space-x-2 mx-2 my-4">
+          <div className="flex w-full max-w-sm items-center space-x-2 my-4">
             <Input type="text" placeholder="Search by name and email" />
             {/* <Button type="submit">Search</Button> */}
           </div>
@@ -43,9 +35,9 @@ const page = () => {
               <td className="px-4 py-2 border">{user.email}</td>
               <td className="px-4 py-2 border">{user.role}</td>
               <td className="px-4 py-2 border">
-                <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                <Button className=" text-white px-3 py-1 rounded hover:bg-blue-6">
                   Action
-                </button>
+                </Button>
               </td>
             </tr>
           ))}
@@ -58,4 +50,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
