@@ -1,12 +1,15 @@
+'use client';
+import Loader from '@/components/Loader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useAllUserQuery } from '@/redux/endApi';
 
 const Page = () => {
-    const users = [
-      { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-      { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
-      { id: 3, name: "Alice Johnson", email: "alice@example.com", role: "Editor" },
-    ];
+  const { data: users, isLoading, isError } = useAllUserQuery([]);
+  
+  if(isLoading) return <Loader/>
+  if(isError) return <div className='flex justify-center items-center text-2xl text-red-600'>something went wrong with the api</div>
+  
   return (
     <div>
       <div>
@@ -17,33 +20,33 @@ const Page = () => {
             {/* <Button type="submit">Search</Button> */}
           </div>
           <div className="overflow-x-auto">
-      <table className="min-w-full border border-gray-200 bg-white shadow-md rounded-lg">
-        <thead className="bg-gray-100">
-          <tr className="text-left">
-            <th className="px-4 py-2 border">No</th>
-            <th className="px-4 py-2 border">User Name</th>
-            <th className="px-4 py-2 border">User Email</th>
-            <th className="px-4 py-2 border">Role</th>
-            <th className="px-4 py-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user.id} className="text-left hover:bg-gray-50">
-              <td className="px-4 py-2 border">{index + 1}</td>
-              <td className="px-4 py-2 border">{user.name}</td>
-              <td className="px-4 py-2 border">{user.email}</td>
-              <td className="px-4 py-2 border">{user.role}</td>
-              <td className="px-4 py-2 border">
-                <Button className=" text-white px-3 py-1 rounded hover:bg-blue-6">
-                  Action
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            <table className="min-w-full border border-gray-200 bg-white shadow-md rounded-lg">
+              <thead className="bg-gray-100">
+                <tr className="text-left">
+                  <th className="px-4 py-2 border">No</th>
+                  <th className="px-4 py-2 border">User Name</th>
+                  <th className="px-4 py-2 border">User Email</th>
+                  <th className="px-4 py-2 border">Role</th>
+                  <th className="px-4 py-2 border">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users?.map((user, index) => (
+                  <tr key={user.id} className="text-left hover:bg-gray-50">
+                    <td className="px-4 py-2 border">{index + 1}</td>
+                    <td className="px-4 py-2 border">{user.name}</td>
+                    <td className="px-4 py-2 border">{user.email}</td>
+                    <td className="px-4 py-2 border">{user.role}</td>
+                    <td className="px-4 py-2 border">
+                      <Button className=" text-white px-3 py-1 rounded hover:bg-blue-6">
+                        Action
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
