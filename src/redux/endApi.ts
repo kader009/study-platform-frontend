@@ -18,7 +18,11 @@ const EduNestApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+
+    allUser: build.query({
+      query: () => '/api/v1/user'
+    })
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation } = EduNestApi;
+export const { useSignUpMutation, useLoginMutation, useAllUserQuery } = EduNestApi;
