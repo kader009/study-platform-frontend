@@ -10,6 +10,7 @@ import {
   SetEmail,
   SetPassword,
 } from '@/redux/features/authentication/loginSlice';
+import { setUser } from '@/redux/features/authentication/userSlice';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -20,8 +21,9 @@ const Page = () => {
     e.preventDefault();
 
     try {
-      const user = await signIn({ email, password });
-      console.log(user);
+      const {data} = await signIn({ email, password });
+      dispatch(setUser(data))
+      console.log('login success', data);
     } catch (error) {
       console.log(error);
     }

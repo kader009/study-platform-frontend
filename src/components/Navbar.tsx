@@ -6,8 +6,16 @@ import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 
 const Navbar = () => {
-  const user = useAppSelector((state: RootState) => state.user.user);
-  console.log(user);
+  const { user, error, loading } = useAppSelector(
+    (state: RootState) => state.user
+  );
+  const localUser =
+    typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+  const storedUser = localUser ? JSON.parse(localUser) : null;
+  const displayUser = user || storedUser;
+  console.log(displayUser);
+  console.log(user, error, loading);
+  console.log(localStorage.getItem('user'));
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -80,10 +88,13 @@ const Navbar = () => {
             {/* Profile Image (Dummy) */}
             <div className="ml-4">
               <Image
-                src="https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg"
+                src={
+                  displayUser?.photoUrl ||
+                  'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg'
+                }
                 alt="Profile"
-                width={32}
-                height={32}
+                width={50}
+                height={70}
                 className="rounded-full"
               />
             </div>
