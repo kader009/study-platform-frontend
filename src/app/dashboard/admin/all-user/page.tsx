@@ -3,7 +3,8 @@ import Loader from '@/components/Loader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAllUserQuery, useUpdateUserMutation } from '@/redux/endApi';
-import { FaUserTie, FaUserShield } from 'react-icons/fa'; // Import Icons
+import { useState } from 'react';
+import { FaUserTie, FaUserShield } from 'react-icons/fa';
 
 interface Userprops {
   _id: string;
@@ -18,22 +19,25 @@ const Page = () => {
     data: users,
     isLoading,
     isError,
-  } = useAllUserQuery({},{
-    pollingInterval: 1000,
-    // refetchOnMountOrArgChange: true,
-    // refetchOnReconnect: true,
-    // refetchOnFocus: true,
-  });
-  const [updateUser] = useUpdateUserMutation()
-  const handleRole = async(id:string, currentRole:string) =>{
-    if(currentRole !== 'admin'){
+  } = useAllUserQuery(
+    {},
+    {
+      pollingInterval: 1000,
+    }
+  );
+
+  const [updateUser] = useUpdateUserMutation();
+  const [searchTerm, setsearchTerm] = useState('');
+
+  const handleRole = async (id: string, currentRole: string) => {
+    if (currentRole !== 'admin') {
       try {
-        await updateUser({id, role:'admin'})
+        await updateUser({ id, role: 'admin' });
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   if (isLoading) return <Loader />;
   if (isError)
@@ -43,14 +47,24 @@ const Page = () => {
       </div>
     );
 
+  const filterUser = users?.filter(
+    (user: Userprops) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <div>
         <h2 className="text-center font-semibold my-6">A list of all users</h2>
         <div className="w-full">
           <div className="flex w-full max-w-sm items-center space-x-2 my-4">
-            <Input type="text" placeholder="Search by name and email" />
-            {/* <Button type="submit">Search</Button> */}
+            <Input
+              type="text"
+              placeholder="Search by name and email"
+              value={searchTerm}
+              onChange={(e) => setsearchTerm(e.target.value)}
+            />
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-200 bg-white shadow-md rounded-lg">
@@ -64,7 +78,7 @@ const Page = () => {
                 </tr>
               </thead>
               <tbody>
-                {users?.map((user: Userprops, index: number) => (
+                {filterUser?.map((user: Userprops, index: number) => (
                   <tr key={user._id} className="text-left hover:bg-gray-50">
                     <td className="px-4 py-2 border">{index + 1}</td>
                     <td className="px-4 py-2 border">{user.name}</td>
@@ -72,8 +86,10 @@ const Page = () => {
                     <td className="px-4 py-2 border">{user.role}</td>
                     <td className="px-4 py-2 border">
                       <Button
-                      disabled={user.role === 'admin'}
-                      className=" text-white px-3 py-1 rounded hover:bg-blue-6" onClick={() => handleRole(user?._id, user?.role)}>
+                        disabled={user.role === 'admin'}
+                        className=" text-white px-3 py-1 rounded hover:bg-blue-6"
+                        onClick={() => handleRole(user?._id, user?.role)}
+                      >
                         {user.role === 'admin' ? (
                           <>
                             <FaUserShield /> Admin
