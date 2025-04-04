@@ -52,13 +52,23 @@ const EduNestApi = baseApi.injectEndpoints({
       }),
     }),
 
-    // delete note from the list
+    // delete note based on id
     deleteNote: build.mutation({
       query: (id) => ({
         url: `/api/v1/note/${id}`,
         method: 'DELETE',
       }),
     }),
+
+    // update note based on id
+    updateNote: build.mutation({
+      query: ({id, ...data}) => ({
+        url:`/api/v1/note/${id}`,
+        method:"PATCH",
+        body: data
+      })
+    })
+
   }),
 });
 
@@ -69,5 +79,6 @@ export const {
   useAllTutorQuery,
   useCreateNoteMutation,
   useUserNoteQuery,
-  useDeleteNoteMutation
+  useDeleteNoteMutation,
+  useUpdateNoteMutation
 } = EduNestApi; 

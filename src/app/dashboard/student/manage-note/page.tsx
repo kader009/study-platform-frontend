@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import {
   Table,
   TableBody,
@@ -7,10 +7,23 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
-import { useDeleteNoteMutation, useUserNoteQuery } from '@/redux/endApi';
+import {
+  useDeleteNoteMutation,
+  useUpdateNoteMutation,
+  useUserNoteQuery,
+} from '@/redux/endApi';
 import { RootState } from '@/redux/store/store';
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
 
 interface Noteprops {
   _id: string;
@@ -19,12 +32,43 @@ interface Noteprops {
 }
 
 const Page = () => {
-  const { user } = useAppSelector((state:RootState) => state.user);
-  const { data: notes, isLoading, isError } = useUserNoteQuery(user?.email, { pollingInterval :1000});
-  const [deleteNote] = useDeleteNoteMutation()
-  // const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state: RootState) => state.user);
+  const {
+    data: notes,
+    isLoading,
+    isError,
+  } = useUserNoteQuery(user?.email, { pollingInterval: 1000 });
+  const [deleteNote] = useDeleteNoteMutation();
+  const [updateNote] = useUpdateNoteMutation();
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedNote, setSelectedNote] = useState<Noteprops | null>(null);
 
-  if (isLoading) return <div className='flex justify-center items-center h-screen'>Loading..</div>;
+  const handleOpenModal = (note: Noteprops) => {
+    setSelectedNote(note);
+    setOpenModal(true);
+  };
+
+  const handleUpdate = async () => {
+    if (!selectedNote) return;
+
+    try {
+      const response = await updateNote({
+        id: selectedNote._id,
+        title: selectedNote.title,
+        description: selectedNote.description,
+      });
+
+      console.log('update response', response);
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-screen">Loading..</div>
+    );
   if (isError) return <div>Something went wrong..</div>;
   return (
     <div>
@@ -48,19 +92,20 @@ const Page = () => {
                     <TableCell>{note.title}</TableCell>
                     <TableCell>{note.description}</TableCell>
                     <TableCell>
-                    <Button
-                      type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 mx-2 text-white py-2 rounded-lg mt-2"
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
-                      onClick={() => deleteNote(note._id)}
-                    >
-                      Delete
-                    </Button>
+                      <Button
+                        type="submit"
+                        className="w-24 bg-black hover:bg-gray-900 mx-2 text-white py-2 rounded-lg mt-2"
+                        onClick={() => handleOpenModal(note)}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
+                        onClick={() => deleteNote(note._id)}
+                      >
+                        Delete
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))
@@ -75,6 +120,42 @@ const Page = () => {
           </Table>
         </div>
       </div>
+
+      {/* Modal */}
+      {openModal && selectedNote && (
+        <Dialog open={openModal} onOpenChange={setOpenModal}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Note</DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col gap-4">
+              <Input
+                type="text"
+                placeholder="Title"
+                value={selectedNote.title}
+                onChange={(e) =>
+                  setSelectedNote({ ...selectedNote, title: e.target.value })
+                }
+              />
+              <Input
+                type="text"
+                placeholder="Description"
+                value={selectedNote.description}
+                onChange={(e) =>
+                  setSelectedNote({
+                    ...selectedNote,
+                    description: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <DialogFooter>
+              <Button onClick={() => setOpenModal(false)}>Cancel</Button>
+              <Button onClick={handleUpdate}>Save Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };
