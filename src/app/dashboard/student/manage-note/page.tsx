@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
-import { useUserNoteQuery } from '@/redux/endApi';
+import { useDeleteNoteMutation, useUserNoteQuery } from '@/redux/endApi';
 import { RootState } from '@/redux/store/store';
 
 interface Noteprops {
@@ -20,9 +20,11 @@ interface Noteprops {
 
 const Page = () => {
   const { user } = useAppSelector((state:RootState) => state.user);
-  const { data: notes, isLoading, isError } = useUserNoteQuery(user?.email);
+  const { data: notes, isLoading, isError } = useUserNoteQuery(user?.email, { pollingInterval :1000});
+  const [deleteNote] = useDeleteNoteMutation()
+  // const dispatch = useAppDispatch()
 
-  if (isLoading) return <div className='flex justify-center items-center min-h-screen'>Loading..</div>;
+  if (isLoading) return <div className='flex justify-center items-center h-screen'>Loading..</div>;
   if (isError) return <div>Something went wrong..</div>;
   return (
     <div>
@@ -45,6 +47,7 @@ const Page = () => {
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>{note.title}</TableCell>
                     <TableCell>{note.description}</TableCell>
+                    <TableCell>
                     <Button
                       type="submit"
                       className="w-24 bg-black hover:bg-gray-900 mx-2 text-white py-2 rounded-lg mt-2"
@@ -54,9 +57,11 @@ const Page = () => {
                     <Button
                       type="submit"
                       className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
+                      onClick={() => deleteNote(note._id)}
                     >
                       Delete
                     </Button>
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (
