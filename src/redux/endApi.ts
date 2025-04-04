@@ -62,13 +62,21 @@ const EduNestApi = baseApi.injectEndpoints({
 
     // update note based on id
     updateNote: build.mutation({
-      query: ({id, ...data}) => ({
-        url:`/api/v1/note/${id}`,
-        method:"PATCH",
-        body: data
-      })
-    })
+      query: ({ id, ...data }) => ({
+        url: `/api/v1/note/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+    }),
 
+    // update user role from user/tutor to admin
+    updateUser: build.mutation({
+      query: ({ id, role }) => ({
+        url: `/api/v1/user/${id}`,
+        method: 'PATCH',
+        body: { role },
+      }),
+    }),
   }),
 });
 
@@ -80,5 +88,5 @@ export const {
   useCreateNoteMutation,
   useUserNoteQuery,
   useDeleteNoteMutation,
-  useUpdateNoteMutation
-} = EduNestApi; 
+  useUpdateNoteMutation,
+} = EduNestApi;

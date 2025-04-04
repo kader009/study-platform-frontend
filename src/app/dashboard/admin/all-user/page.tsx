@@ -3,6 +3,7 @@ import Loader from '@/components/Loader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAllUserQuery } from '@/redux/endApi';
+import { FaUserTie, FaUserShield } from 'react-icons/fa'; // Import Icons
 
 interface Userprops {
   _id: string;
@@ -17,7 +18,7 @@ const Page = () => {
     data: users,
     isLoading,
     isError,
-  } = useAllUserQuery({
+  } = useAllUserQuery({},{
     pollingInterval: 3000,
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
@@ -43,7 +44,7 @@ const Page = () => {
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-200 bg-white shadow-md rounded-lg">
-              <thead >
+              <thead>
                 <tr className="text-left">
                   <th className="px-4 py-2 border">No</th>
                   <th className="px-4 py-2 border">User Name</th>
@@ -61,7 +62,15 @@ const Page = () => {
                     <td className="px-4 py-2 border">{user.role}</td>
                     <td className="px-4 py-2 border">
                       <Button className=" text-white px-3 py-1 rounded hover:bg-blue-6">
-                        Action
+                        {user.role === 'admin' ? (
+                          <>
+                            <FaUserShield /> Admin
+                          </>
+                        ) : (
+                          <>
+                            <FaUserTie /> Make Admin
+                          </>
+                        )}
                       </Button>
                     </td>
                   </tr>
