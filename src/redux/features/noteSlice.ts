@@ -24,12 +24,12 @@ const noteSlice = createSlice({
       state.title = action.payload;
     },
 
-    setDescriptiion: (state, action: PayloadAction<string>) => {
+    setDescription: (state, action: PayloadAction<string>) => {
       state.description = action.payload;
     },
   },
 });
 
-export const { setEmail, setTitle, setDescriptiion } = noteSlice.actions;
+export const { setEmail, setTitle, setDescription } = noteSlice.actions;
 
 export default noteSlice.reducer;

@@ -5,23 +5,31 @@ import { GooglelogIn, logIn } from '@/lib/auth';
 import { FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
-import { SetEmail, SetName, SetPhotoUrl, SetPassword, SetRole } from '@/redux/features/authentication/registerSlice';
+import {
+  SetEmail,
+  SetName,
+  SetPhotoUrl,
+  SetPassword,
+  SetRole,
+} from '@/redux/features/authentication/registerSlice';
 import { useSignUpMutation } from '@/redux/endApi';
 
 const Page = () => {
-  const dispatch = useAppDispatch()
-  const {name, email, photoUrl, password, role} = useAppSelector((state:RootState) => state.register)
-  const [signUp] = useSignUpMutation()
-  const handleSubmit = async(e:FormEvent) =>{
-    e.preventDefault()
+  const dispatch = useAppDispatch();
+  const { name, email, photoUrl, password, role } = useAppSelector(
+    (state: RootState) => state.register
+  );
+  const [signUp] = useSignUpMutation();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
     try {
-      const user = await signUp({name, email, photoUrl, password, role})
+      const user = await signUp({ name, email, photoUrl, password, role });
       console.log('user data', user);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
@@ -137,7 +145,9 @@ const Page = () => {
                 value={role}
                 onChange={(e) => dispatch(SetRole(e.target.value))}
               >
-                <option value="" disabled>Select Role</option>
+                <option value="" disabled>
+                  Select Role
+                </option>
                 <option value="Student">Student</option>
                 <option value="Tutor">Tutor</option>
                 <option value="Admin">Admin</option>

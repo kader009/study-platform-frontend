@@ -3,26 +3,44 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { useCreateNoteMutation } from '@/redux/endApi';
+import {
+  setDescription,
+  setEmail,
+  setTitle,
+} from '@/redux/features/noteSlice';
 
 const Page = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
   console.log('create note', user);
-  const dispatch = useAppDispatch()
-  const [createNote] = useCreateNoteMutation()
-  const handleSubmit = async(e: FormEvent) => {
+  const dispatch = useAppDispatch();
+  const { email, title, description } = useAppSelector(
+    (state: RootState) => state.note
+  );
+  console.log(email);
+  const [createNote] = useCreateNoteMutation();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      const userNote = await createNote()
+      const userNote = await createNote({ email, title, description });
+      console.log('user note data', userNote);
     } catch (error) {
       console.log(error);
     }
     console.log();
   };
+
+  useEffect(() => {
+    if (user?.email) {
+      dispatch(setEmail(user.email));
+    }
+  }, [user?.email, dispatch]);
+
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen px-4">
@@ -40,6 +58,7 @@ const Page = () => {
                 type="email"
                 disabled
                 defaultValue={user?.email}
+                value={email}
                 className="border border-black"
               />
             </div>
@@ -52,6 +71,8 @@ const Page = () => {
                 type="text"
                 placeholder="Enter a title"
                 className="border border-black"
+                value={title}
+                onChange={(e) => dispatch(setTitle(e.target.value))}
               />
             </div>
             <div>
@@ -62,6 +83,8 @@ const Page = () => {
                 id="description"
                 placeholder="Write your notes here"
                 className="border border-black"
+                value={description}
+                onChange={(e) => dispatch(setDescription(e.target.value))}
               />
             </div>
             <Button
