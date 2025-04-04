@@ -4,8 +4,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { FormEvent } from 'react';
+import { useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
 
-const page = () => {
+const Page = () => {
+  const { user } = useAppSelector((state: RootState) => state.user);
+  console.log('create note', user);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log();
@@ -26,6 +30,7 @@ const page = () => {
                 id="email"
                 type="email"
                 disabled
+                defaultValue={user?.email}
                 className="border border-black"
               />
             </div>
@@ -63,4 +68,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
