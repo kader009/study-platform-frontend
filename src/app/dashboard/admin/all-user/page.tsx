@@ -2,7 +2,7 @@
 import Loader from '@/components/Loader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useAllUserQuery } from '@/redux/endApi';
+import { useAllUserQuery, useUpdateUserMutation } from '@/redux/endApi';
 import { FaUserTie, FaUserShield } from 'react-icons/fa'; // Import Icons
 
 interface Userprops {
@@ -19,11 +19,21 @@ const Page = () => {
     isLoading,
     isError,
   } = useAllUserQuery({},{
-    pollingInterval: 3000,
-    refetchOnMountOrArgChange: true,
-    refetchOnReconnect: true,
-    refetchOnFocus: true,
+    pollingInterval: 1000,
+    // refetchOnMountOrArgChange: true,
+    // refetchOnReconnect: true,
+    // refetchOnFocus: true,
   });
+  const [updateUser] = useUpdateUserMutation()
+  const handleRole = async(id:string, currentRole:string) =>{
+    if(currentRole !== 'admin'){
+      try {
+        await updateUser({id, role:'admin'})
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 
   if (isLoading) return <Loader />;
   if (isError)
@@ -61,7 +71,9 @@ const Page = () => {
                     <td className="px-4 py-2 border">{user.email}</td>
                     <td className="px-4 py-2 border">{user.role}</td>
                     <td className="px-4 py-2 border">
-                      <Button className=" text-white px-3 py-1 rounded hover:bg-blue-6">
+                      <Button
+                      disabled={user.role === 'admin'}
+                      className=" text-white px-3 py-1 rounded hover:bg-blue-6" onClick={() => handleRole(user?._id, user?.role)}>
                         {user.role === 'admin' ? (
                           <>
                             <FaUserShield /> Admin

@@ -89,4 +89,5 @@ export const {
   useUserNoteQuery,
   useDeleteNoteMutation,
   useUpdateNoteMutation,
+  useUpdateUserMutation
 } = EduNestApi;
