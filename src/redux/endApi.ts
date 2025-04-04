@@ -1,4 +1,4 @@
-import { baseApi } from './baseApi';
+import { baseApi } from './baseApi'; 
 
 const EduNestApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -34,8 +34,16 @@ const EduNestApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+
+    // create note for student
+    createNote: build.mutation({
+      query: () =>({
+        url: '/api/v1/note',
+        method:"POST"
+      })
+    })
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation, useAllUserQuery, useAllTutorQuery } =
+export const { useSignUpMutation, useLoginMutation, useAllUserQuery, useAllTutorQuery, useCreateNoteMutation } =
   EduNestApi;

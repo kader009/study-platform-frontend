@@ -4,14 +4,23 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { FormEvent } from 'react';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
+import { useCreateNoteMutation } from '@/redux/endApi';
 
 const Page = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
   console.log('create note', user);
-  const handleSubmit = (e: FormEvent) => {
+  const dispatch = useAppDispatch()
+  const [createNote] = useCreateNoteMutation()
+  const handleSubmit = async(e: FormEvent) => {
     e.preventDefault();
+
+    try {
+      const userNote = await createNote()
+    } catch (error) {
+      console.log(error);
+    }
     console.log();
   };
   return (
