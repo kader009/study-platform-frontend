@@ -35,6 +35,7 @@ const page = () => {
               <TableCell>Credit Card</TableCell>
               <TableCell className="">$250.00</TableCell>
               <TableCell className="">$250.00</TableCell>
+              <TableCell className="">
               <Button
                 type="submit"
                 className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2 mx-2"
@@ -47,6 +48,7 @@ const page = () => {
               >
                 Delete
               </Button>
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
