@@ -93,6 +93,14 @@ const EduNestApi = baseApi.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+
+    // session approve from the admin
+    approveSession: build.mutation({
+      query: (id) => ({
+        url: `api/v1/session/approve/${id}`,
+        method: 'PATCH',
+      }),
+    }),
   }),
 });
 
@@ -107,5 +115,6 @@ export const {
   useUpdateNoteMutation,
   useUpdateUserMutation,
   useAllSessionQuery,
-  useDeleteSessionMutation
+  useDeleteSessionMutation,
+  useApproveSessionMutation
 } = EduNestApi;

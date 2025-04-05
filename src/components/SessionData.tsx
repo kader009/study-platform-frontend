@@ -14,7 +14,7 @@ interface SessionProps {
 }
 
 const SessionData = async () => {
-  const data = await fetch('http://localhost:5000/api/v1/session');
+  const data = await fetch('http://localhost:5000/api/v1/session/approved');
   const sessions = await data.json();
 
   return (

@@ -13,17 +13,22 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { FormEvent, useState } from 'react';
+import { useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
 
 const Page = () => {
   const [date, setDate] = useState<Date>();
+  const { user } = useAppSelector((state: RootState) => state.user);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log();
   };
+
   return (
     <div>
       <div className="flex justify-center items-center px-4 mt-4">
-        <div className="max-w-[800px] w-full mx-auto p-6 bg-white rounded-lg shadow-md">
+        <div className="max-w-[800px] w-full mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
           <h2 className="text-center text-2xl font-bold text-black mb-2">
             Create study session
           </h2>
@@ -35,8 +40,7 @@ const Page = () => {
               <Input
                 id="session-title"
                 type="session-title"
-                disabled
-                placeholder='Session title'
+                placeholder="Session title"
                 className="border border-black"
               />
             </div>
@@ -48,6 +52,8 @@ const Page = () => {
                 id="tutor-name"
                 type="tutor-name"
                 placeholder="Enter a title"
+                disabled
+                defaultValue={user?.name}
                 className="border border-black"
               />
             </div>
@@ -58,13 +64,15 @@ const Page = () => {
               <Input
                 id="tutor-email"
                 type="tutor-email"
+                disabled
+                defaultValue={user?.email}
                 placeholder="Enter a title"
                 className="border border-black"
               />
             </div>
             <div>
               <Label htmlFor="description" className="mb-2 font-semibold">
-              Description
+                Description
               </Label>
               <Textarea
                 id="description"
@@ -101,7 +109,7 @@ const Page = () => {
             </div>
             <div>
               <Label htmlFor="description" className="mb-2 font-semibold">
-              Registration end
+                Registration end
               </Label>
               <Popover>
                 <PopoverTrigger asChild>
@@ -180,40 +188,48 @@ const Page = () => {
                 </PopoverContent>
               </Popover>
               <div>
-              <Label htmlFor="session-duration" className="mb-2 font-semibold mt-2">
-                Session duration
-              </Label>
-              <Input
-                id="session-duration"
-                type="session-duration"
-                placeholder="session duration"
-                className="border border-black"
-              />
-            </div>
-            <div>
-              <Label htmlFor="registration" className="mb-2 font-semibold mt-2">
-                Registration fee
-              </Label>
-              <Input
-                id="registration"
-                type="registration"
-                placeholder="Registratio fee"
-                disabled
-                className="border border-black"
-              />
-            </div>
-            <div>
-              <Label htmlFor="status" className="mb-2 font-semibold mt-2">
-                Status
-              </Label>
-              <Input
-                id="status"
-                type="status"
-                disabled
-                placeholder="status here.."
-                className="border border-black"
-              />
-            </div>
+                <Label
+                  htmlFor="session-duration"
+                  className="mb-2 font-semibold mt-2"
+                >
+                  Session duration
+                </Label>
+                <Input
+                  id="session-duration"
+                  type="session-duration"
+                  placeholder="session duration"
+                  className="border border-black"
+                />
+              </div>
+              <div>
+                <Label
+                  htmlFor="registration"
+                  className="mb-2 font-semibold mt-2"
+                >
+                  Registration fee
+                </Label>
+                <Input
+                  id="registration"
+                  type="registration"
+                  placeholder="Registratio fee"
+                  disabled
+                  defaultValue='0'
+                  className="border border-black"
+                />
+              </div>
+              <div>
+                <Label htmlFor="status" className="mb-2 font-semibold mt-2">
+                  Status
+                </Label>
+                <Input
+                  id="status"
+                  type="status"
+                  disabled
+                  placeholder="status here.."
+                  defaultValue="pending"
+                  className="border border-black"
+                />
+              </div>
             </div>
             <Button
               type="submit"

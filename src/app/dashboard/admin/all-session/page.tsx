@@ -9,7 +9,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { useAllSessionQuery, useDeleteSessionMutation } from '@/redux/endApi';
+import {
+  useAllSessionQuery,
+  useApproveSessionMutation,
+  useDeleteSessionMutation,
+} from '@/redux/endApi';
 import Loader from '@/components/Loader';
 
 interface Sessionprops {
@@ -17,6 +21,7 @@ interface Sessionprops {
   sessionTitle: string;
   tutorName: string;
   registrationFee: string;
+  status: string;
 }
 
 const Page = () => {
@@ -26,6 +31,7 @@ const Page = () => {
     isError,
   } = useAllSessionQuery({}, { pollingInterval: 2000 });
   const [deleteSession] = useDeleteSessionMutation();
+  const [approveSession] = useApproveSessionMutation();
 
   if (isLoading) return <Loader />;
   if (isError)
@@ -38,7 +44,7 @@ const Page = () => {
           A list of all study session
         </h2>
         <div className="overflow-x-auto w-full">
-          <Table className="min-w-[600px] w-full ">
+          <Table className="min-w-[600px] w-full">
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[80px]">No</TableHead>
@@ -53,14 +59,25 @@ const Page = () => {
               {sessions?.length > 0 ? (
                 sessions?.map((session: Sessionprops, index: number) => (
                   <TableRow key={session._id}>
-                    <TableCell className="font-medium">{index + 1}</TableCell>
+                    <TableCell className="font-medium">{index + 1}.</TableCell>
                     <TableCell>{session.sessionTitle}</TableCell>
                     <TableCell>{session.tutorName}</TableCell>
-                    <TableCell className="">$250.00</TableCell>
-                    <TableCell className="">
-                      ${session.registrationFee}
+                    <TableCell>
+                      {session.status === 'approved' ? (
+                        <span className="text-black ">
+                          Approved
+                        </span>
+                      ) : (
+                        <Button
+                          className="bg-black text-white py-1 px-3 rounded-md"
+                          onClick={() => approveSession(session._id)}
+                        >
+                          Reject
+                        </Button>
+                      )}
                     </TableCell>
-                    <TableCell className="">
+                    <TableCell>${session.registrationFee}</TableCell>
+                    <TableCell>
                       <Button
                         type="submit"
                         className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2 mx-2"
