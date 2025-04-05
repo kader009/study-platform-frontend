@@ -70,6 +70,7 @@ const Page = () => {
       <div className="flex justify-center items-center h-screen">Loading..</div>
     );
   if (isError) return <div>Something went wrong..</div>;
+  
   return (
     <div>
       <div>
