@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { useAllSessionQuery } from '@/redux/endApi';
+import { useAllSessionQuery, useDeleteSessionMutation } from '@/redux/endApi';
 import Loader from '@/components/Loader';
 
 interface Sessionprops {
@@ -20,7 +20,12 @@ interface Sessionprops {
 }
 
 const Page = () => {
-  const { data: sessions, isLoading, isError } = useAllSessionQuery({});
+  const {
+    data: sessions,
+    isLoading,
+    isError,
+  } = useAllSessionQuery({}, { pollingInterval: 2000 });
+  const [deleteSession] = useDeleteSessionMutation();
 
   if (isLoading) return <Loader />;
   if (isError)
@@ -65,6 +70,7 @@ const Page = () => {
                       <Button
                         type="submit"
                         className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
+                        onClick={() => deleteSession(session._id)}
                       >
                         Delete
                       </Button>

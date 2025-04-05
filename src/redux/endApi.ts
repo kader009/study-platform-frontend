@@ -80,11 +80,19 @@ const EduNestApi = baseApi.injectEndpoints({
 
     // all session data for admin role
     allSession: build.query({
-      query: () =>({
+      query: () => ({
         url: '/api/v1/session',
-        method:'GET'
-      })
-    })
+        method: 'GET',
+      }),
+    }),
+
+    // delete session from the admin
+    deleteSession: build.mutation({
+      query: (id) => ({
+        url: `/api/v1/session/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -98,5 +106,6 @@ export const {
   useDeleteNoteMutation,
   useUpdateNoteMutation,
   useUpdateUserMutation,
-  useAllSessionQuery
+  useAllSessionQuery,
+  useDeleteSessionMutation
 } = EduNestApi;
