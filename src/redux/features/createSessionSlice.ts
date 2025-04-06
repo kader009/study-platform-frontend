@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface Sessionprops {
   sessionTitle: string;
   tutorName: string;
+  tutorEmail: string;
   sessionDescription: string;
   registrationStartDate: string;
   registrationEndDate: string;
@@ -16,6 +17,7 @@ interface Sessionprops {
 const initialState: Sessionprops = {
   sessionTitle: '',
   tutorName: '',
+  tutorEmail: '',
   sessionDescription: '',
   registrationStartDate: '',
   registrationEndDate: '',
@@ -36,6 +38,10 @@ const createSessionSlice = createSlice({
 
     SettutorName: (state, action: PayloadAction<string>) => {
       state.tutorName = action.payload;
+    },
+
+    SettutorEmail: (state, action: PayloadAction<string>) => {
+      state.tutorEmail = action.payload;
     },
 
     SetsessionDescription: (state, action: PayloadAction<string>) => {
@@ -65,6 +71,10 @@ const createSessionSlice = createSlice({
     SetregistrationFee: (state, action: PayloadAction<string>) => {
       state.registrationFee = action.payload;
     },
+
+    SetStatus: (state, action: PayloadAction<string>) => {
+      state.status = action.payload;
+    },
   },
 });
 
@@ -78,6 +88,8 @@ export const {
   SetsessionDescription,
   SetsessionDuration,
   SettutorName,
+  SetStatus,
+  SettutorEmail
 } = createSessionSlice.actions;
 
 export default createSessionSlice.reducer;

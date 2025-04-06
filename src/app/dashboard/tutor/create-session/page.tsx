@@ -15,6 +15,8 @@ import {
   SetsessionDescription,
   SetsessionDuration,
   SetSessionTitle,
+  SetStatus,
+  SettutorName,
 } from '@/redux/features/createSessionSlice';
 
 const Page = () => {
@@ -32,6 +34,7 @@ const Page = () => {
     sessionDuration,
     status,
     tutorName,
+    
   } = useAppSelector((state) => state.createSession);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -88,6 +91,8 @@ const Page = () => {
                 placeholder="Enter a title"
                 disabled
                 defaultValue={user?.name}
+                value={user?.name}
+                onChange={(e) => dispatch(SettutorName(e.target.value))}
                 className="border border-black"
               />
             </div>
@@ -100,6 +105,8 @@ const Page = () => {
                 type="tutor-email"
                 disabled
                 defaultValue={user?.email}
+                value={user?.email}
+                onChange={(e) => dispatch(setturtorem)}
                 placeholder="Enter a title"
                 className="border border-black"
               />
@@ -127,7 +134,7 @@ const Page = () => {
                 <input
                   type="date"
                   value={registrationStartDate}
-                  onChange={(e) => SetregistrationStartDate(e.target.value)}
+                  onChange={(e) => dispatch(SetregistrationStartDate(e.target.value))}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 />
               </div>
@@ -140,7 +147,7 @@ const Page = () => {
                 <input
                   type="date"
                   value={registrationEndDate}
-                  onChange={(e) => SetregistrationEndDate(e.target.value)}
+                  onChange={(e) => dispatch(SetregistrationEndDate(e.target.value))}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 />
               </div>
@@ -151,7 +158,7 @@ const Page = () => {
                 <input
                   type="date"
                   value={classStartDate}
-                  onChange={(e) => SetclassStartDate(e.target.value)}
+                  onChange={(e) => dispatch(SetclassStartDate(e.target.value))}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 />
               </div>
@@ -162,11 +169,27 @@ const Page = () => {
                 <input
                   type="date"
                   value={classEndDate}
-                  onChange={(e) => SetclassEndDate(e.target.value)}
+                  onChange={(e) => dispatch(SetclassEndDate(e.target.value))}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 />
               </div>
             </div>
+            <div>
+                <Label
+                  htmlFor="session-duration"
+                  className="mb-2 font-semibold mt-2"
+                >
+                  Session duration
+                </Label>
+                <Input
+                  id="session-duration"
+                  type="session-duration"
+                  placeholder="session duration"
+                  value={sessionDuration}
+                  onChange={(e) =>{dispatch(SetsessionDuration(e.target.value))}}
+                  className="border border-black"
+                />
+              </div>
             <div>
               <Label htmlFor="registration" className="mb-2 font-semibold mt-2">
                 Registration fee
@@ -178,6 +201,7 @@ const Page = () => {
                 disabled
                 defaultValue="0"
                 className="border border-black"
+                value={registrationFee}
               />
             </div>
             <div>
@@ -191,6 +215,8 @@ const Page = () => {
                 placeholder="status here.."
                 defaultValue="pending"
                 className="border border-black"
+                value={status}
+                onChange={(e) => dispatch(SetStatus(e.target.value))}
               />
             </div>
 
