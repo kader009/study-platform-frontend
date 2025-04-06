@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { FormEvent} from 'react';
+import { FormEvent, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { usePostSessionMutation } from '@/redux/endApi';
@@ -17,6 +17,8 @@ import {
   SetSessionTitle,
   SetStatus,
   SettutorName,
+  SettutorEmail,
+  SetregistrationFee
 } from '@/redux/features/createSessionSlice';
 
 const Page = () => {
@@ -34,7 +36,7 @@ const Page = () => {
     sessionDuration,
     status,
     tutorName,
-    
+    tutorEmail
   } = useAppSelector((state) => state.createSession);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -43,15 +45,16 @@ const Page = () => {
     try {
       const sessionData = await postSession({
         sessionTitle,
-        classEndDate,
-        classStartDate,
-        registrationEndDate,
-        registrationFee,
-        registrationStartDate,
-        sessionDescription,
-        sessionDuration,
-        status,
         tutorName,
+        tutorEmail,
+        sessionDescription,
+        registrationStartDate,
+        registrationEndDate,
+        classStartDate,
+        sessionDuration,
+        classEndDate,
+        registrationFee,
+        status,
       });
 
       console.log('post session', sessionData);
@@ -59,6 +62,14 @@ const Page = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      dispatch(SettutorName(user.name));
+      dispatch(SettutorEmail(user.email));
+    }
+  }, [user, dispatch]);
+  
 
   return (
     <div>
@@ -92,7 +103,6 @@ const Page = () => {
                 disabled
                 defaultValue={user?.name}
                 value={user?.name}
-                onChange={(e) => dispatch(SettutorName(e.target.value))}
                 className="border border-black"
               />
             </div>
@@ -106,7 +116,6 @@ const Page = () => {
                 disabled
                 defaultValue={user?.email}
                 value={user?.email}
-                onChange={(e) => dispatch(setturtorem)}
                 placeholder="Enter a title"
                 className="border border-black"
               />
@@ -183,7 +192,7 @@ const Page = () => {
                 </Label>
                 <Input
                   id="session-duration"
-                  type="session-duration"
+                  type="number"
                   placeholder="session duration"
                   value={sessionDuration}
                   onChange={(e) =>{dispatch(SetsessionDuration(e.target.value))}}
@@ -196,12 +205,12 @@ const Page = () => {
               </Label>
               <Input
                 id="registration"
-                type="registration"
-                placeholder="Registratio fee"
+                type="number"
+                placeholder="Registration fee"
                 disabled
-                defaultValue="0"
                 className="border border-black"
                 value={registrationFee}
+                onChange={(e) => dispatch(SetregistrationFee(e.target.value))}
               />
             </div>
             <div>
@@ -212,8 +221,7 @@ const Page = () => {
                 id="status"
                 type="status"
                 disabled
-                placeholder="status here.."
-                defaultValue="pending"
+                placeholder="status"
                 className="border border-black"
                 value={status}
                 onChange={(e) => dispatch(SetStatus(e.target.value))}

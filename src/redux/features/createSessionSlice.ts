@@ -24,8 +24,8 @@ const initialState: Sessionprops = {
   classStartDate: '',
   classEndDate: '',
   sessionDuration: '',
-  registrationFee: '',
-  status: '',
+  registrationFee: '0',
+  status: 'pending',
 };
 
 const createSessionSlice = createSlice({

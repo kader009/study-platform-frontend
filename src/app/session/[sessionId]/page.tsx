@@ -21,9 +21,9 @@ const page = async ({ params }: PageProps) => {
         </p>
         <div className="flex items-center gap-2 text-gray-700">
           Rating:
-          {Datas.averageRating ? (
+          {Datas?.averageRating ? (
             <span className="font-medium text-yellow-500">
-              {Datas.averageRating}★
+              {Datas?.averageRating}★
             </span>
           ) : (
             <span className="text-yellow-500">⭐ No ratings yet</span>
@@ -49,16 +49,16 @@ const page = async ({ params }: PageProps) => {
             {new Date(Datas.classEndDate).toLocaleDateString()}
           </p>
           <p>
-            <span className="font-bold">Duration:</span> {Datas.sessionDuration}
+            <span className="font-bold">Duration:</span> {Datas.sessionDuration} hours
           </p>
           <p>
-            <span className="font-bold">Fee:</span> ${Datas.registrationFee}
+            <span className="font-bold">Fee:</span> ${Datas?.registrationFee}
           </p>
         </div>
 
         <div>
           <p className="font-bold text-gray-800">Reviews:</p>
-          {Datas.reviews.length > 0 ? (
+          {Datas?.reviews?.length > 0 ? (
             <ul className="list-disc list-inside text-gray-600 text-sm">
               {Datas.reviews.map((review: string, index: number) => (
                 <li key={index}>{review}</li>
