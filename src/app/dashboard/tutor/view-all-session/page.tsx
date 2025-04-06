@@ -7,8 +7,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import { RootState } from '@/redux/store/store';
 
 const page = () => {
+  const {user} = useAppSelector((state:RootState) =>)
   return (
     <div>
       <div>

@@ -110,6 +110,13 @@ const EduNestApi = baseApi.injectEndpoints({
         method: 'PATCH',
       }),
     }),
+
+    tutorSession: build.query({
+      query : (email) =>({
+        url: `/api/v1/session/${email}`,
+        method:"GET"
+      })
+    })
   }),
 });
 
@@ -126,5 +133,6 @@ export const {
   useAllSessionQuery,
   useDeleteSessionMutation,
   useApproveSessionMutation,
-  usePostSessionMutation
+  usePostSessionMutation,
+  useTutorSessionQuery
 } = EduNestApi;
