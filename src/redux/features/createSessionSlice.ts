@@ -6,7 +6,7 @@ interface Sessionprops {
   sessionDescription: string;
   registrationStartDate: string;
   registrationEndDate: string;
-  classStartTime: string;
+  classStartDate: string;
   classEndDate: string;
   sessionDuration: string;
   registrationFee: string;
@@ -19,7 +19,7 @@ const initialState: Sessionprops = {
   sessionDescription: '',
   registrationStartDate: '',
   registrationEndDate: '',
-  classStartTime: '',
+  classStartDate: '',
   classEndDate: '',
   sessionDuration: '',
   registrationFee: '',
@@ -50,8 +50,8 @@ const createSessionSlice = createSlice({
       state.registrationEndDate = action.payload;
     },
 
-    SetclassStartTime: (state, action: PayloadAction<string>) => {
-      state.classStartTime = action.payload;
+    SetclassStartDate: (state, action: PayloadAction<string>) => {
+      state.classStartDate = action.payload;
     },
 
     SetclassEndDate: (state, action: PayloadAction<string>) => {
@@ -71,7 +71,7 @@ const createSessionSlice = createSlice({
 export const {
   SetSessionTitle,
   SetclassEndDate,
-  SetclassStartTime,
+  SetclassStartDate,
   SetregistrationEndDate,
   SetregistrationFee,
   SetregistrationStartDate,

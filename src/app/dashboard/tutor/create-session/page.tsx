@@ -3,26 +3,58 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { FormEvent, useState } from 'react';
-import { useAppSelector } from '@/redux/hook';
+import { FormEvent} from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
+import { usePostSessionMutation } from '@/redux/endApi';
+import {
+  SetclassEndDate,
+  SetclassStartDate,
+  SetregistrationEndDate,
+  SetregistrationStartDate,
+  SetsessionDescription,
+  SetsessionDuration,
+  SetSessionTitle,
+} from '@/redux/features/createSessionSlice';
 
 const Page = () => {
-  const [date, setDate] = useState<Date>();
   const { user } = useAppSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
+  const [postSession] = usePostSessionMutation();
+  const {
+    sessionTitle,
+    classEndDate,
+    classStartDate,
+    registrationEndDate,
+    registrationFee,
+    registrationStartDate,
+    sessionDescription,
+    sessionDuration,
+    status,
+    tutorName,
+  } = useAppSelector((state) => state.createSession);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log();
+
+    try {
+      const sessionData = await postSession({
+        sessionTitle,
+        classEndDate,
+        classStartDate,
+        registrationEndDate,
+        registrationFee,
+        registrationStartDate,
+        sessionDescription,
+        sessionDuration,
+        status,
+        tutorName,
+      });
+
+      console.log('post session', sessionData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -42,6 +74,8 @@ const Page = () => {
                 type="session-title"
                 placeholder="Session title"
                 className="border border-black"
+                value={sessionTitle}
+                onChange={(e) => dispatch(SetSessionTitle(e.target.value))}
               />
             </div>
             <div>
@@ -78,159 +112,88 @@ const Page = () => {
                 id="description"
                 placeholder="Write your notes here"
                 className="border border-black"
+                value={sessionDescription}
+                onChange={(e) =>
+                  dispatch(SetsessionDescription(e.target.value))
+                }
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              {/* Registration start */}
+              <div>
+                <label className="block font-semibold mb-1">
+                  Registration start
+                </label>
+                <input
+                  type="date"
+                  value={registrationStartDate}
+                  onChange={(e) => SetregistrationStartDate(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                />
+              </div>
+
+              {/* Registration end */}
+              <div>
+                <label className="block font-semibold mb-1">
+                  Registration end
+                </label>
+                <input
+                  type="date"
+                  value={registrationEndDate}
+                  onChange={(e) => SetregistrationEndDate(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                />
+              </div>
+
+              {/* Class start */}
+              <div>
+                <label className="block font-semibold mb-1">Class start</label>
+                <input
+                  type="date"
+                  value={classStartDate}
+                  onChange={(e) => SetclassStartDate(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                />
+              </div>
+
+              {/* Class end */}
+              <div>
+                <label className="block font-semibold mb-1">Class end</label>
+                <input
+                  type="date"
+                  value={classEndDate}
+                  onChange={(e) => SetclassEndDate(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="registration" className="mb-2 font-semibold mt-2">
+                Registration fee
+              </Label>
+              <Input
+                id="registration"
+                type="registration"
+                placeholder="Registratio fee"
+                disabled
+                defaultValue="0"
+                className="border border-black"
               />
             </div>
             <div>
-              <Label htmlFor="description" className="mb-2 font-semibold">
-                Registration start
+              <Label htmlFor="status" className="mb-2 font-semibold mt-2">
+                Status
               </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={'outline'}
-                    className={cn(
-                      'w-full justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+              <Input
+                id="status"
+                type="status"
+                disabled
+                placeholder="status here.."
+                defaultValue="pending"
+                className="border border-black"
+              />
             </div>
-            <div>
-              <Label htmlFor="description" className="mb-2 font-semibold">
-                Registration end
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={'outline'}
-                    className={cn(
-                      'w-full justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div>
-              <Label htmlFor="description" className="mb-2 font-semibold">
-                Class start
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={'outline'}
-                    className={cn(
-                      'w-full justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div>
-              <Label htmlFor="description" className="mb-2 font-semibold">
-                Class end
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={'outline'}
-                    className={cn(
-                      'w-full justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <div>
-                <Label
-                  htmlFor="session-duration"
-                  className="mb-2 font-semibold mt-2"
-                >
-                  Session duration
-                </Label>
-                <Input
-                  id="session-duration"
-                  type="session-duration"
-                  placeholder="session duration"
-                  className="border border-black"
-                />
-              </div>
-              <div>
-                <Label
-                  htmlFor="registration"
-                  className="mb-2 font-semibold mt-2"
-                >
-                  Registration fee
-                </Label>
-                <Input
-                  id="registration"
-                  type="registration"
-                  placeholder="Registratio fee"
-                  disabled
-                  defaultValue='0'
-                  className="border border-black"
-                />
-              </div>
-              <div>
-                <Label htmlFor="status" className="mb-2 font-semibold mt-2">
-                  Status
-                </Label>
-                <Input
-                  id="status"
-                  type="status"
-                  disabled
-                  placeholder="status here.."
-                  defaultValue="pending"
-                  className="border border-black"
-                />
-              </div>
-            </div>
+
             <Button
               type="submit"
               className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg"

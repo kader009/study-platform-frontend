@@ -78,6 +78,15 @@ const EduNestApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // post session route for tutor
+    postSession: build.mutation({
+      query: (body) =>({
+        url:'/api/v1/session',
+        method: 'POST',
+        body
+      })
+    }),
+
     // all session data for admin role
     allSession: build.query({
       query: () => ({
@@ -116,5 +125,6 @@ export const {
   useUpdateUserMutation,
   useAllSessionQuery,
   useDeleteSessionMutation,
-  useApproveSessionMutation
+  useApproveSessionMutation,
+  usePostSessionMutation
 } = EduNestApi;
