@@ -72,7 +72,7 @@ const Page = () => {
                           className="bg-black text-white py-1 px-3 rounded-md"
                           onClick={() => approveSession(session._id)}
                         >
-                          Reject
+                          Pending
                         </Button>
                       )}
                     </TableCell>

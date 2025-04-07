@@ -111,9 +111,19 @@ const EduNestApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // tutor session get with email query
     tutorSession: build.query({
       query : (email) =>({
         url: `/api/v1/session/email/${email}`,
+        method:"GET"
+      })
+      
+    })
+
+    // tutor approved session get
+    tutorApprovedSession: build.query({
+      query: (email) =>({
+        url: `/api/v1/session/approved/${email}`,
         method:"GET"
       })
     })
