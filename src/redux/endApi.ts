@@ -113,7 +113,7 @@ const EduNestApi = baseApi.injectEndpoints({
 
     tutorSession: build.query({
       query : (email) =>({
-        url: `/api/v1/session/${email}`,
+        url: `/api/v1/session/email/${email}`,
         method:"GET"
       })
     })

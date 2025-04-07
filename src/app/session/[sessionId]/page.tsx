@@ -42,7 +42,7 @@ const page = async ({ params }: PageProps) => {
           </p>
           <p>
             <span className="font-bold">Class Start:</span>{' '}
-            {new Date(Datas.classStartTime).toLocaleDateString()}
+            {new Date(Datas.classStartDate).toLocaleDateString()}
           </p>
           <p>
             <span className="font-bold">Class End:</span>{' '}

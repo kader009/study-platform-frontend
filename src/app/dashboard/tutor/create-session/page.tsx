@@ -51,8 +51,8 @@ const Page = () => {
         registrationStartDate,
         registrationEndDate,
         classStartDate,
-        sessionDuration,
         classEndDate,
+        sessionDuration,
         registrationFee,
         status,
       });
