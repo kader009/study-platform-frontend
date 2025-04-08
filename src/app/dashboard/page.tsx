@@ -97,6 +97,36 @@ const Page = () => {
               />
             </div>
           </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+            <h2 className="text-lg font-semibold mb-4">🕒 Recent Activities</h2>
+            <ul className="space-y-2">
+              <li>Booked a session</li>
+              <li>Uploaded study material</li>
+              <li>Joined css class</li>
+            </ul>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+            <h2 className="text-lg font-semibold mb-4">📋 Upcoming Sessions</h2>
+            <table className="w-full table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Date</th>
+                  <th className="border px-4 py-2">Subject</th>
+                  <th className="border px-4 py-2">Tutor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border px-4 py-2">April 10</td>
+                  <td className="border px-4 py-2">Math</td>
+                  <td className="border px-4 py-2">Mr. Rahim</td>
+                </tr>
+                {/* Add more rows */}
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>
