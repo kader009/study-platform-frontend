@@ -17,7 +17,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
-import { useTutorApprovedSessionQuery } from '@/redux/endApi';
+import {
+  useMaterialPostMutation,
+  useTutorApprovedSessionQuery,
+} from '@/redux/endApi';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -37,7 +40,10 @@ const Page = () => {
     isError,
   } = useTutorApprovedSessionQuery(user?.email, { pollingInterval: 2000 });
   const [openModal, setOpenModal] = useState(false);
-  const [selectedUpload, setSelectedUpload] = useState<Approveprops | null>(null);
+  const [selectedUpload, setSelectedUpload] = useState<Approveprops | null>(
+    null
+  );
+  const [upload] = useMaterialPostMutation();
 
   const handleOpenModal = (note: Approveprops) => {
     setSelectedUpload(note);
@@ -108,22 +114,44 @@ const Page = () => {
         <Dialog open={openModal} onOpenChange={setOpenModal}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Material for: {selectedUpload.sessionTitle}</DialogTitle>
+              <DialogTitle>
+                Material for: {selectedUpload.sessionTitle}
+              </DialogTitle>
             </DialogHeader>
             <div className="flex flex-col gap-4">
-              <Label htmlFor="form" className='font-semibold'>Material title</Label>
+              <Label htmlFor="form" className="font-semibold">
+                Material title
+              </Label>
               <Input type="text" placeholder="Material title" />
 
-              <Label htmlFor="form" className='font-semibold'>Session id</Label>
-              <Input type="text" placeholder="Session id" disabled defaultValue={selectedUpload._id}/>
+              <Label htmlFor="form" className="font-semibold">
+                Session id
+              </Label>
+              <Input
+                type="text"
+                placeholder="Session id"
+                disabled
+                defaultValue={selectedUpload._id}
+              />
 
-              <Label htmlFor="form" className='font-semibold'>Tutor email</Label>
-              <Input type="text" placeholder="Tutor email" disabled defaultValue={selectedUpload.tutorEmail}/>
+              <Label htmlFor="form" className="font-semibold">
+                Tutor email
+              </Label>
+              <Input
+                type="text"
+                placeholder="Tutor email"
+                disabled
+                defaultValue={selectedUpload.tutorEmail}
+              />
 
-              <Label htmlFor="form" className='font-semibold'>Upload images</Label>
+              <Label htmlFor="form" className="font-semibold">
+                Upload images
+              </Label>
               <Input type="file" placeholder="upload image" accept="image/**" />
 
-              <Label htmlFor="form" className='font-semibold'>Google drive link</Label>
+              <Label htmlFor="form" className="font-semibold">
+                Google drive link
+              </Label>
               <Input type="text" placeholder="Google drive link" />
             </div>
             <DialogFooter>

@@ -80,11 +80,11 @@ const EduNestApi = baseApi.injectEndpoints({
 
     // post session route for tutor
     postSession: build.mutation({
-      query: (body) =>({
-        url:'/api/v1/session',
+      query: (body) => ({
+        url: '/api/v1/session',
         method: 'POST',
-        body
-      })
+        body,
+      }),
     }),
 
     // all session data for admin role
@@ -113,19 +113,28 @@ const EduNestApi = baseApi.injectEndpoints({
 
     // tutor session get with email query
     tutorSession: build.query({
-      query : (email) =>({
+      query: (email) => ({
         url: `/api/v1/session/email/${email}`,
-        method:"GET"
-      })      
+        method: 'GET',
+      }),
     }),
 
     // tutor approved session get
     tutorApprovedSession: build.query({
-      query: (email) =>({
+      query: (email) => ({
         url: `/api/v1/session/approved/${email}`,
-        method:"GET"
-      })
-    })
+        method: 'GET',
+      }),
+    }),
+
+    // material post route for tutor
+    materialPost: build.mutation({
+      query: (body) => ({
+        url: '/api/v1/material',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -144,5 +153,6 @@ export const {
   useApproveSessionMutation,
   usePostSessionMutation,
   useTutorSessionQuery,
-  useTutorApprovedSessionQuery
+  useTutorApprovedSessionQuery,
+  useMaterialPostMutation
 } = EduNestApi;
