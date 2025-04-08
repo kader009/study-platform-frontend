@@ -8,10 +8,22 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { RootState } from '@/redux/store/store';
-import { useDeleteMaterialMutation, useGetMaterialByemailQuery } from '@/redux/endApi';
+import {
+  useDeleteMaterialMutation,
+  useGetMaterialByemailQuery,
+} from '@/redux/endApi';
 import { useAppSelector } from '@/redux/hook';
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
 
 interface Materislprops {
   _id: string;
@@ -28,7 +40,24 @@ const Page = () => {
   } = useGetMaterialByemailQuery(user?.email, {
     pollingInterval: 2000,
   });
-  const [deleteMaterial] = useDeleteMaterialMutation()
+  const [deleteMaterial] = useDeleteMaterialMutation();
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedMaterial, setSelectedMaterial] = useState<Materislprops | null>(null);
+
+  const handleOpenModal = (material: Materislprops) => {
+    setSelectedMaterial(material);
+    setOpenModal(true);
+  };
+
+  const handleUpdate = async () => {
+    if (!selectedMaterial) return;
+
+    try {
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (isLoading)
     return (
@@ -63,6 +92,7 @@ const Page = () => {
                     <Button
                       type="submit"
                       className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2 mx-2"
+                      onClick={() => handleOpenModal(material)}
                     >
                       Update
                     </Button>
@@ -86,6 +116,26 @@ const Page = () => {
           </Table>
         </div>
       </div>
+
+      {/* Modal */}
+      {openModal && selectedMaterial && (
+        <Dialog open={openModal} onOpenChange={setOpenModal}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Material</DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col gap-4">
+              <Input type="text" placeholder="Title" value={selectedMaterial.MaterialTitle}/>
+              <Input type="file" placeholder="Upload images" />
+              <Input type="text" placeholder="Google drive link" />
+            </div>
+            <DialogFooter>
+              <Button onClick={() => setOpenModal(false)}>Cancel</Button>
+              <Button onClick={handleUpdate}>Update Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

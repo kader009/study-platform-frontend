@@ -4,6 +4,7 @@ import loginReducer from '../features/authentication/loginSlice';
 import userReducer from '../features/authentication/userSlice';
 import noteReducer from '../features/noteSlice';
 import materialReducer from '../features/uploadMaterial';
+import updatematerialReducer from '../features/updateMaterial';
 import createSessionReducer from '../features/createSessionSlice';
 import { baseApi } from '../baseApi';
 
@@ -15,7 +16,8 @@ export const store = configureStore({
     user: userReducer,
     note: noteReducer,
     createSession: createSessionReducer,
-    uploadMaterial:materialReducer
+    uploadMaterial: materialReducer,
+    updateMaterial: updatematerialReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat(baseApi.middleware),

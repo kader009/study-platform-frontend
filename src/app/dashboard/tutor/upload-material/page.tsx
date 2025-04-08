@@ -24,7 +24,13 @@ import {
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { SetGoogledriveLink, SetMaterialTitle, SetSessionId, SetTutorEmail, SetUploadImages } from '@/redux/features/uploadMaterial';
+import {
+  SetGoogledriveLink,
+  SetMaterialTitle,
+  SetSessionId,
+  SetTutorEmail,
+  SetUploadImages,
+} from '@/redux/features/uploadMaterial';
 
 interface Approveprops {
   _id: string;
@@ -44,9 +50,15 @@ const Page = () => {
   const [selectedUpload, setSelectedUpload] = useState<Approveprops | null>(
     null
   );
-  const {MaterialTitle,SessionId,TutorEmail,UploadImages,GoogledriveLink} = useAppSelector((state:RootState) => state.uploadMaterial)
+  const {
+    MaterialTitle,
+    SessionId,
+    TutorEmail,
+    UploadImages,
+    GoogledriveLink,
+  } = useAppSelector((state: RootState) => state.uploadMaterial);
   const [uploadmaterial] = useMaterialPostMutation();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleOpenModal = (approve: Approveprops) => {
     setSelectedUpload(approve);
@@ -63,22 +75,21 @@ const Page = () => {
         TutorEmail,
         UploadImages,
         GoogledriveLink,
-      })
+      });
 
       console.log('uploadmeterial', response);
+      setOpenModal(false);
     } catch (error) {
       console.log(error);
     }
-    
-
   };
 
-  useEffect(() =>{
-    if(selectedUpload){
-      dispatch(SetSessionId(selectedUpload._id))
-      dispatch(SetTutorEmail(selectedUpload.tutorEmail))
+  useEffect(() => {
+    if (selectedUpload) {
+      dispatch(SetSessionId(selectedUpload._id));
+      dispatch(SetTutorEmail(selectedUpload.tutorEmail));
     }
-  },[selectedUpload,dispatch])
+  }, [selectedUpload, dispatch]);
 
   if (isLoading)
     return (
@@ -148,7 +159,12 @@ const Page = () => {
               <Label htmlFor="form" className="font-semibold">
                 Material title
               </Label>
-              <Input type="text" placeholder="Material title" value={MaterialTitle} onChange={(e) => dispatch(SetMaterialTitle(e.target.value))}/>
+              <Input
+                type="text"
+                placeholder="Material title"
+                value={MaterialTitle}
+                onChange={(e) => dispatch(SetMaterialTitle(e.target.value))}
+              />
 
               <Label htmlFor="form" className="font-semibold">
                 Session id
@@ -175,12 +191,24 @@ const Page = () => {
               <Label htmlFor="form" className="font-semibold">
                 Upload images
               </Label>
-              <Input type="file" placeholder="upload image" accept="image/*" value={UploadImages} onChange={(e) => dispatch(SetUploadImages(e.target.value))} className='file-input'/>
+              <Input
+                type="file"
+                placeholder="upload image"
+                accept="image/*"
+                value={UploadImages}
+                onChange={(e) => dispatch(SetUploadImages(e.target.value))}
+                className="file-input"
+              />
 
               <Label htmlFor="form" className="font-semibold">
                 Google drive link
               </Label>
-              <Input type="text" placeholder="Google drive link" value={GoogledriveLink} onChange={(e) => dispatch(SetGoogledriveLink(e.target.value))}/>
+              <Input
+                type="text"
+                placeholder="Google drive link"
+                value={GoogledriveLink}
+                onChange={(e) => dispatch(SetGoogledriveLink(e.target.value))}
+              />
             </div>
             <DialogFooter>
               <Button onClick={() => setOpenModal(false)}>Cancel</Button>
