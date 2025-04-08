@@ -135,6 +135,23 @@ const EduNestApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+
+    // get material based on the email
+    getMaterialByemail: build.query({
+      query: (email) =>({
+        url:`/api/v1/material/${email}`,
+        method:"GET"
+      })
+    }),
+
+    // materail delete from tutor
+    deleteMaterial: build.mutation({
+      query: (id) =>({
+        url:`/api/v1/material/${id}`,
+        method:"DELETE"
+      })
+    })
+
   }),
 });
 
@@ -154,5 +171,7 @@ export const {
   usePostSessionMutation,
   useTutorSessionQuery,
   useTutorApprovedSessionQuery,
-  useMaterialPostMutation
+  useMaterialPostMutation,
+  useGetMaterialByemailQuery,
+  useDeleteMaterialMutation
 } = EduNestApi;
