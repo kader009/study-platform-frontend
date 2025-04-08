@@ -15,15 +15,16 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import {
   useMaterialPostMutation,
   useTutorApprovedSessionQuery,
 } from '@/redux/endApi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { SetGoogledriveLink, SetMaterialTitle, SetSessionId, SetTutorEmail, SetUploadImages } from '@/redux/features/uploadMaterial';
 
 interface Approveprops {
   _id: string;
@@ -43,16 +44,41 @@ const Page = () => {
   const [selectedUpload, setSelectedUpload] = useState<Approveprops | null>(
     null
   );
-  const [upload] = useMaterialPostMutation();
+  const {MaterialTitle,SessionId,TutorEmail,UploadImages,GoogledriveLink} = useAppSelector((state:RootState) => state.uploadMaterial)
+  const [uploadmaterial] = useMaterialPostMutation();
+  const dispatch = useAppDispatch()
 
-  const handleOpenModal = (note: Approveprops) => {
-    setSelectedUpload(note);
+  const handleOpenModal = (approve: Approveprops) => {
+    setSelectedUpload(approve);
     setOpenModal(true);
   };
 
   const handleUpdate = async () => {
     if (!selectedUpload) return;
+
+    try {
+      const response = await uploadmaterial({
+        MaterialTitle,
+        SessionId,
+        TutorEmail,
+        UploadImages,
+        GoogledriveLink,
+      })
+
+      console.log('uploadmeterial', response);
+    } catch (error) {
+      console.log(error);
+    }
+    
+
   };
+
+  useEffect(() =>{
+    if(selectedUpload){
+      dispatch(SetSessionId(selectedUpload._id))
+      dispatch(SetTutorEmail(selectedUpload.tutorEmail))
+    }
+  },[selectedUpload,dispatch])
 
   if (isLoading)
     return (
@@ -122,7 +148,7 @@ const Page = () => {
               <Label htmlFor="form" className="font-semibold">
                 Material title
               </Label>
-              <Input type="text" placeholder="Material title" />
+              <Input type="text" placeholder="Material title" value={MaterialTitle} onChange={(e) => dispatch(SetMaterialTitle(e.target.value))}/>
 
               <Label htmlFor="form" className="font-semibold">
                 Session id
@@ -132,6 +158,7 @@ const Page = () => {
                 placeholder="Session id"
                 disabled
                 defaultValue={selectedUpload._id}
+                value={SessionId}
               />
 
               <Label htmlFor="form" className="font-semibold">
@@ -142,17 +169,18 @@ const Page = () => {
                 placeholder="Tutor email"
                 disabled
                 defaultValue={selectedUpload.tutorEmail}
+                value={TutorEmail}
               />
 
               <Label htmlFor="form" className="font-semibold">
                 Upload images
               </Label>
-              <Input type="file" placeholder="upload image" accept="image/**" />
+              <Input type="file" placeholder="upload image" accept="image/*" value={UploadImages} onChange={(e) => dispatch(SetUploadImages(e.target.value))} className='file-input'/>
 
               <Label htmlFor="form" className="font-semibold">
                 Google drive link
               </Label>
-              <Input type="text" placeholder="Google drive link" />
+              <Input type="text" placeholder="Google drive link" value={GoogledriveLink} onChange={(e) => dispatch(SetGoogledriveLink(e.target.value))}/>
             </div>
             <DialogFooter>
               <Button onClick={() => setOpenModal(false)}>Cancel</Button>

@@ -9,13 +9,27 @@ const Navbar = () => {
   const { user, error, loading } = useAppSelector(
     (state: RootState) => state.user
   );
-  const localUser =
-    typeof window !== 'undefined' ? localStorage.getItem('user') : null;
-  const storedUser = localUser ? JSON.parse(localUser) : null;
+  
+  let storedUser = null;
+  
+  if (typeof window !== 'undefined') {
+    const localUser = localStorage.getItem('user');
+    try {
+      storedUser =
+        localUser && localUser !== 'undefined' ? JSON.parse(localUser) : null;
+    } catch (error) {
+      console.error('Error parsing user from localStorage:', error);
+      localStorage.removeItem('user'); // Optional: clean up bad value
+    }
+  }
+  
   const displayUser = user || storedUser;
+  
   console.log(displayUser);
   console.log(user, error, loading);
-  console.log(localStorage.getItem('user'));
+  console.log(typeof window !== 'undefined' ? localStorage.getItem('user') : null);
+  
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
