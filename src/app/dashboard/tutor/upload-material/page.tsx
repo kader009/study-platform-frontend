@@ -26,6 +26,7 @@ interface Approveprops {
   _id: string;
   sessionTitle: string;
   status: string;
+  tutorEmail: string;
 }
 
 const Page = () => {
@@ -36,15 +37,15 @@ const Page = () => {
     isError,
   } = useTutorApprovedSessionQuery(user?.email, { pollingInterval: 2000 });
   const [openModal, setOpenModal] = useState(false);
-  const [selectedNote, setSelectedNote] = useState<Approveprops | null>(null);
+  const [selectedUpload, setSelectedUpload] = useState<Approveprops | null>(null);
 
   const handleOpenModal = (note: Approveprops) => {
-    setSelectedNote(note);
+    setSelectedUpload(note);
     setOpenModal(true);
   };
 
   const handleUpdate = async () => {
-    if (!selectedNote) return;
+    if (!selectedUpload) return;
   };
 
   if (isLoading)
@@ -103,26 +104,26 @@ const Page = () => {
       </div>
 
       {/* Modal */}
-      {openModal && selectedNote && (
+      {openModal && selectedUpload && (
         <Dialog open={openModal} onOpenChange={setOpenModal}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Edit Note</DialogTitle>
+              <DialogTitle>Material for: {selectedUpload.sessionTitle}</DialogTitle>
             </DialogHeader>
             <div className="flex flex-col gap-4">
-              <Label htmlFor="form">Material title</Label>
+              <Label htmlFor="form" className='font-semibold'>Material title</Label>
               <Input type="text" placeholder="Material title" />
 
-              <Label htmlFor="form">Session id</Label>
-              <Input type="text" placeholder="Session id" disabled/>
+              <Label htmlFor="form" className='font-semibold'>Session id</Label>
+              <Input type="text" placeholder="Session id" disabled defaultValue={selectedUpload._id}/>
 
-              <Label htmlFor="form">Tutor email</Label>
-              <Input type="text" placeholder="Tutor email" disabled/>
+              <Label htmlFor="form" className='font-semibold'>Tutor email</Label>
+              <Input type="text" placeholder="Tutor email" disabled defaultValue={selectedUpload.tutorEmail}/>
 
-              <Label htmlFor="form">Upload images</Label>
+              <Label htmlFor="form" className='font-semibold'>Upload images</Label>
               <Input type="file" placeholder="upload image" accept="image/**" />
 
-              <Label htmlFor="form">Google drive link</Label>
+              <Label htmlFor="form" className='font-semibold'>Google drive link</Label>
               <Input type="text" placeholder="Google drive link" />
             </div>
             <DialogFooter>
