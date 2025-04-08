@@ -7,10 +7,20 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { useTutorApprovedSessionQuery } from '@/redux/endApi';
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface Approveprops {
   _id: string;
@@ -25,6 +35,17 @@ const Page = () => {
     isLoading,
     isError,
   } = useTutorApprovedSessionQuery(user?.email, { pollingInterval: 2000 });
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedNote, setSelectedNote] = useState<Approveprops | null>(null);
+
+  const handleOpenModal = (note: Approveprops) => {
+    setSelectedNote(note);
+    setOpenModal(true);
+  };
+
+  const handleUpdate = async () => {
+    if (!selectedNote) return;
+  };
 
   if (isLoading)
     return (
@@ -33,7 +54,11 @@ const Page = () => {
       </div>
     );
   if (isError)
-    return <div className="text-center font-bold text-red-600">Something went wrong</div>;
+    return (
+      <div className="text-center font-bold text-red-600">
+        Something went wrong
+      </div>
+    );
 
   return (
     <div>
@@ -59,6 +84,7 @@ const Page = () => {
                     <Button
                       type="submit"
                       className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
+                      onClick={() => handleOpenModal(approve)}
                     >
                       Upload
                     </Button>
@@ -75,6 +101,37 @@ const Page = () => {
           </Table>
         </div>
       </div>
+
+      {/* Modal */}
+      {openModal && selectedNote && (
+        <Dialog open={openModal} onOpenChange={setOpenModal}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Note</DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col gap-4">
+              <Label htmlFor="form">Material title</Label>
+              <Input type="text" placeholder="Material title" />
+
+              <Label htmlFor="form">Session id</Label>
+              <Input type="text" placeholder="Session id" disabled/>
+
+              <Label htmlFor="form">Tutor email</Label>
+              <Input type="text" placeholder="Tutor email" disabled/>
+
+              <Label htmlFor="form">Upload images</Label>
+              <Input type="file" placeholder="upload image" accept="image/**" />
+
+              <Label htmlFor="form">Google drive link</Label>
+              <Input type="text" placeholder="Google drive link" />
+            </div>
+            <DialogFooter>
+              <Button onClick={() => setOpenModal(false)}>Cancel</Button>
+              <Button onClick={handleUpdate}>Save Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };
