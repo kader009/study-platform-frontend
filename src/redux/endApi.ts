@@ -160,6 +160,13 @@ const EduNestApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+
+    allMateril: build.query({
+      query: () => ({
+        url: '/api/v1/material',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -182,5 +189,5 @@ export const {
   useMaterialPostMutation,
   useGetMaterialByemailQuery,
   useDeleteMaterialMutation,
-  useUpdateMaterialMutation
+  useUpdateMaterialMutation,
 } = EduNestApi;
