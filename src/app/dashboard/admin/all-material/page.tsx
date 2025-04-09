@@ -8,7 +8,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { useAllMaterilQuery } from '@/redux/endApi';
+import { useAllMaterilQuery, useDeleteMaterialMutation } from '@/redux/endApi';
 import Link from 'next/link';
 
 interface Materialprops {
@@ -19,7 +19,12 @@ interface Materialprops {
 }
 
 const Page = () => {
-  const { data: materials, isLoading, isError } = useAllMaterilQuery('');
+  const {
+    data: materials,
+    isLoading,
+    isError,
+  } = useAllMaterilQuery({}, { pollingInterval: 2000 });
+  const [deleteMaterial] = useDeleteMaterialMutation()
 
   if (isLoading)
     return (
@@ -79,6 +84,7 @@ const Page = () => {
                     <Button
                       type="submit"
                       className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
+                      onClick={() => deleteMaterial(material._id)}
                     >
                       Delete
                     </Button>
