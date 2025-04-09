@@ -33,12 +33,14 @@ const page = () => {
               <TableCell>Paid</TableCell>
               <TableCell>Credit Card</TableCell>
               <TableCell className="">$250.00</TableCell>
+              <TableCell className="">
               <Button
                 type="submit"
                 className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
               >
                 View Detail
               </Button>
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
