@@ -45,13 +45,13 @@ const SessionData = async () => {
                     Closed
                   </span>
                 ) : (
-                  <span className="bg-green-500 text-white text-sm font-semibold py-2 px-4 rounded-full">
+                  <span className="bg-slate-800 text-white text-xs font-semibold py-2 px-4 rounded-full">
                     Open
                   </span>
                 )}
 
                 <Link href={`/session/${session._id}`}>
-                  <span className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-5 rounded-full transition duration-300">
+                  <span className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700">
                     Read More
                   </span>
                 </Link>

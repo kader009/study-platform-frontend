@@ -42,17 +42,17 @@ const page = async () => {
                 </p>
                 <div className="flex justify-between items-center">
                   {isSessionEnded ? (
-                    <span className="bg-gray-500 text-white text-sm font-semibold py-1 px-3 rounded">
+                    <span className="bg-slate-800 text-white text-sm font-semibold py-2 px-4 rounded-full">
                       Closed
                     </span>
                   ) : (
-                    <span className="bg-green-500 text-white text-sm font-semibold py-1 px-3 rounded">
+                    <span className="bg-slate-800 text-white text-xs font-semibold py-2 px-4 rounded-full">
                       Open
                     </span>
                   )}
 
                   <Link href={`/session/${session._id}`}>
-                    <span className="bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-semibold py-1.5 px-4 rounded transition duration-300">
+                    <span className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700">
                       Read More
                     </span>
                   </Link>
