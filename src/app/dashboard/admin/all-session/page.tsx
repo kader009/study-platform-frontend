@@ -65,12 +65,15 @@ const Page = () => {
     if (!selectedSession) return;
 
     try {
-      await updateSession({
+      const updatedSessionDB = {
         id: selectedSession._id,
         body: {
-          registrationFee: isFree ? '0' : fee,
+          registrationFee: Number(isFree ? '0' : fee),
         },
-      });
+      };
+
+      const response = await updateSession(updatedSessionDB);
+      console.log('Update fee response:', response);
       setIsOpen(false);
     } catch (err) {
       console.error('Update failed', err);
@@ -162,7 +165,7 @@ const Page = () => {
 
           <div className="space-y-4">
             <div>
-              <Label className='mb-2'>Session Title</Label>
+              <Label className="mb-2">Session Title</Label>
               <Input disabled value={selectedSession?.sessionTitle || ''} />
             </div>
 
@@ -189,7 +192,9 @@ const Page = () => {
 
             {!isFree && (
               <div>
-                <Label htmlFor="fee" className='mb-2'>Registration Fee ($)</Label>
+                <Label htmlFor="fee" className="mb-2">
+                  Registration Fee ($)
+                </Label>
                 <Input
                   id="fee"
                   type="number"
