@@ -190,4 +190,5 @@ export const {
   useGetMaterialByemailQuery,
   useDeleteMaterialMutation,
   useUpdateMaterialMutation,
+  useAllMaterilQuery
 } = EduNestApi;
