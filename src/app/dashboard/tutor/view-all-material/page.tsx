@@ -20,10 +20,16 @@ import { RootState } from '@/redux/store/store';
 import {
   useDeleteMaterialMutation,
   useGetMaterialByemailQuery,
+  useUpdateMaterialMutation,
 } from '@/redux/endApi';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import {
+  SetGoogledriveLink,
+  SetMaterialtitle,
+  SetUploadImages,
+} from '@/redux/features/updateMaterial';
 
 interface Materislprops {
   _id: string;
@@ -42,7 +48,13 @@ const Page = () => {
   });
   const [deleteMaterial] = useDeleteMaterialMutation();
   const [openModal, setOpenModal] = useState(false);
-  const [selectedMaterial, setSelectedMaterial] = useState<Materislprops | null>(null);
+  const [selectedMaterial, setSelectedMaterial] =
+    useState<Materislprops | null>(null);
+  const [updateMaterial] = useUpdateMaterialMutation();
+  const { MaterialTitle, GoogledriveLink, UploadImages } = useAppSelector(
+    (state: RootState) => state.updateMaterial
+  );
+  const dispatch = useAppDispatch();
 
   const handleOpenModal = (material: Materislprops) => {
     setSelectedMaterial(material);
@@ -53,6 +65,13 @@ const Page = () => {
     if (!selectedMaterial) return;
 
     try {
+      const response = await updateMaterial({
+        id: selectedMaterial._id,
+        MaterialTitle,
+        GoogledriveLink,
+        UploadImages,
+      });
+      console.log(response);
       setOpenModal(false);
     } catch (error) {
       console.log(error);
@@ -125,9 +144,24 @@ const Page = () => {
               <DialogTitle>Edit Material</DialogTitle>
             </DialogHeader>
             <div className="flex flex-col gap-4">
-              <Input type="text" placeholder="Title" value={selectedMaterial.MaterialTitle}/>
-              <Input type="file" placeholder="Upload images" />
-              <Input type="text" placeholder="Google drive link" />
+              <Input
+                type="text"
+                placeholder="Title"
+                value={selectedMaterial.MaterialTitle}
+                onChange={(e) => dispatch(SetMaterialtitle(e.target.value))}
+              />
+              <Input
+                type="file"
+                placeholder="Upload images"
+                value={UploadImages}
+                onChange={(e) => dispatch(SetUploadImages(e.target.value))}
+              />
+              <Input
+                type="text"
+                placeholder="Google drive link"
+                value={GoogledriveLink}
+                onChange={(e) => dispatch(SetGoogledriveLink(e.target.value))}
+              />
             </div>
             <DialogFooter>
               <Button onClick={() => setOpenModal(false)}>Cancel</Button>
