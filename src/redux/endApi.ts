@@ -127,6 +127,15 @@ const EduNestApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // update session fee from admin
+    updateSession: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/api/v1/session/${id}`,
+        method: 'PATCH',
+        body,
+      }),
+    }),
+
     // material post route for tutor
     materialPost: build.mutation({
       query: (body) => ({
@@ -190,5 +199,6 @@ export const {
   useGetMaterialByemailQuery,
   useDeleteMaterialMutation,
   useUpdateMaterialMutation,
-  useAllMaterilQuery
+  useAllMaterilQuery,
+  useUpdateSessionMutation,
 } = EduNestApi;
