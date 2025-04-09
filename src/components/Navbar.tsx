@@ -107,8 +107,8 @@ const Navbar = () => {
                   'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg'
                 }
                 alt="Profile"
-                width={50}
-                height={70}
+                width={40}
+                height={50}
                 className="rounded-full"
               />
             </div>

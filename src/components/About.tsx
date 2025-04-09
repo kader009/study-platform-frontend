@@ -32,7 +32,7 @@ const AboutUs = () => {
             layout="fill"
             loading='lazy'
             objectFit="cover"
-            className="rounded-2xl "
+            className="rounded-2xl"
           />
         </div>
       </div>
