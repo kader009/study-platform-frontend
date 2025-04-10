@@ -42,13 +42,15 @@ const Sidebar = () => {
         )}
       </button>
 
-      {/* Sidebar */}
+      {/* Sidebar */} 
       <aside
         className={`fixed top-0 left-0 h-full bg-black text-white p-4 w-48 transition-transform duration-300 z-40 ${
           isOpen ? 'translate-x-0' : '-translate-x-64'
         } md:relative md:translate-x-0 md:h-auto`}
       >
-        <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          <Link href={'/'}>Dashboard</Link> 
+        </h2>
         <ul className="space-y-2">
           {links.map((link) => (
             <li key={link.href}>
@@ -60,7 +62,7 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
-        </ul>
+        </ul> 
       </aside>
 
       {/* Overlay */}

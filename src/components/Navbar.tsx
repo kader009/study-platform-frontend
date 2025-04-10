@@ -2,15 +2,21 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
+import { logout } from '@/redux/features/authentication/userSlice';
 
 const Navbar = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
@@ -50,34 +56,33 @@ const Navbar = () => {
               <>
                 <Link
                   href="/dashboard"
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                  className="block mt-4 md:inline-block md:mt-0 text-black  px-3 py-2 rounded-md font-medium"
                 >
                   Dashboard
                 </Link>
                 <Link
                   href="/session"
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                  className="block mt-4 md:inline-block md:mt-0 text-black  px-3 py-2 rounded-md font-medium"
                 >
                   All Session
                 </Link>
 
-                <Link
-                  href="/logout"
+                <button
                   className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                  onClick={handleLogout}
                 >
                   Logout
-                </Link>
+                </button>
 
                 {/* Profile Image (Dummy) */}
                 <div className="ml-4">
                   <Image
                     src={
-                      user?.photoUrl ||
                       'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg'
                     }
                     alt="Profile"
                     width={40}
-                    height={40}
+                    height={60}
                     className="rounded-full object-cover"
                   />
                 </div>
