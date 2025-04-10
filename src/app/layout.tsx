@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Providers from '@/Provider/Provider';
+import PersistProvider from '@/redux/PersistProvider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   description: 'A Learing Platform',
 };
 
-export default function RootLayout({
+export default function RootLayout({ 
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -24,11 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <Providers>
+          <PersistProvider>
           <Navbar />
 
           {children}
 
           <Footer />
+          </PersistProvider>
         </Providers>
       </body>
     </html>
