@@ -6,68 +6,70 @@ function Footer() {
   const [year, setYear] = useState('');
 
   useEffect(() => {
-    setYear(new Date().getFullYear().toString()); // Fix hydration issue
+    setYear(new Date().getFullYear().toString());
   }, []);
+
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About Us Section */}
-          <div>
-            <h4 className="text-lg font-bold mb-4 text-white">About Us</h4>
-            <p className="text-sm">
-              We are a passionate team dedicated to providing high-quality
-              services and solutions to our clients. Learn more about our
-              mission and values.
-            </p>
-            <Link href="/about" className="text-blue-400 hover:text-blue-300">
-              Read More
-            </Link>
-          </div>
-
-          {/* Quick Links Section */}
-          <div>
-            <h4 className="text-lg font-bold mb-4 text-white">Quick Links</h4>
-            <ul className="text-sm">
-              <li className="mb-2">
-                <Link href="/" className="hover:text-gray-400">
-                  Home
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="/services" className="hover:text-gray-400">
-                  Services
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="/contact" className="hover:text-gray-400">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-gray-400">
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Information Section */}
-          <div>
-            <h4 className="text-lg font-bold mb-4 text-white">
-              Contact Information
-            </h4>
-            <p className="text-sm">123 Main Street, Anytown, CA 12345</p>
-            <p className="text-sm">Email: info@example.com</p>
-            <p className="text-sm">Phone: (123) 456-7890</p>
-          </div>
+    <footer className="bg-gray-900 text-gray-300 py-12 mt-16">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* About Edunest */}
+        <div>
+          <h4 className="text-xl font-bold text-white mb-4">About Edunest</h4>
+          <p className="text-sm leading-relaxed">
+            Edunest is a learning platform built for curious minds. Our mission is to provide accessible, high-quality education through interactive live sessions and modern tech.
+          </p>
+          <Link href="/about" className="inline-block mt-3 text-blue-400 hover:text-blue-300 text-sm font-medium">
+            Learn More →
+          </Link>
         </div>
 
-        <hr className="border-gray-700 my-6" />
-
-        <div className="text-center text-sm">
-          © {year} My Company. All rights reserved.
+        {/* Explore Links */}
+        <div>
+          <h4 className="text-xl font-bold text-white mb-4">Explore</h4>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/" className="hover:text-gray-400">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="hover:text-gray-400">
+                Courses
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="hover:text-gray-400">
+                Instructors
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="hover:text-gray-400">
+                FAQ
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="hover:text-gray-400">
+                Contact
+              </Link>
+            </li>
+          </ul>
         </div>
+
+        {/* Contact Info */}
+        <div className='space-y-3'>
+          <h4 className="text-xl font-bold text-white mb-4">Get in Touch</h4>
+          <p className="text-sm">📍 123 Learning Way, Dhaka, Bangladesh</p>
+          <p className="text-sm">📧 support@edunest.com</p>
+          <p className="text-sm">📞 +880 1234-567890</p>
+        </div>
+      </div>
+
+      <hr className="border-gray-700 my-8" />
+
+      {/* Footer bottom */}
+      <div className="text-center text-sm text-gray-400">
+        <p>© {year} Edunest. All rights reserved.</p>
+        <p className="mt-2 text-gray-500">Built with ❤️ by Md Abdul Kader Molla</p>
       </div>
     </footer>
   );
