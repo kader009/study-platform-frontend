@@ -11,6 +11,7 @@ import {
   SetPassword,
 } from '@/redux/features/authentication/loginSlice';
 import { setUser } from '@/redux/features/authentication/userSlice';
+import { toast } from 'sonner';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -21,9 +22,10 @@ const Page = () => {
     e.preventDefault();
 
     try {
-      const {data} = await signIn({ email, password });
-      dispatch(setUser(data))
+      const { data } = await signIn({ email, password });
+      dispatch(setUser(data));
       console.log('login success', data);
+      toast.success('welcome to Edunest Website');
     } catch (error) {
       console.log(error);
     }
