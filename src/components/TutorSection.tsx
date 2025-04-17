@@ -34,7 +34,7 @@ const TutorSection = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-10">
           Meet Our Expert Tutors
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
           {tutors?.map((tutor: Tutorprops) => (
             <div
               key={tutor._id}
