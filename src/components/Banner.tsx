@@ -18,7 +18,7 @@ const Banner = () => {
             Join live sessions, master in-demand skills, and build your tech
             career the right way — one session at a time.
           </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 cursor-pointer">
             Get Started
           </button>
         </div>
