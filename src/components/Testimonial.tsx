@@ -1,6 +1,6 @@
-'use client'
+'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TestimonialCarousel = () => {
   const testimonials = [
@@ -26,15 +26,19 @@ const TestimonialCarousel = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
-  const prevSlide = () => {
+  const nextSlide = () =>
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const prevSlide = () =>
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
-  };
 
   return (
     <section className="py-16 px-8">
@@ -44,43 +48,52 @@ const TestimonialCarousel = () => {
         </h2>
 
         <div className="relative">
-          {/* Testimonial Card */}
           <div className="bg-white p-8 rounded-xl shadow-lg">
             <div className="flex justify-center mb-4">
               <Image
-              width={40}
-              height={40}
+                width={80}
+                height={80}
                 src={testimonials[currentIndex].image}
                 alt={testimonials[currentIndex].name}
-                className="w-20 h-20 object-cover rounded-full border-2"
+                className="object-cover rounded-full border-2"
               />
             </div>
             <p className="text-lg text-gray-700 mb-4 italic">
               {testimonials[currentIndex].message}
             </p>
-            <p className="font-semibold text-gray-900 text-lg">
+            <p className="font-semibold text-gray-900 text-lg mb-4">
               {testimonials[currentIndex].name}
             </p>
+
+            {/* Pagination moved here under the name */}
+            <div className="flex justify-center space-x-2">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`
+                    w-3 h-3 rounded-full
+                    ${idx === currentIndex ? 'bg-gray-800' : 'bg-gray-300'}
+                    focus:outline-none
+                  `}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Carousel Navigation */}
-          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2">
-            <button
-              onClick={prevSlide}
-              className="bg-black text-white p-2 rounded-full shadow-lg focus:outline-none"
-            >
-              &#10094;
-            </button>
-          </div>
-
-          <div className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2">
-            <button
-              onClick={nextSlide}
-              className="bg-black text-white p-2 rounded-full shadow-lg focus:outline-none"
-            >
-              &#10095;
-            </button>
-          </div>
+          {/* Carousel arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black text-white p-2 rounded-full shadow-lg focus:outline-none"
+          >
+            &#10094;
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black text-white p-2 rounded-full shadow-lg focus:outline-none"
+          >
+            &#10095;
+          </button>
         </div>
       </div>
     </section>
