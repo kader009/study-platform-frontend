@@ -14,6 +14,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'EduNest',
   description: 'A Learing Platform',
+  icons:{
+    icon: '/icons8-education-90.png'
+  }
 };
 
 export default function RootLayout({ 
