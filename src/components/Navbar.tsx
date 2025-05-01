@@ -5,10 +5,12 @@ import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { logout } from '@/redux/features/authentication/userSlice';
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
+  const router = useRouter()
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
@@ -17,6 +19,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    router.replace('/login')
   };
 
   return (
