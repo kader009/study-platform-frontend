@@ -119,9 +119,9 @@ const Page = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td className="border px-4 py-2">May 10</td>
-                  <td className="border px-4 py-2">Redux Toolkit</td>
-                  <td className="border px-4 py-2">Mr. Rahim</td>
+                  <td className="border px-4 py-2 text-center">May 10</td>
+                  <td className="border px-4 py-2 text-center">Redux Toolkit</td>
+                  <td className="border px-4 py-2 text-center">Mr. Rahim</td>
                 </tr>
                 {/* Add more rows */}
               </tbody>

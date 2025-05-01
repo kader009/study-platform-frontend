@@ -1,13 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const loginUser = createAsyncThunk('user/login', async (obj) => {
-  const request = await axios.post(`http://localhost:5000/api/v1/login`, obj);
-  const response = request.data.data;
-  localStorage.setItem('user', JSON.stringify(response));
-  return response;
-});
-
+// Login response টাইপ: backend থেকে { user, token } রিটার্ন করা হবে
 interface User {
   _id: string;
   name: string;
@@ -16,54 +10,91 @@ interface User {
   role: string;
 }
 
+interface LoginResponse {
+  user: User;
+  token: string;
+}
+
 interface AuthState {
   user: User | null;
+  token: string | null;
   loading: boolean;
   error: string | null;
 }
 
+// Initial state—localStorage থেকে restore
 const initialState: AuthState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  token: localStorage.getItem('token'),
   loading: false,
   error: null,
 };
+
+// Async thunk: login API call করে user ও token ফেরত নেবে
+export const loginUser = createAsyncThunk<
+  LoginResponse,
+  { email: string; password: string },
+  { rejectValue: string }
+>(
+  'user/login',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post<LoginResponse>(
+        'http://localhost:5000/api/v1/login',
+        credentials
+      );
+      const { user, token } = response.data;
+
+      // Client-side এ সেভ
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
+
+      return { user, token };
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        return rejectWithValue('Access Denied! Invalid credentials');
+      }
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User | null>) => {
-      state.user = action.payload;
-      localStorage.setItem('user', JSON.stringify(action.payload));
+    // ম্যানুয়ালি set করতে চাইলে
+    setUser: (state, action: PayloadAction<LoginResponse>) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      localStorage.setItem('token', action.payload.token);
     },
-
     logout: (state) => {
       state.user = null;
+      state.token = null;
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
     },
   },
-
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
-        state.user = null;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
-        state.error = null;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
+        state.token = null;
+        state.error = action.payload ?? action.error.message ?? null;
         localStorage.removeItem('user');
-        if (action.error?.message === 'Request failed with status code 401') {
-          state.error = 'Access Denied! Invalid username or password';
-        } else {
-          state.error = action.error?.message ?? null;
-        }
+        localStorage.removeItem('token');
       });
   },
 });

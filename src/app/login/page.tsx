@@ -12,13 +12,16 @@ import {
 } from '@/redux/features/authentication/loginSlice';
 import { setUser } from '@/redux/features/authentication/userSlice';
 import { toast } from 'sonner';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
+  const { token } = useAppSelector((state: RootState) => state.user);
   const [signIn] = useLoginMutation();
-  const router = useRouter()
+  const router = useRouter();
+
+  console.log('token', token)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -27,8 +30,13 @@ const Page = () => {
       const { data } = await signIn({ email, password });
       dispatch(setUser(data));
       console.log('login success', data);
+      // console.log('login success', data.token);
       toast.success('welcome to Edunest Website');
-      router.replace('/')
+
+      dispatch(SetEmail(''));
+      dispatch(SetPassword(''));
+
+      router.replace('/');
     } catch (error) {
       console.log(error);
     }

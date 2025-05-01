@@ -9,8 +9,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // localStorage use করবো
-
+import storage from 'redux-persist/lib/storage';
 import registerReducer from '../features/authentication/registerSlice';
 import loginReducer from '../features/authentication/loginSlice';
 import userReducer from '../features/authentication/userSlice';
