@@ -37,7 +37,7 @@ const Page = () => {
   };
 
   const pieData = {
-    labels: ['Math', 'Science', 'English'],
+    labels: ['NextJs', 'ReactJs', 'Typescript'],
     datasets: [
       {
         data: [10, 20, 30],
@@ -119,8 +119,8 @@ const Page = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td className="border px-4 py-2">April 10</td>
-                  <td className="border px-4 py-2">Math</td>
+                  <td className="border px-4 py-2">May 10</td>
+                  <td className="border px-4 py-2">Redux Toolkit</td>
                   <td className="border px-4 py-2">Mr. Rahim</td>
                 </tr>
                 {/* Add more rows */}
