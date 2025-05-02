@@ -34,16 +34,15 @@ const TutorSection = () => {
           Meet Our Expert Tutors
         </h2>
         {/* reduced gap-12 → gap-6 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {tutors?.map((tutor: Tutorprops) => (
             <div
               key={tutor._id}
               className="
-                rounded-xl shadow-lg 
+                rounded-xl shadow-sm 
                 bg-white overflow-hidden
-                
                 transition-transform duration-300 
-                transform hover:scale-105 hover:shadow-xl hover:z-10
+                transform hover:scale-105 hover:shadow-md hover:z-10
               "
             >
               <div className="relative w-full h-72">

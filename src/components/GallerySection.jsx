@@ -20,19 +20,19 @@ function GallerySection() {
     <section className="py-12">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Gallery</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {galleryImages.map((src, idx) => (
             <button
               key={idx}
               onClick={() => setSelected(src)}
-              className="relative block overflow-hidden rounded shadow-sm focus:outline-none"
+              className="relative block overflow-hidden  shadow-sm focus:outline-none"
             >
               <Image
                 src={src}
                 alt={`Gallery image ${idx + 1}`}
                 width={400}
                 height={300}
-                className="object-cover w-full h-48 hover:scale-105 transition-transform duration-300"
+                className="object-cover w-full h-56 hover:scale-105 transition-transform duration-300"
               />
             </button>
           ))}
