@@ -4,24 +4,70 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useAppSelector } from '@/redux/hook';
 
 const links = [
-  { href: '/dashboard/student/booked-session', label: 'Booked Session' },
-  { href: '/dashboard/student/create-note', label: 'Create Note' },
-  { href: '/dashboard/student/manage-note', label: 'Manage Note' },
-  { href: '/dashboard/student/study-material', label: 'Study Material' },
-  { href: '/dashboard/admin/all-user', label: 'All User' },
-  { href: '/dashboard/admin/all-session', label: 'All Session' },
-  { href: '/dashboard/admin/all-material', label: 'All Material' },
-  { href: '/dashboard/tutor/create-session', label: 'Create Session' },
-  { href: '/dashboard/tutor/view-all-session', label: 'View Session' },
-  { href: '/dashboard/tutor/upload-material', label: 'Upload Material' },
-  { href: '/dashboard/tutor/view-all-material', label: 'View Material' },
+  {
+    href: '/dashboard/student/booked-session',
+    label: 'Booked Session',
+    roles: ['student'],
+  },
+  {
+    href: '/dashboard/student/create-note',
+    label: 'Create Note',
+    roles: ['student'],
+  },
+  {
+    href: '/dashboard/student/manage-note',
+    label: 'Manage Note',
+    roles: ['student'],
+  },
+  {
+    href: '/dashboard/student/study-material',
+    label: 'Study Material',
+    roles: ['student'],
+  },
+  { href: '/dashboard/admin/all-user', label: 'All User', roles: ['admin'] },
+  {
+    href: '/dashboard/admin/all-session',
+    label: 'All Session',
+    roles: ['admin'],
+  },
+  {
+    href: '/dashboard/admin/all-material',
+    label: 'All Material',
+    roles: ['admin'],
+  },
+  {
+    href: '/dashboard/tutor/create-session',
+    label: 'Create Session',
+    roles: ['tutor'],
+  },
+  {
+    href: '/dashboard/tutor/view-all-session',
+    label: 'View Session',
+    roles: ['tutor'],
+  },
+  {
+    href: '/dashboard/tutor/upload-material',
+    label: 'Upload Material',
+    roles: ['tutor'],
+  },
+  {
+    href: '/dashboard/tutor/view-all-material',
+    label: 'View Material',
+    roles: ['tutor'],
+  },
 ];
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const role = useAppSelector((state) =>
+    state.user.token ? state.user.user?.role : null
+  );
+
+  const filterLinks = links.filter((link) => role && link.roles.includes(role));
 
   // Automatically close sidebar on route change
   useEffect(() => {
@@ -42,17 +88,17 @@ const Sidebar = () => {
         )}
       </button>
 
-      {/* Sidebar */} 
+      {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full bg-black text-white p-4 w-48 transition-transform duration-300 z-40 ${
           isOpen ? 'translate-x-0' : '-translate-x-64'
         } md:relative md:translate-x-0 md:h-auto`}
       >
         <h2 className="text-2xl font-bold mb-4">
-          <Link href={'/'}>Dashboard</Link> 
+          <Link href={'/'}>Dashboard</Link>
         </h2>
         <ul className="space-y-2">
-          {links.map((link) => (
+          {filterLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
@@ -62,7 +108,7 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
-        </ul> 
+        </ul>
       </aside>
 
       {/* Overlay */}

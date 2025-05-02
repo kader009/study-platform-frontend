@@ -148,9 +148,9 @@ const Page = () => {
                 <option value="" disabled>
                   Select Role
                 </option>
-                <option value="Student">Student</option>
-                <option value="Tutor">Tutor</option>
-                <option value="Admin">Admin</option>
+                <option value="student">student</option>
+                <option value="tutor">tutor</option>
+                <option value="admin">admin</option>
               </select>
             </div>
 

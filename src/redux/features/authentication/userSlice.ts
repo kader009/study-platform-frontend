@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Login response টাইপ: backend থেকে { user, token } রিটার্ন করা হবে
 interface User {
   _id: string;
   name: string;
@@ -22,7 +21,7 @@ interface AuthState {
   error: string | null;
 }
 
-// Initial state—localStorage থেকে restore
+// Initial state—localStorage 
 const initialState: AuthState = {
   user: JSON.parse(localStorage.getItem('user') || 'null'),
   token: localStorage.getItem('token'),
@@ -30,7 +29,7 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Async thunk: login API call করে user ও token ফেরত নেবে
+// Async thunk: login API call 
 export const loginUser = createAsyncThunk<
   LoginResponse,
   { email: string; password: string },
@@ -63,12 +62,11 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // ম্যানুয়ালি set করতে চাইলে
     setUser: (state, action: PayloadAction<LoginResponse>) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      localStorage.setItem('user', JSON.stringify(action.payload.user));
-      localStorage.setItem('token', action.payload.token);
+      state.user = action.payload?.user;
+      state.token = action.payload?.token;
+      localStorage.setItem('user', JSON.stringify(action.payload?.user));
+      localStorage.setItem('token', action.payload?.token);
     },
     logout: (state) => {
       state.user = null;
@@ -85,8 +83,8 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = action.payload?.user;
+        state.token = action.payload?.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

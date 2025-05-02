@@ -17,11 +17,8 @@ import { useRouter } from 'next/navigation';
 const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
-  const { token } = useAppSelector((state: RootState) => state.user);
   const [signIn] = useLoginMutation();
   const router = useRouter();
-
-  console.log('token', token)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

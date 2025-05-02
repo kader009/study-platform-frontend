@@ -10,10 +10,11 @@ const page = async ({ params }: PageProps) => {
   );
 
   const Datas = await sessionCatch.json();
+  console.log(Datas);
   return (
     <div className="my-8 mx-5">
       <div className="max-w-lg w-full mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4">
-        <h2 className="text-2xl font-bold text-purple-700">
+        <h2 className="text-2xl font-bold">
           {Datas.sessionTitle}
         </h2>
         <p className="text-md font-semibold text-gray-700">
@@ -69,7 +70,7 @@ const page = async ({ params }: PageProps) => {
           )}
         </div>
 
-        <button className="w-36 bg-purple-700 text-white font-semibold py-2 rounded-lg hover:bg-purple-800">
+        <button className="w-36 bg-black text-white font-semibold py-2 rounded hover:bg-purple-400">
           Book Now
         </button>
       </div>
