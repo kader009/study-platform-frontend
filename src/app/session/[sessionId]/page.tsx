@@ -70,7 +70,7 @@ const page = async ({ params }: PageProps) => {
           )}
         </div>
 
-        <button className="w-36 bg-black text-white font-semibold py-2 rounded hover:bg-purple-400">
+        <button className="w-36 bg-black text-white font-semibold py-2 rounded hover:bg-gray-600">
           Book Now
         </button>
       </div>

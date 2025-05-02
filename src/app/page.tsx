@@ -3,6 +3,7 @@ import Banner from "@/components/Banner";
 import SessionData from "@/components/SessionData";
 import Testimonial from "@/components/Testimonial";
 import TutorSection from "@/components/TutorSection";
+import GallerySection from "@/components/GallerySection";
 
 export default function Home() {
   return <div >
@@ -10,6 +11,7 @@ export default function Home() {
     <About/>
     <SessionData/>
     <TutorSection/>
+    <GallerySection/>
     <Testimonial/>
   </div>;
 }
