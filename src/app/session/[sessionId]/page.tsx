@@ -1,15 +1,18 @@
-const page = async ({ params }: { params: { sessionId: string } }) => { 
+interface Props {
+  params: { sessionId: string };
+}
+
+const page = async ({ params }: Props) => {
+  const { sessionId } = await params;
   const sessionCatch = await fetch(
-    `http://localhost:5000/api/v1/session/${params.sessionId}`
+    `http://localhost:5000/api/v1/session/${sessionId}`
   );
 
   const Datas = await sessionCatch.json();
   return (
     <div className="my-8 mx-5">
       <div className="max-w-lg w-full mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4">
-        <h2 className="text-2xl font-bold">
-          {Datas.sessionTitle}
-        </h2>
+        <h2 className="text-2xl font-bold">{Datas.sessionTitle}</h2>
         <p className="text-md font-semibold text-gray-700">
           <span className="font-bold">Tutor:</span> {Datas.tutorName}
         </p>
@@ -43,7 +46,8 @@ const page = async ({ params }: { params: { sessionId: string } }) => {
             {new Date(Datas.classEndDate).toLocaleDateString()}
           </p>
           <p>
-            <span className="font-bold">Duration:</span> {Datas.sessionDuration} hours
+            <span className="font-bold">Duration:</span> {Datas.sessionDuration}{' '}
+            hours
           </p>
           <p>
             <span className="font-bold">Fee:</span> ${Datas?.registrationFee}
