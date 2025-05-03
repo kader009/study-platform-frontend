@@ -30,9 +30,10 @@ const TutorSection = () => {
   return (
     <section className="py-8">
       <div className="container mx-auto px-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-10">
-          Meet Our Expert Tutors
-        </h2>
+        <h1 className="text-2xl font-bold text-gray-800 mb-2">
+          Our Expert Tutors
+        </h1>
+        <p className='mb-10'>Guiding you every step of your learning journey</p>
         {/* reduced gap-12 → gap-6 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {tutors?.map((tutor: Tutorprops) => (

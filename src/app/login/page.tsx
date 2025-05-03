@@ -13,6 +13,7 @@ import {
 import { setUser } from '@/redux/features/authentication/userSlice';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -113,6 +114,15 @@ const Page = () => {
               </button>
             </div>
           </form>
+          {/* Register link */}
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              New to here?{' '}
+              <Link href="/register" className="text-blue-500 hover:underline">
+                Create an account
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

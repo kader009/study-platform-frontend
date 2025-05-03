@@ -19,8 +19,14 @@ const TestimonialCarousel = () => {
     {
       name: 'David Lee',
       message:
-        'The platform is easy to use, and the sessions are very well organized. It’s been an amazing experience.',
+      'The platform is easy to use, and the sessions are very well organized. It’s been an amazing experience.',
       image: 'https://randomuser.me/api/portraits/men/36.jpg',
+    },
+    {
+      name: 'Jenifer white',
+      message:
+      'I acquired hands-on skills immediately applicable to my career—highly recommend!',
+      image: 'https://randomuser.me/api/portraits/women/43.jpg',
     },
   ];
 
@@ -44,7 +50,7 @@ const TestimonialCarousel = () => {
     <section className="py-16 px-8">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-semibold text-gray-800 mb-12">
-          What Our Students Say
+          Student <span className='text-blue-600'>Testimonial</span>
         </h2>
 
         <div className="relative">
