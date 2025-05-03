@@ -1,10 +1,5 @@
-interface PageProps {
-  params: {
-    sessionId: string;
-  };
-}
 
-const page = async ({ params }: PageProps) => { 
+const page = async ({ params }: { params: { sessionId: string } }) => { 
   const sessionCatch = await fetch(
     `http://localhost:5000/api/v1/session/${params.sessionId}`
   );
