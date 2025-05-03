@@ -1,11 +1,9 @@
-
 const page = async ({ params }: { params: { sessionId: string } }) => { 
   const sessionCatch = await fetch(
     `http://localhost:5000/api/v1/session/${params.sessionId}`
   );
 
   const Datas = await sessionCatch.json();
-  console.log(Datas);
   return (
     <div className="my-8 mx-5">
       <div className="max-w-lg w-full mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4">
