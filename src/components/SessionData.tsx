@@ -19,9 +19,10 @@ const SessionData = async () => {
 
   return (
     <div className="container mx-auto py-16 px-8">
-      <h2 className="text-3xl font-semibold mb-8 text-center">
+      <h1 className="text-3xl font-semibold mb-2 text-center">
         <span className="text-blue-600">Approved</span> Sessions
-      </h2>
+      </h1>
+      <p className='text-center mb-8'>Browse sessions that are reviewed and officially approved</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sessions.slice(0, 6).map((session: SessionProps) => {
           const currentTime = new Date();

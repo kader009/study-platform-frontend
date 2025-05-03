@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface User {
   _id: string;
@@ -31,9 +31,9 @@ const initialState: AuthState = {
 
 // Async thunk: login API call 
 export const loginUser = createAsyncThunk<
-  LoginResponse,
-  { email: string; password: string },
-  { rejectValue: string }
+  LoginResponse,                             
+  { email: string; password: string },     
+  { rejectValue: string }                   
 >(
   'user/login',
   async (credentials, { rejectWithValue }) => {
@@ -42,18 +42,19 @@ export const loginUser = createAsyncThunk<
         'http://localhost:5000/api/v1/login',
         credentials
       );
-      const { user, token } = response.data;
 
-      // Client-side এ সেভ
+      const { user, token } = response.data;
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
 
       return { user, token };
-    } catch (err: any) {
-      if (err.response?.status === 401) {
-        return rejectWithValue('Access Denied! Invalid credentials');
+    } catch (err) {
+      let message = 'Something went wrong';
+      if (axios.isAxiosError(err)) {
+        const axiosErr = err as AxiosError<{ message?: string }>;
+        message = axiosErr.response?.data.message ?? axiosErr.message;
       }
-      return rejectWithValue(err.message);
+      return rejectWithValue(message);
     }
   }
 );
