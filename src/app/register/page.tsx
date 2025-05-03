@@ -13,6 +13,7 @@ import {
   SetRole,
 } from '@/redux/features/authentication/registerSlice';
 import { useSignUpMutation } from '@/redux/endApi';
+import Link from 'next/link';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -164,6 +165,15 @@ const Page = () => {
               </button>
             </div>
           </form>
+          {/* Login link */}
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              Already have an account?{' '}
+              <Link href="/login" className="text-blue-500 hover:underline">
+                Login here
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
