@@ -170,12 +170,31 @@ const EduNestApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // all material get route
     allMateril: build.query({
       query: () => ({
         url: '/api/v1/material',
         method: 'GET',
       }),
     }),
+
+    // booked post route for student
+    bookPost: build.mutation({
+      query: (body) => ({
+        url: '/api/v1/book-session',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // get booked session based on the email
+    getbookByemail: build.query({
+      query: (email) => ({
+        url: `/api/v1/book-session/${email}`,
+        method: 'GET',
+      }),
+    }),
+
   }),
 });
 
@@ -201,4 +220,6 @@ export const {
   useUpdateMaterialMutation,
   useAllMaterilQuery,
   useUpdateSessionMutation,
+  useBookPostMutation,
+  useGetbookByemailQuery
 } = EduNestApi;
