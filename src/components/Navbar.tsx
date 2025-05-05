@@ -71,7 +71,7 @@ const Navbar = () => {
                 </Link>
 
                 <button
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium"
+                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded-full font-medium"
                   onClick={handleLogout}
                 >
                   Logout
@@ -94,13 +94,13 @@ const Navbar = () => {
               <>
                 <Link
                   href="/register"
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium"
+                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded-full font-medium"
                 >
                   Register
                 </Link>
                 <Link
                   href="/login"
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium"
+                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded-full font-medium"
                 >
                   Login
                 </Link>
