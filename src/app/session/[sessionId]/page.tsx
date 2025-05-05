@@ -1,64 +1,93 @@
-interface Props {
-  params: { sessionId: string };
+'use client'
+import { useParams } from 'next/navigation';
+import {useEffect,useState} from 'react';
+
+interface SessionData {
+  _id: string;
+  sessionTitle: string;
+  sessionDescription: string;
+  tutorName: string;
+  tutorId: string;
+  averageRating?: number;
+  registrationStartDate: string;
+  registrationEndDate: string;
+  classStartDate: string;
+  classEndDate: string;
+  sessionDuration: number;
+  registrationFee: number;
+  reviews: string[];
 }
 
-const page = async ({ params }: Props) => {
-  const { sessionId } = await params;
-  const sessionCatch = await fetch(
-    `http://localhost:5000/api/v1/session/${sessionId}`
-  );
+const SessionDetails =  () => {
+  const params = useParams();
+  const sessionId = params?.sessionId as string;
+  const [data, setData] = useState<SessionData | null>(null);
 
-  const Datas = await sessionCatch.json();
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/v1/session/${sessionId}`);
+        if (!res.ok) throw new Error('Failed to fetch session');
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        console.error('Error fetching session:', err);
+      } 
+    };
+
+    fetchSession();
+  }, [sessionId]);
+
   return (
     <div className="my-8 mx-5">
       <div className="max-w-lg w-full mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4">
-        <h2 className="text-2xl font-bold">{Datas.sessionTitle}</h2>
+        <h2 className="text-2xl font-bold">{data?.sessionTitle}</h2>
         <p className="text-md font-semibold text-gray-700">
-          <span className="font-bold">Tutor:</span> {Datas.tutorName}
+          <span className="font-bold">Tutor:</span> {data?.tutorName}
         </p>
         <div className="flex items-center gap-2 text-gray-700">
           Rating:
-          {Datas?.averageRating ? (
+          {data?.averageRating ? (
             <span className="font-medium text-yellow-500">
-              {Datas?.averageRating}★
+              {data?.averageRating}★
             </span>
           ) : (
             <span className="text-yellow-500">⭐ No ratings yet</span>
           )}
         </div>
-        <p className="text-gray-600">{Datas.sessionDescription}</p>
+        <p className="text-gray-600">{data?.sessionDescription}</p>
 
         <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
           <p>
             <span className="font-bold">Registration Start:</span>{' '}
-            {Datas.registrationStartDate}
+            {data?.registrationStartDate}
           </p>
           <p>
             <span className="font-bold">Registration End:</span>{' '}
-            {Datas.registrationEndDate}
+            {data?.registrationEndDate}
           </p>
           <p>
             <span className="font-bold">Class Start:</span>{' '}
-            {new Date(Datas.classStartDate).toLocaleDateString()}
+            {data?.classStartDate ? new Date(data.classStartDate).toLocaleDateString() : 'N/A'}
           </p>
           <p>
             <span className="font-bold">Class End:</span>{' '}
-            {new Date(Datas.classEndDate).toLocaleDateString()}
+            {data?.classEndDate ? new Date(data.classEndDate).toLocaleDateString() : 'N/A'}
           </p>
           <p>
-            <span className="font-bold">Duration:</span> {Datas.sessionDuration}{' '}
+            <span className="font-bold">Duration:</span> {data?.sessionDuration}{' '}
             hours
           </p>
           <p>
-            <span className="font-bold">Fee:</span> ${Datas?.registrationFee}
+            <span className="font-bold">Fee:</span> ${data?.registrationFee}
           </p>
         </div>
 
         <div>
           <p className="font-bold text-gray-800">Reviews:</p>
-          {Datas?.reviews?.length > 0 ? (
+          {(data?.reviews ?? []).length > 0 ? (
             <ul className="list-disc list-inside text-gray-600 text-sm">
-              {Datas.reviews.map((review: string, index: number) => (
+              {data?.reviews.map((review: string, index: number) => (
                 <li key={index}>{review}</li>
               ))}
             </ul>
@@ -75,4 +104,4 @@ const page = async ({ params }: Props) => {
   );
 };
 
-export default page;
+export default SessionDetails;
