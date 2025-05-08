@@ -1,42 +1,65 @@
-'use client'
+'use client';
+import { useBookPostMutation } from '@/redux/endApi';
+import { useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
 import { useParams } from 'next/navigation';
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 
 interface SessionData {
   _id: string;
   sessionTitle: string;
   sessionDescription: string;
   tutorName: string;
-  tutorId: string;
+  tutorEmail: string;
   averageRating?: number;
   registrationStartDate: string;
   registrationEndDate: string;
   classStartDate: string;
   classEndDate: string;
   sessionDuration: number;
-  registrationFee: number;
+  registrationFee: string;
   reviews: string[];
 }
 
-const SessionDetails =  () => {
+const SessionDetails = () => {
   const params = useParams();
   const sessionId = params?.sessionId as string;
   const [data, setData] = useState<SessionData | null>(null);
+  const [booksession, {isLoading}] = useBookPostMutation()
+  const { user } = useAppSelector((state: RootState) => state.user);
+  console.log(user);
 
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/v1/session/${sessionId}`);
+        const res = await fetch(
+          `http://localhost:5000/api/v1/session/${sessionId}`
+        );
         if (!res.ok) throw new Error('Failed to fetch session');
         const json = await res.json();
         setData(json);
       } catch (err) {
         console.error('Error fetching session:', err);
-      } 
+      }
     };
 
     fetchSession();
   }, [sessionId]);
+
+  const handleBook = async() =>{
+    try {
+      const payload = {
+        sessionId: data?._id,
+        studentEmail: user?.email,
+        tutorEmail: data?.tutorEmail,
+        registrationFee: data?.registrationFee,
+      }
+      const postData = await booksession(payload)
+      console.log(postData);
+    } catch (error) {
+      console.log('data posting error', error);
+    }
+  }
 
   return (
     <div className="my-8 mx-5">
@@ -68,11 +91,15 @@ const SessionDetails =  () => {
           </p>
           <p>
             <span className="font-bold">Class Start:</span>{' '}
-            {data?.classStartDate ? new Date(data.classStartDate).toLocaleDateString() : 'N/A'}
+            {data?.classStartDate
+              ? new Date(data.classStartDate).toLocaleDateString()
+              : 'N/A'}
           </p>
           <p>
             <span className="font-bold">Class End:</span>{' '}
-            {data?.classEndDate ? new Date(data.classEndDate).toLocaleDateString() : 'N/A'}
+            {data?.classEndDate
+              ? new Date(data.classEndDate).toLocaleDateString()
+              : 'N/A'}
           </p>
           <p>
             <span className="font-bold">Duration:</span> {data?.sessionDuration}{' '}
@@ -96,8 +123,8 @@ const SessionDetails =  () => {
           )}
         </div>
 
-        <button className="w-36 bg-black text-white font-semibold py-2 rounded hover:bg-gray-600">
-          Book Now
+        <button onClick={handleBook} disabled={isLoading} className="w-36 bg-black text-white font-semibold py-2 rounded hover:bg-gray-600">
+        {isLoading ? 'Booking...' : 'Book Now'}
         </button>
       </div>
     </div>
