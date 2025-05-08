@@ -21,43 +21,49 @@ interface AuthState {
   error: string | null;
 }
 
-// Initial state—localStorage 
+const getLocalUser = () => {
+  if (typeof window === 'undefined') return null;
+  return JSON.parse(localStorage.getItem('user') || 'null');
+};
+
+const getLocalToken = () => {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem('token');
+};
+
 const initialState: AuthState = {
-  user: JSON.parse(localStorage.getItem('user') || 'null'),
-  token: localStorage.getItem('token'),
+  user: getLocalUser(),
+  token: getLocalToken(),
   loading: false,
   error: null,
 };
 
-// Async thunk: login API call 
+// Async thunk: login API call
 export const loginUser = createAsyncThunk<
-  LoginResponse,                             
-  { email: string; password: string },     
-  { rejectValue: string }                   
->(
-  'user/login',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const response = await axios.post<LoginResponse>(
-        'http://localhost:5000/api/v1/login',
-        credentials
-      );
+  LoginResponse,
+  { email: string; password: string },
+  { rejectValue: string }
+>('user/login', async (credentials, { rejectWithValue }) => {
+  try {
+    const response = await axios.post<LoginResponse>(
+      'http://localhost:5000/api/v1/login',
+      credentials
+    );
 
-      const { user, token } = response.data;
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
+    const { user, token } = response.data;
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
 
-      return { user, token };
-    } catch (err) {
-      let message = 'Something went wrong';
-      if (axios.isAxiosError(err)) {
-        const axiosErr = err as AxiosError<{ message?: string }>;
-        message = axiosErr.response?.data.message ?? axiosErr.message;
-      }
-      return rejectWithValue(message);
+    return { user, token };
+  } catch (err) {
+    let message = 'Something went wrong';
+    if (axios.isAxiosError(err)) {
+      const axiosErr = err as AxiosError<{ message?: string }>;
+      message = axiosErr.response?.data.message ?? axiosErr.message;
     }
+    return rejectWithValue(message);
   }
-);
+});
 
 const userSlice = createSlice({
   name: 'user',

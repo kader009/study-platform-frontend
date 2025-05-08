@@ -25,7 +25,7 @@ const SessionDetails = () => {
   const params = useParams();
   const sessionId = params?.sessionId as string;
   const [data, setData] = useState<SessionData | null>(null);
-  const [booksession, {isLoading}] = useBookPostMutation()
+  const [booksession, { isLoading }] = useBookPostMutation();
   const { user } = useAppSelector((state: RootState) => state.user);
   console.log(user);
 
@@ -46,20 +46,20 @@ const SessionDetails = () => {
     fetchSession();
   }, [sessionId]);
 
-  const handleBook = async() =>{
+  const handleBook = async () => {
     try {
       const payload = {
         sessionId: data?._id,
         studentEmail: user?.email,
         tutorEmail: data?.tutorEmail,
         registrationFee: data?.registrationFee,
-      }
-      const postData = await booksession(payload)
+      };
+      const postData = await booksession(payload);
       console.log(postData);
     } catch (error) {
       console.log('data posting error', error);
     }
-  }
+  };
 
   return (
     <div className="my-8 mx-5">
@@ -123,8 +123,19 @@ const SessionDetails = () => {
           )}
         </div>
 
-        <button onClick={handleBook} disabled={isLoading} className="w-36 bg-black text-white font-semibold py-2 rounded hover:bg-gray-600">
-        {isLoading ? 'Booking...' : 'Book Now'}
+        <button
+          onClick={handleBook}
+          disabled={
+            isLoading || user?.role === 'admin' || user?.role === 'tutor'
+          }
+          className={`cursor-pointer w-36 font-semibold py-2 rounded 
+    ${
+      isLoading || user?.role === 'admin' || user?.role === 'tutor'
+        ? 'bg-gray-400 cursor-not-allowed'
+        : 'bg-black hover:bg-gray-600 text-white'
+    }`}
+        >
+          {isLoading ? 'Booking...' : 'Book Now'}
         </button>
       </div>
     </div>
