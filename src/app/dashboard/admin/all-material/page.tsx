@@ -24,7 +24,7 @@ const Page = () => {
     isLoading,
     isError,
   } = useAllMaterilQuery({}, { pollingInterval: 2000 });
-  const [deleteMaterial] = useDeleteMaterialMutation()
+  const [deleteMaterial] = useDeleteMaterialMutation();
 
   if (isLoading)
     return (
@@ -63,12 +63,13 @@ const Page = () => {
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>{material.MaterialTitle}</TableCell>
                     <TableCell>
-                      <Link href={material.UploadImages} target="_blank"></Link>
                       <Button
                         type="submit"
                         className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
                       >
-                        Image link
+                        <Link href={material.UploadImages} target="_blank">
+                          Image link
+                        </Link>
                       </Button>
                     </TableCell>
                     <TableCell>

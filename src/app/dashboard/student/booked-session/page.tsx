@@ -26,7 +26,6 @@ const Page = () => {
     isLoading,
     isError,
   } = useGetbookByemailQuery(user?.email);
-  console.log(sessions);
 
   if (isLoading)
     return (
