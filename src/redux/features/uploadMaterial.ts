@@ -39,6 +39,12 @@ const uploadMaterial = createSlice({
     SetGoogledriveLink: (state, action: PayloadAction<string>) => {
       state.GoogledriveLink = action.payload;
     },
+
+    ResetMaterialForm: (state) => {
+      state.MaterialTitle = '';
+      state.UploadImages = '';
+      state.GoogledriveLink = '';
+    },
   },
 });
 
@@ -48,6 +54,7 @@ export const {
   SetSessionId,
   SetTutorEmail,
   SetUploadImages,
+  ResetMaterialForm
 } = uploadMaterial.actions;
 
 export default uploadMaterial.reducer;

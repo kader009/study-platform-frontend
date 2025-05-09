@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { FormEvent, useEffect} from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { usePostSessionMutation } from '@/redux/endApi';
@@ -18,8 +18,9 @@ import {
   SetStatus,
   SettutorName,
   SettutorEmail,
-  SetregistrationFee
+  SetregistrationFee,
 } from '@/redux/features/createSessionSlice';
+import { toast } from 'sonner';
 
 const Page = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
@@ -36,7 +37,7 @@ const Page = () => {
     sessionDuration,
     status,
     tutorName,
-    tutorEmail
+    tutorEmail,
   } = useAppSelector((state) => state.createSession);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -58,8 +59,10 @@ const Page = () => {
       });
 
       console.log('post session', sessionData);
+      toast.success('session create successfully');
     } catch (error) {
       console.log(error);
+      toast.error('something went wrong.');
     }
   };
 
@@ -69,7 +72,6 @@ const Page = () => {
       dispatch(SettutorEmail(user.email));
     }
   }, [user, dispatch]);
-  
 
   return (
     <div>
@@ -143,7 +145,9 @@ const Page = () => {
                 <input
                   type="date"
                   value={registrationStartDate}
-                  onChange={(e) => dispatch(SetregistrationStartDate(e.target.value))}
+                  onChange={(e) =>
+                    dispatch(SetregistrationStartDate(e.target.value))
+                  }
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 />
               </div>
@@ -156,7 +160,9 @@ const Page = () => {
                 <input
                   type="date"
                   value={registrationEndDate}
-                  onChange={(e) => dispatch(SetregistrationEndDate(e.target.value))}
+                  onChange={(e) =>
+                    dispatch(SetregistrationEndDate(e.target.value))
+                  }
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 />
               </div>
@@ -184,21 +190,23 @@ const Page = () => {
               </div>
             </div>
             <div>
-                <Label
-                  htmlFor="session-duration"
-                  className="mb-2 font-semibold mt-2"
-                >
-                  Session duration
-                </Label>
-                <Input
-                  id="session-duration"
-                  type="number"
-                  placeholder="session duration"
-                  value={sessionDuration}
-                  onChange={(e) =>{dispatch(SetsessionDuration(e.target.value))}}
-                  className="border border-black"
-                />
-              </div>
+              <Label
+                htmlFor="session-duration"
+                className="mb-2 font-semibold mt-2"
+              >
+                Session duration
+              </Label>
+              <Input
+                id="session-duration"
+                type="number"
+                placeholder="session duration"
+                value={sessionDuration}
+                onChange={(e) => {
+                  dispatch(SetsessionDuration(e.target.value));
+                }}
+                className="border border-black"
+              />
+            </div>
             <div>
               <Label htmlFor="registration" className="mb-2 font-semibold mt-2">
                 Registration fee

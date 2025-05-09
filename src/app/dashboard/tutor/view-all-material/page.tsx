@@ -30,6 +30,7 @@ import {
   SetMaterialtitle,
   SetUploadImages,
 } from '@/redux/features/updateMaterial';
+import { toast } from 'sonner';
 
 interface Materislprops {
   _id: string;
@@ -73,8 +74,20 @@ const Page = () => {
       });
       console.log(response);
       setOpenModal(false);
+      toast.success('update material successfully');
     } catch (error) {
       console.log(error);
+      toast.error('something went wrong');
+    }
+  };
+
+  const handleDeleteMaterial = async (id: string) => {
+    try {
+      await deleteMaterial(id);
+      toast.success('Material deleted successfully');
+    } catch (error) {
+      toast.error('Failed to delete material');
+      console.error(error);
     }
   };
 
@@ -87,11 +100,10 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h2 className="text-center font-semibold my-6">
+        <h1 className="text-center font-semibold my-6 text-xl capitalize">
           your session material
-        </h2>
+        </h1>
         <div className="overflow-x-auto w-full">
-          <p>user information</p>
           <Table className=" min-w-[600px] w-full ">
             <TableHeader>
               <TableRow>
@@ -108,20 +120,22 @@ const Page = () => {
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>{material.MaterialTitle}</TableCell>
                     <TableCell>{material.SessionId}</TableCell>
-                    <Button
-                      type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2 mx-2"
-                      onClick={() => handleOpenModal(material)}
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
-                      onClick={() => deleteMaterial(material._id)}
-                    >
-                      Delete
-                    </Button>
+                    <div className="my-2 flex flex-wrap gap-2">
+                      <Button
+                        type="submit"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg"
+                        onClick={() => handleOpenModal(material)}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg"
+                        onClick={() => handleDeleteMaterial(material._id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </TableRow>
                 ))
               ) : (

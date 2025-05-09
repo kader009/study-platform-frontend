@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
+  ResetMaterialForm,
   SetGoogledriveLink,
   SetMaterialTitle,
   SetSessionId,
@@ -81,6 +82,8 @@ const Page = () => {
       console.log('uploadmeterial', response);
       setOpenModal(false);
       toast.success('material upload successful')
+      dispatch(ResetMaterialForm())
+
     } catch (error) {
       console.log(error);
       toast.error('something went wrong.')
@@ -197,7 +200,6 @@ const Page = () => {
               <Input
                 type="text"
                 placeholder="upload image"
-                // accept="image/*"
                 value={UploadImages}
                 onChange={(e) => dispatch(SetUploadImages(e.target.value))}
                 className="file-input"
