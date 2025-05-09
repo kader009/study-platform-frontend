@@ -24,6 +24,7 @@ import {
 import { RootState } from '@/redux/store/store';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
 
 interface Noteprops {
   _id: string;
@@ -60,8 +61,20 @@ const Page = () => {
 
       console.log('update response', response);
       setOpenModal(false);
+      toast.success('note update successfully');
     } catch (error) {
       console.log(error);
+      toast.error('something went wrong');
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteNote(id);
+      toast.success('delete note successfully');
+    } catch (error) {
+      toast.error('delete note successfully');
+      console.error(error);
     }
   };
 
@@ -70,11 +83,13 @@ const Page = () => {
       <div className="flex justify-center items-center h-screen">Loading..</div>
     );
   if (isError) return <div>Something went wrong..</div>;
-  
+
   return (
     <div>
       <div>
-        <h2 className="text-center font-semibold my-6">Manage your notes</h2>
+        <h1 className="text-center font-semibold my-6 text-xl">
+          Manage your notes
+        </h1>
         <div className="overflow-x-auto">
           <Table className=" min-w-[600px] w-full ">
             <TableHeader>
@@ -103,7 +118,7 @@ const Page = () => {
                       <Button
                         type="submit"
                         className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
-                        onClick={() => deleteNote(note._id)}
+                        onClick={() => handleDelete(note._id)}
                       >
                         Delete
                       </Button>
