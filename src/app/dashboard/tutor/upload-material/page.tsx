@@ -31,6 +31,7 @@ import {
   SetTutorEmail,
   SetUploadImages,
 } from '@/redux/features/uploadMaterial';
+import { toast } from 'sonner';
 
 interface Approveprops {
   _id: string;
@@ -79,8 +80,10 @@ const Page = () => {
 
       console.log('uploadmeterial', response);
       setOpenModal(false);
+      toast.success('material upload successful')
     } catch (error) {
       console.log(error);
+      toast.error('something went wrong.')
     }
   };
 
@@ -107,7 +110,7 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h2 className="text-center font-semibold my-6">upload material</h2>
+        <h1 className="text-center font-semibold my-6 capitalize text-xl">upload material</h1>
         <div className="overflow-x-auto w-full">
           <Table className=" min-w-[600px] w-full ">
             <TableHeader>
@@ -124,10 +127,10 @@ const Page = () => {
                   <TableRow key={approve._id}>
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>{approve.sessionTitle}</TableCell>
-                    <TableCell>{approve.status}</TableCell>
+                    <TableCell className='capitalize'>{approve.status}</TableCell>
                     <Button
                       type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
+                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded my-2"
                       onClick={() => handleOpenModal(approve)}
                     >
                       Upload
@@ -189,12 +192,12 @@ const Page = () => {
               />
 
               <Label htmlFor="form" className="font-semibold">
-                Upload images
+                Upload images (link or from hosting site)
               </Label>
               <Input
-                type="file"
+                type="text"
                 placeholder="upload image"
-                accept="image/*"
+                // accept="image/*"
                 value={UploadImages}
                 onChange={(e) => dispatch(SetUploadImages(e.target.value))}
                 className="file-input"

@@ -4,6 +4,7 @@ import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 interface SessionData {
   _id: string;
@@ -56,8 +57,10 @@ const SessionDetails = () => {
       };
       const postData = await booksession(payload);
       console.log(postData);
+      toast.success('booked session successfully')
     } catch (error) {
       console.log('data posting error', error);
+      toast.error('something went wrong')
     }
   };
 
@@ -129,11 +132,11 @@ const SessionDetails = () => {
             isLoading || user?.role === 'admin' || user?.role === 'tutor'
           }
           className={`cursor-pointer w-36 font-semibold py-2 rounded 
-    ${
+        ${
       isLoading || user?.role === 'admin' || user?.role === 'tutor'
         ? 'bg-gray-400 cursor-not-allowed'
         : 'bg-black hover:bg-gray-600 text-white'
-    }`}
+        }`}
         >
           {isLoading ? 'Booking...' : 'Book Now'}
         </button>
