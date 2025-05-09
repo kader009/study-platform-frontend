@@ -7,20 +7,15 @@ import { FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { useCreateNoteMutation } from '@/redux/endApi';
-import {
-  setDescription,
-  setEmail,
-  setTitle,
-} from '@/redux/features/noteSlice';
+import { setDescription, setEmail, setTitle } from '@/redux/features/noteSlice';
+import { toast } from 'sonner';
 
 const Page = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
-  console.log('create note', user);
   const dispatch = useAppDispatch();
   const { email, title, description } = useAppSelector(
     (state: RootState) => state.note
   );
-  console.log(email);
   const [createNote] = useCreateNoteMutation();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -29,10 +24,14 @@ const Page = () => {
     try {
       const userNote = await createNote({ email, title, description });
       console.log('user note data', userNote);
+      toast.success('Create note successfully');
+
+      dispatch(setTitle(''));
+      dispatch(setDescription(''));
     } catch (error) {
       console.log(error);
+      toast.error('something went wrong');
     }
-    console.log();
   };
 
   useEffect(() => {
