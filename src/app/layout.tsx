@@ -14,12 +14,12 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'EduNest',
   description: 'A Learing Platform',
-  icons:{
-    icon: '/icons8-education-90.png'
-  }
+  icons: {
+    icon: '/icons8-education-90.png',
+  },
 };
 
-export default function RootLayout({ 
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -29,11 +29,11 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <Providers>
           <PersistProvider>
-          <Navbar />
+            <Navbar />
 
-          {children}
+            {children}
 
-          <Footer />
+            <Footer />
           </PersistProvider>
         </Providers>
       </body>
