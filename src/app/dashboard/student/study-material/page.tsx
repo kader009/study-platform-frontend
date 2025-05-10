@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useGetbookByemailQuery } from '../../../../redux/endApi';
 import { RootState } from '@/redux/store/store';
 import { useAppSelector } from '@/redux/hook';
+import Link from 'next/link';
 
 interface SessionProps {
   _id: string;
@@ -57,16 +58,18 @@ const Page = () => {
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>{session.sessionId}</TableCell>
                     <TableCell>{session.tutorEmail}</TableCell>
-                    <TableCell className="">
-                      ${session.registrationFee}
-                    </TableCell>
-                    <TableCell className="">
-                      <Button
-                        type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
+                    <TableCell>${session.registrationFee}</TableCell>
+                    <TableCell>
+                      <Link
+                        href={`/dashboard/student/study-material/${session._id}`}
                       >
-                        View Detail
-                      </Button>
+                        <Button
+                          type="button"
+                          className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2"
+                        >
+                          View Detail
+                        </Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))
