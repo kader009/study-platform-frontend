@@ -1,3 +1,4 @@
+'use client';
 import {
   Table,
   TableBody,
@@ -7,14 +8,37 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import { useGetbookByemailQuery } from '../../../../redux/endApi';
+import { RootState } from '@/redux/store/store';
+import { useAppSelector } from '@/redux/hook';
 
-const page = () => {
+interface SessionProps {
+  _id: string;
+  sessionId: string;
+  tutorEmail: string;
+  registrationFee: string;
+}
+
+const Page = () => {
+  const { user } = useAppSelector((state: RootState) => state.user);
+  const {
+    data: sessions,
+    isLoading,
+    isError,
+  } = useGetbookByemailQuery(user?.email);
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-screen">Loading..</div>
+    );
+  if (isError) return <div>Something went wrong..</div>;
+
   return (
     <div>
       <div>
-        <h2 className="text-center font-semibold my-6">
-          Your study material
-        </h2>
+        <h1 className="text-center font-semibold my-6 text-xl capitalize">
+          A list of your session material
+        </h1>
         <div className="overflow-x-auto w-full">
           <Table className=" min-w-[600px] w-full ">
             <TableHeader>
@@ -27,18 +51,32 @@ const page = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">INV001</TableCell>
-                <TableCell>Paid</TableCell>
-                <TableCell>Credit Card</TableCell>
-                <TableCell className="">$250.00</TableCell>
-                <Button
-                  type="submit"
-                  className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
-                >
-                  View Detail
-                </Button>
-              </TableRow>
+              {sessions?.length > 0 ? (
+                sessions.map((session: SessionProps, index: number) => (
+                  <TableRow key={session._id}>
+                    <TableCell className="font-medium">{index + 1}</TableCell>
+                    <TableCell>{session.sessionId}</TableCell>
+                    <TableCell>{session.tutorEmail}</TableCell>
+                    <TableCell className="">
+                      ${session.registrationFee}
+                    </TableCell>
+                    <TableCell className="">
+                      <Button
+                        type="submit"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
+                      >
+                        View Detail
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={4} className="text-center py-4">
+                    No sessions found
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>
@@ -47,4 +85,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
