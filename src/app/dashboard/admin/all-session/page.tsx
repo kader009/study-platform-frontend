@@ -87,7 +87,7 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h1 className="text-center font-semibold my-6">
+        <h1 className="text-center font-semibold my-6 text-xl capitalize">
           A list of all study session
         </h1>
         <div className="overflow-x-auto w-full">

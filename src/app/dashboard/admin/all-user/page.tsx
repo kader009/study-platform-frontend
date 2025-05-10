@@ -57,7 +57,7 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h1 className="text-center font-semibold my-6">A list of all users</h1>
+        <h1 className="text-center font-semibold my-6 text-xl capitalize">A list of all users</h1>
         <div className="w-full">
           <div className="flex w-full max-w-sm items-center space-x-2 my-4">
             <Input

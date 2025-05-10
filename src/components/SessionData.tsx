@@ -18,7 +18,7 @@ const SessionData = async () => {
   const sessions = await data.json();
 
   return (
-    <div className="container mx-auto py-16 px-8">
+    <div className="container mx-auto py-12 px-8">
       <h1 className="text-3xl font-semibold mb-2 text-center">
         <span className="text-blue-600">Approved</span> Sessions
       </h1>
