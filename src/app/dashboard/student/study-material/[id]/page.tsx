@@ -33,7 +33,7 @@ const Page = () => {
     <div>
       <div>
         <h1 className="text-center font-semibold my-6 text-xl capitalize">
-          A list of your session material
+          A list of your material item
         </h1>
         <div className="overflow-x-auto w-full">
           <Table className=" min-w-[600px] w-full ">
