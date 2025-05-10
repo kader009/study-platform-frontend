@@ -72,6 +72,7 @@ const Page = () => {
                 className="border border-black"
                 value={title}
                 onChange={(e) => dispatch(setTitle(e.target.value))}
+                required
               />
             </div>
             <div>
@@ -84,6 +85,7 @@ const Page = () => {
                 className="border border-black"
                 value={description}
                 onChange={(e) => dispatch(setDescription(e.target.value))}
+                required
               />
             </div>
             <Button
