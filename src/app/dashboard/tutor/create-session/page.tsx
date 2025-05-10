@@ -77,9 +77,9 @@ const Page = () => {
     <div>
       <div className="flex justify-center items-center px-4 mt-4">
         <div className="max-w-[800px] w-full mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
-          <h2 className="text-center text-2xl font-bold text-black mb-2">
+          <h1 className="text-center text-2xl font-bold text-black mb-2">
             Create study session
-          </h2>
+          </h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="session-title" className="mb-2 font-semibold">
