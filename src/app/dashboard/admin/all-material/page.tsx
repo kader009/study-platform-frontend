@@ -42,9 +42,9 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h2 className="text-center font-semibold my-6">
+        <h1 className="text-center font-semibold my-6">
           A list of your all material
-        </h2>
+        </h1>
         <div className="overflow-x-auto w-full">
           <Table className=" min-w-[600px] w-full ">
             <TableHeader>

@@ -25,7 +25,7 @@ const Page = () => {
   const paginatedSession = sessions.slice(startIndex, startIndex + limit);
 
   const fetchSessions = async () => {
-    const res = await fetch(`http://localhost:5000/api/v1/session`);
+    const res = await fetch(`https://study-platform-backend-drxm.onrender.com/api/v1/session`);
     const data = await res.json();
     setSession(data);
   };

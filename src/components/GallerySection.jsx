@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from 'react';
 import Image from 'next/image';
 
@@ -19,8 +19,10 @@ function GallerySection() {
   return (
     <section className="py-12">
       <div className="container mx-auto px-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Our Gallery</h1>
-        <p className='text-center mb-8'>Moments that reflect our story</p>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
+          Our Gallery
+        </h1>
+        <p className="text-center mb-8">Moments that reflect our story</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {galleryImages.map((src, idx) => (
             <button
@@ -66,6 +68,5 @@ function GallerySection() {
     </section>
   );
 }
-
 
 export default GallerySection;

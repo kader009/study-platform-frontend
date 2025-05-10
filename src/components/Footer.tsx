@@ -15,7 +15,7 @@ function Footer() {
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* About Edunest */}
         <div className="space-y-4">
-          <h4 className="text-2xl font-extrabold text-white">About Edunest</h4>
+          <h1 className="text-2xl font-extrabold text-white">About Edunest</h1>
           <p className="text-sm leading-relaxed">
             Empowering learners with live interactive sessions & cutting-edge tech. Join our community of curious minds.
           </p>
@@ -26,7 +26,7 @@ function Footer() {
 
         {/* Explore Links */}
         <div className="space-y-4">
-          <h4 className="text-xl font-bold text-white">Explore</h4>
+          <h2 className="text-xl font-bold text-white">Explore</h2>
           <ul className="space-y-2 text-sm">
             <li><Link href="/" className="hover:text-gray-400 transition">Home</Link></li>
             <li><Link href="/courses" className="hover:text-gray-400 transition">Courses</Link></li>
@@ -38,7 +38,7 @@ function Footer() {
 
         {/* Newsletter Subscription */}
         <div className="space-y-4">
-          <h4 className="text-xl font-bold text-white">Newsletter</h4>
+          <h3 className="text-xl font-bold text-white">Newsletter</h3>
           <p className="text-sm">
             Subscribe for updates, offers, and news directly in your inbox.
           </p>

@@ -5,12 +5,12 @@ const AboutUs = () => {
     <section className="flex flex-col md:flex-row-reverse items-center justify-between px-8 md:px-24 py-24  min-h-[600px]">
       {/* Right Side - Text Content */}
       <div className="w-full md:w-1/2 text-center md:text-left space-y-3">
-        <h2 className="text-blue-600 font-bold text-xl tracking-wide uppercase">
+        <h1 className="text-blue-600 font-bold text-xl tracking-wide uppercase">
           About Us
-        </h2>
-        <h3 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
+        </h1>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
           Shaping the Future of <br /> Learning & Innovation
-        </h3>
+        </h2>
         <p className="text-gray-700 text-lg leading-relaxed">
           At <span className="font-semibold text-blue-600">EduNest</span>, we believe that education should be 
           engaging, accessible, and transformative. Our platform is dedicated to providing 

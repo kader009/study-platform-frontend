@@ -34,7 +34,7 @@ const SessionDetails = () => {
     const fetchSession = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/v1/session/${sessionId}`
+          `https://study-platform-backend-drxm.onrender.com/api/v1/session/${sessionId}`
         );
         if (!res.ok) throw new Error('Failed to fetch session');
         const json = await res.json();
@@ -57,17 +57,17 @@ const SessionDetails = () => {
       };
       const postData = await booksession(payload);
       console.log(postData);
-      toast.success('booked session successfully')
+      toast.success('booked session successfully');
     } catch (error) {
       console.log('data posting error', error);
-      toast.error('something went wrong')
+      toast.error('something went wrong');
     }
   };
 
   return (
     <div className="my-8 mx-5">
       <div className="max-w-lg w-full mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4">
-        <h2 className="text-2xl font-bold">{data?.sessionTitle}</h2>
+        <h1 className="text-2xl font-bold">{data?.sessionTitle}</h1>
         <p className="text-md font-semibold text-gray-700">
           <span className="font-bold">Tutor:</span> {data?.tutorName}
         </p>
@@ -133,9 +133,9 @@ const SessionDetails = () => {
           }
           className={`cursor-pointer w-36 font-semibold py-2 rounded 
         ${
-      isLoading || user?.role === 'admin' || user?.role === 'tutor'
-        ? 'bg-gray-400 cursor-not-allowed'
-        : 'bg-black hover:bg-gray-600 text-white'
+          isLoading || user?.role === 'admin' || user?.role === 'tutor'
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-black hover:bg-gray-600 text-white'
         }`}
         >
           {isLoading ? 'Booking...' : 'Book Now'}

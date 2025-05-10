@@ -49,9 +49,9 @@ const TestimonialCarousel = () => {
   return (
     <section className="py-16 px-8">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-12">
+        <h1 className="text-3xl font-semibold text-gray-800 mb-12">
           Student <span className='text-blue-600'>Testimonial</span>
-        </h2>
+        </h1>
 
         <div className="relative">
           <div className="bg-white p-8 rounded-xl shadow-lg">
