@@ -21,7 +21,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     router.replace('/login');
-    toast.success('logout successfully')
+    toast.success('logout successfully');
   };
 
   return (
@@ -95,14 +95,8 @@ const Navbar = () => {
             ) : (
               <>
                 <Link
-                  href="/register"
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium cursor-pointer"
-                >
-                  Register
-                </Link>
-                <Link
                   href="/login"
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium cursor-pointer"
+                  className="block mt-4 md:inline-block md:mt-0 text-white bg-black hover:text-white px-6 py-2 rounded font-medium cursor-pointer"
                 >
                   Login
                 </Link>

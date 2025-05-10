@@ -14,6 +14,8 @@ import {
 } from '@/redux/features/authentication/registerSlice';
 import { useSignUpMutation } from '@/redux/endApi';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -21,16 +23,22 @@ const Page = () => {
     (state: RootState) => state.register
   );
   const [signUp] = useSignUpMutation();
+  const router = useRouter();
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
       const user = await signUp({ name, email, photoUrl, password, role });
       console.log('user data', user);
+      toast.success('register successfull');
+      router.replace('/login');
     } catch (error) {
       console.log(error);
+      toast.error('something went wrong');
     }
   };
+  
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">

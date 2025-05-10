@@ -46,7 +46,7 @@ export const loginUser = createAsyncThunk<
 >('user/login', async (credentials, { rejectWithValue }) => {
   try {
     const response = await axios.post<LoginResponse>(
-      'http://localhost:5000/api/v1/login',
+      'https://study-platform-backend-drxm.onrender.com/api/v1/login',
       credentials
     );
 
