@@ -41,7 +41,9 @@ function GallerySection() {
               />
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
-                <span className="text-white text-lg font-semibold">{label}</span>
+                <span className="text-white text-lg font-semibold">
+                  {label}
+                </span>
               </div>
             </div>
           ))}
@@ -67,7 +69,9 @@ function GallerySection() {
                 height={600}
                 className="object-contain w-full h-full rounded"
               />
-              <p className="text-center text-white mt-2 text-lg font-medium">{selected.label}</p>
+              <p className="text-center text-white mt-2 text-lg font-medium">
+                {selected.label}
+              </p>
             </div>
           </div>
         )}
