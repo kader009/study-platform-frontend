@@ -34,7 +34,7 @@ const Navbar = () => {
           </Link>
           <button
             onClick={toggleMenu}
-            className="text-black focus:outline-none md:hidden" // Hide on medium and up
+            className="text-black focus:outline-none md:hidden mr-3" // Hide on medium and up
           >
             <svg
               className="w-6 h-6 fill-current"
@@ -59,28 +59,25 @@ const Navbar = () => {
           <div className="text-sm md:flex md:items-center md:space-x-4">
             {user ? (
               <>
-                <Link
-                  href="/dashboard"
-                  className="block mt-4 md:inline-block md:mt-0 text-black  px-3 py-2 rounded-md font-medium"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/session"
-                  className="block mt-4 md:inline-block md:mt-0 text-black  px-3 py-2 rounded-md font-medium"
-                >
-                  All Session
-                </Link>
-
-                <button
-                  className="block mt-4 md:inline-block md:mt-0 text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium cursor-pointer"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-
-                {/* Profile Image (Dummy) */}
-                <div className="ml-4">
+                <div className="flex flex-col md:flex-row items-center gap-3 mt-4 md:mt-0">
+                  <Link
+                    href="/dashboard"
+                    className="text-black px-3 py-2 rounded-md font-medium"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/session"
+                    className="text-black px-3 py-2 rounded-md font-medium"
+                  >
+                    All Session
+                  </Link>
+                  <button
+                    className="text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium w-full md:w-auto "
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
                   <Image
                     src={
                       'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg'
@@ -94,12 +91,14 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link
-                  href="/login"
-                  className="block mt-4 md:inline-block md:mt-0 text-white bg-black hover:text-white px-5 py-2 rounded font-medium cursor-pointer"
-                >
-                  Login
-                </Link>
+                <button>
+                  <Link
+                    href="/login"
+                    className="block mt-4 md:inline-block md:mt-0 text-white bg-black hover:text-white px-5 py-2 rounded font-medium cursor-pointer"
+                  >
+                    Login
+                  </Link>
+                </button>
               </>
             )}
           </div>
