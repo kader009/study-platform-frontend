@@ -33,6 +33,12 @@ const Page = () => {
       console.log('user data', user);
       toast.success('register successfull');
       router.replace('/login');
+
+      dispatch(SetName(''))
+      dispatch(SetEmail(''))
+      dispatch(SetPhotoUrl(''))
+      dispatch(SetPassword(''))
+      dispatch(SetRole(''))
     } catch (error) {
       console.log(error);
       toast.error('something went wrong');
@@ -83,6 +89,7 @@ const Page = () => {
                 placeholder="Your Name"
                 value={name}
                 onChange={(e) => dispatch(SetName(e.target.value))}
+                required
               />
             </div>
 
@@ -101,6 +108,7 @@ const Page = () => {
                 placeholder="Your Email"
                 value={email}
                 onChange={(e) => dispatch(SetEmail(e.target.value))}
+                required
               />
             </div>
 
@@ -119,6 +127,7 @@ const Page = () => {
                 placeholder="Direct image URL or ImgBB URL"
                 value={photoUrl}
                 onChange={(e) => dispatch(SetPhotoUrl(e.target.value))}
+                required
               />
             </div>
 
@@ -137,6 +146,7 @@ const Page = () => {
                 placeholder="Your Password"
                 value={password}
                 onChange={(e) => dispatch(SetPassword(e.target.value))}
+                required
               />
             </div>
 
@@ -153,6 +163,7 @@ const Page = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={role}
                 onChange={(e) => dispatch(SetRole(e.target.value))}
+                required
               >
                 <option value="" disabled>
                   Select Role

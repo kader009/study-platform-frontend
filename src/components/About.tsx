@@ -12,7 +12,7 @@ const AboutUs = () => {
           Shaping the Future of <br /> Learning & Innovation
         </h2>
         <p className="text-gray-700 text-lg leading-relaxed">
-          At <span className="font-semibold text-blue-600">EduNest</span>, we believe that education should be 
+          At <span className="font-semibold text-blue-600 typing-animation">EduNest</span>, we believe that education should be 
           engaging, accessible, and transformative. Our platform is dedicated to providing 
           cutting-edge learning experiences that empower students to reach their full potential.
         </p>

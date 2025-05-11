@@ -22,7 +22,7 @@ function GallerySection() {
         <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
           Our Gallery
         </h1>
-        <p className="text-center mb-8">Moments that reflect our story</p>
+        <p className="text-center mb-8">Explore the highlights and milestones that define our journey</p>
 
         {/* Masonry Layout */}
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
