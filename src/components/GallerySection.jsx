@@ -3,14 +3,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 const galleryImages = [
-  '/image (8).webp',
-  '/image (1).webp',
-  '/image (2).webp',
-  '/image (3).webp',
-  '/image (4).webp',
-  '/image (5).webp',
-  '/image (6).webp',
-  '/image (7).webp',
+  { src: '/image (8).webp', label: 'Student Lab' },
+  { src: '/image (1).webp', label: 'Live Session' },
+  { src: '/image (2).webp', label: 'Workshop' },
+  { src: '/image (3).webp', label: 'Collaboration' },
+  { src: '/image (4).webp', label: 'Guest Lecture' },
+  { src: '/image (5).webp', label: 'Award Ceremony' },
+  { src: '/image (6).webp', label: 'Bootcamp' },
+  { src: '/image (7).webp', label: 'Hackathon' },
 ];
 
 function GallerySection() {
@@ -23,44 +23,51 @@ function GallerySection() {
           Our Gallery
         </h1>
         <p className="text-center mb-8">Moments that reflect our story</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {galleryImages.map((src, idx) => (
-            <button
+
+        {/* Masonry Layout */}
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+          {galleryImages.map(({ src, label }, idx) => (
+            <div
               key={idx}
-              onClick={() => setSelected(src)}
-              className="relative block overflow-hidden  shadow-sm focus:outline-none"
+              className="relative w-full break-inside-avoid cursor-pointer group"
+              onClick={() => setSelected({ src, label })}
             >
               <Image
                 src={src}
                 alt={`Gallery image ${idx + 1}`}
                 width={400}
                 height={300}
-                className="object-cover w-full h-56 hover:scale-105 transition-transform duration-300"
+                className="object-cover w-full h-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
               />
-            </button>
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
+                <span className="text-white text-lg font-semibold">{label}</span>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Modal Overlay */}
+        {/* Lightbox Modal */}
         {selected && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
             onClick={() => setSelected(null)}
           >
             <button
-              className="absolute top-4 right-4 text-white text-3xl font-bold"
+              className="absolute top-4 right-4 text-white text-3xl font-bold z-50"
               onClick={() => setSelected(null)}
             >
               &times;
             </button>
             <div className="max-w-3xl max-h-[80vh] p-4">
               <Image
-                src={selected}
-                alt="Selected image"
+                src={selected.src}
+                alt={selected.label}
                 width={800}
                 height={600}
-                className="object-cover w-full h-full rounded"
+                className="object-contain w-full h-full rounded"
               />
+              <p className="text-center text-white mt-2 text-lg font-medium">{selected.label}</p>
             </div>
           </div>
         )}
