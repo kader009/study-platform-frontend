@@ -94,7 +94,7 @@ const Navbar = () => {
                 <button>
                   <Link
                     href="/login"
-                    className="block mt-4 md:inline-block md:mt-0 text-white bg-black hover:text-white px-5 py-2 rounded font-medium cursor-pointer"
+                    className="block  md:inline-block md:mt-0 text-white bg-black hover:text-white px-5 py-2 rounded font-medium cursor-pointer"
                   >
                     Login
                   </Link>

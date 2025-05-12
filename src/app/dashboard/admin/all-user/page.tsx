@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { useAllUserQuery, useUpdateUserMutation } from '@/redux/endApi';
 import { useState } from 'react';
 import { FaUserTie, FaUserShield } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 interface Userprops {
   _id: string;
@@ -34,8 +35,10 @@ const Page = () => {
     if (currentRole !== 'admin') {
       try {
         await updateUser({ id, role: 'admin' });
+        toast.success('user role updated');
       } catch (error) {
         console.log(error);
+        toast.error('something went wrong');
       }
     }
   };
@@ -57,7 +60,9 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h1 className="text-center font-semibold my-6 text-xl capitalize">A list of all users</h1>
+        <h1 className="text-center font-semibold my-6 text-xl capitalize">
+          A list of all users
+        </h1>
         <div className="w-full">
           <div className="flex w-full max-w-sm items-center space-x-2 my-4">
             <Input

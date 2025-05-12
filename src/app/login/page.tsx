@@ -36,7 +36,7 @@ const Page = () => {
         dispatch(SetPassword(''));
         router.replace('/');
       } else {
-        throw new Error('Invalid login response');
+        throw new Error('Invalid login response write again');
       }
     } catch (error) {
       console.error('Login error:', error);
