@@ -18,7 +18,7 @@ import Link from 'next/link';
 const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
-  const [signIn] = useLoginMutation();
+  const [signIn, {isLoading}] = useLoginMutation();
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -26,6 +26,7 @@ const Page = () => {
 
     try {
       const { data } = await signIn({ email, password });
+
       dispatch(setUser(data));
       console.log('login success', data);
       // console.log('login success', data.token);
@@ -37,8 +38,14 @@ const Page = () => {
       router.replace('/');
     } catch (error) {
       console.log(error);
+      const message =
+        (error as { message?: string; error?: string })?.message ||
+        (error as { message?: string; error?: string })?.error ||
+        `Invalid email or password`;
+      toast.error(message);
     }
   };
+
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
@@ -110,7 +117,7 @@ const Page = () => {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Login
+                {isLoading ? 'Loggin in..' : 'Login'}
               </button>
             </div>
           </form>

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
+// User interface
 interface User {
   _id: string;
   name: string;
@@ -21,24 +22,15 @@ interface AuthState {
   error: string | null;
 }
 
-const getLocalUser = () => {
-  if (typeof window === 'undefined') return null;
-  return JSON.parse(localStorage.getItem('user') || 'null');
-};
-
-const getLocalToken = () => {
-  if (typeof window === 'undefined') return null;
-  return localStorage.getItem('token');
-};
-
+// Initial state (no localStorage used)
 const initialState: AuthState = {
-  user: getLocalUser(),
-  token: getLocalToken(),
+  user: null,
+  token: null,
   loading: false,
   error: null,
 };
 
-// Async thunk: login API call
+// Async thunk for login
 export const loginUser = createAsyncThunk<
   LoginResponse,
   { email: string; password: string },
@@ -47,13 +39,13 @@ export const loginUser = createAsyncThunk<
   try {
     const response = await axios.post<LoginResponse>(
       'https://study-platform-backend-drxm.onrender.com/api/v1/login',
-      credentials
+      credentials,
+      {
+        withCredentials: true,
+      }
     );
 
     const { user, token } = response.data;
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
-
     return { user, token };
   } catch (err) {
     let message = 'Something went wrong';
@@ -65,21 +57,18 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+// User slice
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<LoginResponse>) => {
-      state.user = action.payload?.user;
-      state.token = action.payload?.token;
-      localStorage.setItem('user', JSON.stringify(action.payload?.user));
-      localStorage.setItem('token', action.payload?.token);
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
     logout: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
     },
   },
   extraReducers: (builder) => {
@@ -90,16 +79,14 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload?.user;
-        state.token = action.payload?.token;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
         state.token = null;
         state.error = action.payload ?? action.error.message ?? null;
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
       });
   },
 });

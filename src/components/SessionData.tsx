@@ -26,21 +26,21 @@ const SessionData = async () => {
         Browse sessions that are reviewed and officially approved
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sessions.slice(0, 6).map((session: SessionProps) => {
+        {sessions?.slice(0, 6).map((session: SessionProps) => {
           const currentTime = new Date();
-          const sessionEndTime = new Date(session.classEndDate);
+          const sessionEndTime = new Date(session?.classEndDate);
           const isSessionEnded = currentTime > sessionEndTime;
 
           return (
             <div
-              key={session._id}
+              key={session?._id}
               className="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
             >
               <h3 className="text-lg font-semibold text-blue-600 mb-3 truncate">
-                {session.sessionTitle}
+                {session?.sessionTitle}
               </h3>
               <p className="text-gray-700 text-sm mb-4 leading-relaxed">
-                {session.sessionDescription}
+                {session?.sessionDescription}
               </p>
               <div className="flex justify-between items-center">
                 {isSessionEnded ? (
