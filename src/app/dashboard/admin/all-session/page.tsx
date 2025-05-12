@@ -28,6 +28,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface Sessionprops {
   _id: string;
@@ -75,6 +76,7 @@ const Page = () => {
       const response = await updateSession(updatedSessionDB);
       console.log('Update fee response:', response);
       setIsOpen(false);
+      toast.success('session update successfully')
     } catch (err) {
       console.error('Update failed', err);
     }

@@ -4,7 +4,7 @@ import { BsGithub } from 'react-icons/bs';
 import { GooglelogIn, logIn } from '@/lib/auth';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useLoginMutation } from '@/redux/endApi';
 import {
   SetEmail,
@@ -18,33 +18,42 @@ import Link from 'next/link';
 const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
+  const error = useAppSelector((state: RootState) => state.user.error);
   const [signIn, {isLoading}] = useLoginMutation();
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+  
     try {
       const { data } = await signIn({ email, password });
-
-      dispatch(setUser(data));
-      console.log('login success', data);
-      // console.log('login success', data.token);
-      toast.success('welcome to Edunest Website');
-
-      dispatch(SetEmail(''));
-      dispatch(SetPassword(''));
-
-      router.replace('/');
+  
+      if (data?.user && data?.token) {
+        dispatch(setUser(data));
+        toast.success('Welcome to Edunest Website');
+        
+        dispatch(SetEmail(''));
+        dispatch(SetPassword(''));
+        router.replace('/');
+      } else {
+        throw new Error('Invalid login response');
+      }
     } catch (error) {
-      console.log(error);
+      console.error('Login error:', error);
       const message =
         (error as { message?: string; error?: string })?.message ||
         (error as { message?: string; error?: string })?.error ||
-        `Invalid email or password`;
+        'Invalid email or password';
       toast.error(message);
     }
   };
+  
+
+  useEffect(() => {
+  if (error) {
+    toast.error(error);
+  }
+}, [error])
 
   return (
     <div>
