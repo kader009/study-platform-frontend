@@ -44,7 +44,7 @@ const SessionData = async () => {
               </p>
               <div className="flex justify-between items-center">
                 {isSessionEnded ? (
-                  <span className="bg-gray-400 text-white text-sm font-semibold py-2 px-4 rounded-full">
+                  <span className="bg-black text-white text-sm font-semibold py-2 px-4 rounded-full">
                     Closed
                   </span>
                 ) : (

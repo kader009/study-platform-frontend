@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Providers from '@/Provider/Provider';
 import PersistProvider from '@/redux/PersistProvider';
+import { SessionProvider } from 'next-auth/react';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -30,8 +31,7 @@ export default function RootLayout({
         <Providers>
           <PersistProvider>
             <Navbar />
-
-            {children}
+            <SessionProvider>{children}</SessionProvider>
 
             <Footer />
           </PersistProvider>

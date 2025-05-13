@@ -14,24 +14,27 @@ import { setUser } from '@/redux/features/authentication/userSlice';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
   const error = useAppSelector((state: RootState) => state.user.error);
-  const [signIn, {isLoading}] = useLoginMutation();
+  const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
+  const { data:sessions } = useSession();
+  console.log(sessions);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-  
+
     try {
       const { data } = await signIn({ email, password });
-  
+
       if (data?.user && data?.token) {
         dispatch(setUser(data));
         toast.success('Welcome to Edunest Website');
-        
+
         dispatch(SetEmail(''));
         dispatch(SetPassword(''));
         router.replace('/');
@@ -47,13 +50,12 @@ const Page = () => {
       toast.error(message);
     }
   };
-  
 
   useEffect(() => {
-  if (error) {
-    toast.error(error);
-  }
-}, [error])
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <div>

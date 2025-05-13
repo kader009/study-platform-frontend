@@ -16,6 +16,7 @@ import { useSignUpMutation } from '@/redux/endApi';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useSession } from 'next-auth/react';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,8 @@ const Page = () => {
   );
   const [signUp] = useSignUpMutation();
   const router = useRouter();
+  const { data: sessions } = useSession();
+  console.log(sessions);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -34,17 +37,17 @@ const Page = () => {
       toast.success('register successfull');
       router.replace('/login');
 
-      dispatch(SetName(''))
-      dispatch(SetEmail(''))
-      dispatch(SetPhotoUrl(''))
-      dispatch(SetPassword(''))
-      dispatch(SetRole(''))
+      dispatch(SetName(''));
+      dispatch(SetEmail(''));
+      dispatch(SetPhotoUrl(''));
+      dispatch(SetPassword(''));
+      dispatch(SetRole(''));
     } catch (error) {
       console.log(error);
       toast.error('something went wrong');
     }
   };
-  
+
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
