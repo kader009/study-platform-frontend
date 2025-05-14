@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Edunest – Your Smart Study Platform
 
-## Getting Started
+Edunest is a full-featured online study platform built with modern technologies to enhance the learning experience for students, tutors, and admins. It provides a seamless way to manage sessions, study materials, and users with a clean and responsive UI.
 
-First, run the development server:
+---
+
+## 🚀 Live Demo
+
+🔗 [Visit Edunest](https://study-platform-frontend-azure.vercel.app/)
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend:
+
+- ⚛️ **Next.js** (App Router)
+- 💬 **TypeScript** & **JavaScript**
+- 🎨 **Tailwind CSS** – Utility-first CSS framework
+- 🧩 **shadcn/ui** – Accessible components for modern UI
+- 🔄 **Redux Toolkit** – State management
+
+### Backend:
+
+- 🧠 **Express.js** – Node.js backend framework
+- 🗃️ **MongoDB** – NoSQL database
+- 🔐 **JWT Authentication** – Role-based access control
+
+### Others:
+
+- 🌐 Hosted on **Vercel**
+- 📦 **REST APIs** integrated with backend
+- 🧾 Environment managed with `.env.local`
+
+---
+
+## 👤 User Roles
+
+1. **Admin**
+
+   - Manage all users (approve/block/delete)
+   - View statistics
+   - Monitor sessions and materials
+
+2. **Tutor**
+
+   - Create, edit, and manage study sessions
+   - Upload study materials
+   - Communicate with students
+
+3. **Student**
+   - Join sessions
+   - Access materials
+   - Interact with tutors
+
+---
+
+## 🔐 Authentication
+
+- Secure login system using **JWT tokens**
+- Role-based access for Admin, Tutor, and Student
+- Protected routes and session persistence
+
+---
+
+## 📦 Features
+
+- 📚 Study Session Management
+- 📝 Material Upload and Viewing
+- 🧑‍🏫 Tutor-Student Communication
+- 🌐 Fully Responsive Design
+- ⚙️ Admin Dashboard
+- 📂 Organized folder structure for scalability
+
+---
+
+## 🛠️ Setup Instructions
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/kader009/study-platform-frontend.git
+
+# 2. Navigate to the project
+cd study-platform-frontend
+
+# 3. Install dependencies
+npm install
+
+# 4. Add your environment variables in `.env.local`
+
+# 5. Run the app
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
