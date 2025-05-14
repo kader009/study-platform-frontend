@@ -2,7 +2,7 @@
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { GooglelogIn, logIn } from '@/lib/auth';
-import { FormEvent, useEffect } from 'react';
+import { FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import {
@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
-import { setUser } from '@/redux/features/authentication/userSlice';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -28,18 +27,6 @@ const Page = () => {
   const router = useRouter();
   const { data: session } = useSession();
   console.log(session);
-
-
-  // useEffect(() => {
-  //   if (session?.user) {
-  //     dispatch(setUser({
-  //       name: session?.user?.name,
-  //       email: session?.user?.email,
-  //       image: session?.user?.image,
-  //       role: session?.user?.role
-  //     }));
-  //   }
-  // }, [dispatch, session?.user]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
