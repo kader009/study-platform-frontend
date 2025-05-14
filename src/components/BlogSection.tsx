@@ -36,9 +36,10 @@ export default function BlogSection() {
         <h1 className="text-3xl font-bold text-center mb-2">
           Latest Blogs & Resources
         </h1>
-        <p className="text-center text-gray-600 mb-10  text-sm">
-        Discover practical tips, expert insights, and the latest updates on online learning
-</p>
+        <p className="text-center text-gray-600 mb-8  text-sm">
+          Discover practical tips, expert insights, and the latest updates on
+          learning
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <Card
@@ -55,7 +56,7 @@ export default function BlogSection() {
               <CardContent className="p-4 pt-0">
                 <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                 <p className="text-sm text-gray-600 mb-4">{post.excerpt}</p>
-                <Link href={`${post.slug}`} target='_blank'>
+                <Link href={`${post.slug}`} target="_blank">
                   <span className="text-blue-600 hover:underline font-medium">
                     Read more →
                   </span>

@@ -20,11 +20,11 @@ const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
   const error = useAppSelector((state: RootState) => state.user.error);
-  const {user} = useAppSelector((state: RootState) => state.user);
+  const { user } = useAppSelector((state: RootState) => state.user);
   console.log(user);
   const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
-  const { data:sessions } = useSession();
+  const { data: sessions } = useSession();
   console.log(sessions);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -33,7 +33,7 @@ const Page = () => {
     try {
       const { data } = await signIn({ email, password });
 
-      if (data?.user && data?.token) { 
+      if (data?.user && data?.token) {
         dispatch(setUser(data));
         toast.success('Welcome to Edunest Website');
 
@@ -67,6 +67,37 @@ const Page = () => {
             Login Your Account
           </h1>
 
+          {/*  Admin Access Info */}
+          <div className="text-center text-sm text-gray-600 mb-6">
+            <p className="font-semibold text-gray-700 mb-2">
+              Admin Demo Access
+            </p>
+
+            <div className="flex justify-center items-center space-x-2 mb-1">
+              <span>
+                Email: <span className="text-blue-600">kader@gmail.com</span>
+              </span>
+              <button
+                onClick={() => navigator.clipboard.writeText('kader@gmail.com')}
+                className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded"
+              >
+                Copy
+              </button>
+            </div>
+
+            <div className="flex justify-center items-center space-x-2">
+              <span>
+                Password: <span className="text-blue-600">78757278</span>
+              </span>
+              <button
+                onClick={() => navigator.clipboard.writeText('78757278')}
+                className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
           {/* Social Login Buttons */}
           <div className="flex justify-around mb-4">
             <button
@@ -94,7 +125,7 @@ const Page = () => {
                 htmlFor="email"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Eamil
+                Email
               </label>
               <input
                 type="text"
@@ -130,10 +161,11 @@ const Page = () => {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                {isLoading ? 'Loggin in..' : 'Login'}
+                {isLoading ? 'Logging in...' : 'Login'}
               </button>
             </div>
           </form>
+
           {/* Register link */}
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
