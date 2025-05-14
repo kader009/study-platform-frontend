@@ -91,3 +91,10 @@ npm install
 # 5. Run the app
 npm run dev
 ```
+
+## 🧑 Author
+
+**Md Abdul Kader Molla**  
+3rd Semester Student, Bangladesh Open University  
+📧 **Email:** [kadermollarasel000@gmail.com](mailto:kadermollarasel000@gmail.com)  
+🌐 **Portfolio:** [https://abdul-kader.netlify.app/](https://abdul-kader.netlify.app/)
