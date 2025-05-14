@@ -4,6 +4,7 @@ import SessionData from '@/components/SessionData';
 import Testimonial from '@/components/Testimonial';
 import TutorSection from '@/components/TutorSection';
 import GallerySection from '@/components/GallerySection';
+import BlogSection from '@/components/BlogSection';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <SessionData />
       <TutorSection />
       <GallerySection />
+      <BlogSection/>
       <Testimonial />
     </div>
   );
