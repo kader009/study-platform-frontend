@@ -97,11 +97,11 @@ const Page = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[80px]">No</TableHead>
-                <TableHead>Session name</TableHead>
+                <TableHead >Session name</TableHead>
                 <TableHead>Tutor name</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Fee</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className='w-60 ms-10 text-center'>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
