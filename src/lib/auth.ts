@@ -1,4 +1,4 @@
-'use server';
+'use server'; 
 import { signIn, signOut } from '@/auth';
 
 export const logIn = async () => {
@@ -6,7 +6,7 @@ export const logIn = async () => {
 };
 
 export const GooglelogIn = async () => {
-  await signIn('google', { redirectTo: '/' }); 
+  await signIn('google', { redirectTo: '/' });
 };
 
 export const logOut = async () => {

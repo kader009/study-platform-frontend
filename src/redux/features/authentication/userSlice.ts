@@ -13,6 +13,10 @@ interface User {
 interface LoginResponse {
   user: User;
   token: string;
+  name?: string | null | undefined;
+  email?: string | null;
+  image?: string | null;
+  role?: string;
 }
 
 interface AuthState {

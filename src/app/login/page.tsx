@@ -20,6 +20,8 @@ const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
   const error = useAppSelector((state: RootState) => state.user.error);
+  const {user} = useAppSelector((state: RootState) => state.user);
+  console.log(user);
   const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
   const { data:sessions } = useSession();
@@ -31,7 +33,7 @@ const Page = () => {
     try {
       const { data } = await signIn({ email, password });
 
-      if (data?.user && data?.token) {
+      if (data?.user && data?.token) { 
         dispatch(setUser(data));
         toast.success('Welcome to Edunest Website');
 
