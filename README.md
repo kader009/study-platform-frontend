@@ -4,12 +4,6 @@ Edunest is a full-featured online study platform built with modern technologies 
 
 ---
 
-## 🚀 Live Demo
-
-🔗 [Visit Edunest](https://study-platform-frontend-azure.vercel.app/)
-
----
-
 ## 🛠️ Tech Stack
 
 ### Frontend:
