@@ -33,6 +33,7 @@ const Navbar = () => {
             EduNest
           </Link>
           <button
+          aria-label="Open navigation menu"
             onClick={toggleMenu}
             className="text-black focus:outline-none md:hidden mr-3" // Hide on medium and up
           >
