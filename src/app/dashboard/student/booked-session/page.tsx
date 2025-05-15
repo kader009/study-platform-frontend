@@ -28,7 +28,9 @@ const Page = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-screen">Loading..</div>
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
+      </div>
     );
   if (isError) return <div>Something went wrong..</div>;
 

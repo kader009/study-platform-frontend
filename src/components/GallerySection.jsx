@@ -17,7 +17,7 @@ function GallerySection() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section className="py-12">
+    <section className="py-10">
       <div className="container mx-auto px-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
           Our Gallery
