@@ -119,14 +119,14 @@ const Page = () => {
                     <TableCell>
                       <Button
                         type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 mx-2 text-white py-2 rounded-lg mt-2"
+                        className="w-24 bg-black hover:bg-gray-900 mx-2 text-white py-2 rounded mt-2"
                         onClick={() => handleOpenModal(note)}
                       >
                         Update
                       </Button>
                       <Button
                         type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg mt-2"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2"
                         onClick={() => handleDelete(note._id)}
                       >
                         Delete

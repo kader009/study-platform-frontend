@@ -1,7 +1,7 @@
 'use client';
-import { FcGoogle } from 'react-icons/fc';
-import { BsGithub } from 'react-icons/bs';
-import { GooglelogIn, logIn } from '@/lib/auth';
+// import { FcGoogle } from 'react-icons/fc';
+// import { BsGithub } from 'react-icons/bs';
+// import { GooglelogIn, logIn } from '@/lib/auth';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { FormEvent, useEffect } from 'react';
@@ -14,18 +14,13 @@ import { setUser } from '@/redux/features/authentication/userSlice';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 
 const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
   const error = useAppSelector((state: RootState) => state.user.error);
-  const { user } = useAppSelector((state: RootState) => state.user);
-  console.log(user);
   const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
-  const { data: sessions } = useSession();
-  console.log(sessions);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -99,7 +94,7 @@ const Page = () => {
           </div>
 
           {/* Social Login Buttons */}
-          <div className="flex justify-around mb-4">
+          {/* <div className="flex justify-around mb-4">
             <button
               className="bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
               onClick={() => GooglelogIn()}
@@ -114,7 +109,7 @@ const Page = () => {
               <BsGithub className="mr-2" />
               GitHub
             </button>
-          </div>
+          </div> */}
 
           <div className="text-center text-gray-500 mb-4">Or</div>
 
