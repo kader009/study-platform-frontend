@@ -77,42 +77,25 @@ function Footer() {
           </p>
           <p className="text-sm flex items-center gap-2">
             📧{' '}
-            <a href="mailto:support@edunest.com" className="hover:underline">
-              support@edunest.com
-            </a>
+            <li className="hover:underline list-none">support@edunest.com</li>
           </p>
           <p className="text-sm flex items-center gap-2">
-            📞{' '}
-            <a href="tel:+8801234567890" className="hover:underline">
-              +880 1234-567890
-            </a>
+            📞 <li className="hover:underline list-none">+880 1234-567890</li>
           </p>
 
           <div className="flex space-x-4 mt-2">
-            <a
-              href="#"
-              className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition"
-            >
+            <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition list-none">
               <FaFacebookF />
-            </a>
-            <a
-              href="#"
-              className="p-2 bg-gray-800 rounded-full hover:bg-blue-400 transition"
-            >
+            </li>
+            <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-400 transition list-none">
               <FaTwitter />
-            </a>
-            <a
-              href="#"
-              className="p-2 bg-gray-800 rounded-full hover:bg-pink-500 transition"
-            >
+            </li>
+            <li className="p-2 bg-gray-800 rounded-full hover:bg-pink-500 transition list-none">
               <FaInstagram />
-            </a>
-            <a
-              href="#"
-              className="p-2 bg-gray-800 rounded-full hover:bg-blue-700 transition"
-            >
+            </li>
+            <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-700 transition list-none">
               <FaLinkedinIn />
-            </a>
+            </li>
           </div>
         </div>
       </div>
