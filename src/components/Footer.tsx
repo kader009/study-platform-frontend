@@ -83,7 +83,7 @@ function Footer() {
             📞 <li className="hover:underline list-none">+880 1234-567890</li>
           </p>
 
-          <div className="flex space-x-4 mt-2">
+          <div className="flex space-x-4 mt-2 cursor-pointer">
             <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition list-none">
               <FaFacebookF />
             </li>
