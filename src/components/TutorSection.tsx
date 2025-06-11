@@ -11,7 +11,11 @@ interface Tutorprops {
 }
 
 const TutorSection = () => {
-  const { data: tutors, isLoading, isError } = useAllTutorQuery([]);
+  const { data: tutors, isLoading, isError } = useAllTutorQuery(undefined, {
+    refetchOnMountOrArgChange: false,
+    refetchOnFocus: false,
+    refetchOnReconnect: false,
+  });
 
   if (isLoading)
     return (
