@@ -129,11 +129,14 @@ const SessionDetails = () => {
         <button
           onClick={handleBook}
           disabled={
-            isLoading || user?.role === 'admin' || user?.role === 'tutor'
+            isLoading ||
+            !user ||
+            user?.role === 'admin' ||
+            user?.role === 'tutor'
           }
           className={`cursor-pointer w-36 font-semibold py-2 rounded 
         ${
-          isLoading || user?.role === 'admin' || user?.role === 'tutor'
+          isLoading || !user || user?.role === 'admin' || user?.role === 'tutor'
             ? 'bg-gray-400 cursor-not-allowed'
             : 'bg-black hover:bg-gray-600 text-white'
         }`}
