@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 const Banner = () => {
   return (
     <section className="min-h-screen flex items-center bg-gradient-to-br from-black via-gray-900 to-blue-900 px-6 py-12">
@@ -18,16 +20,18 @@ const Banner = () => {
             Join live sessions, master in-demand skills, and build your tech
             career the right way — one session at a time.
           </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded transition-all duration-300 cursor-pointer">
-            Get Started
-          </button>
+          <Link href="/session">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded transition-all duration-300 cursor-pointer">
+              Get Started
+            </button>
+          </Link>
         </div>
 
         {/* Code Snippet Section */}
         <div className="bg-gray-900 text-green-400 p-6 rounded-xl shadow-lg font-mono text-sm leading-relaxed overflow-x-auto">
           <pre>
             <code>
-          {`// enroll in your first session at Edunest
+              {`// enroll in your first session at Edunest
         const session = {
           course: "Frontend Development",
           level: "Beginner",
