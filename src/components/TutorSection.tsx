@@ -1,7 +1,5 @@
-// 'use client';
 import Image from 'next/image';
 import { CardContent } from '@/components/ui/card';
-// import { useAllTutorQuery } from '@/redux/endApi';
 
 interface Tutorprops {
   _id: string;
@@ -10,29 +8,11 @@ interface Tutorprops {
   photoUrl: string;
 }
 
-const TutorSection = async() => {
-
-  const response = await fetch(`https://study-platform-backend-drxm.onrender.com/api/v1/tutor`)
-  const tutors = await response.json()
-  // const { data: tutors, isLoading, isError } = useAllTutorQuery(undefined, {
-  //   refetchOnMountOrArgChange: false,
-  //   refetchOnFocus: false,
-  //   refetchOnReconnect: false,
-  // });
-
-  // if (isLoading)
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-  //     </div>
-  //   );
-
-  // if (isError)
-  //   return (
-  //     <div className="text-center text-red-600 text-2xl">
-  //       something went wrong
-  //     </div>
-  //   );
+const TutorSection = async () => {
+  const response = await fetch(
+    `https://study-platform-backend-drxm.onrender.com/api/v1/tutor`
+  );
+  const tutors = await response.json();
 
   return (
     <section className="py-6">
@@ -40,7 +20,7 @@ const TutorSection = async() => {
         <h1 className="text-2xl font-bold text-gray-800 mb-2">
           Our Expert Tutors
         </h1>
-        <p className='mb-10'>Guiding you every step of your learning journey</p>
+        <p className="mb-10">Guiding you every step of your learning journey</p>
         {/* reduced gap-12 → gap-6 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {tutors?.map((tutor: Tutorprops) => (
