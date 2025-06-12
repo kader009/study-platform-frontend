@@ -1,7 +1,7 @@
-'use client';
+// 'use client';
 import Image from 'next/image';
 import { CardContent } from '@/components/ui/card';
-import { useAllTutorQuery } from '@/redux/endApi';
+// import { useAllTutorQuery } from '@/redux/endApi';
 
 interface Tutorprops {
   _id: string;
@@ -10,26 +10,29 @@ interface Tutorprops {
   photoUrl: string;
 }
 
-const TutorSection = () => {
-  const { data: tutors, isLoading, isError } = useAllTutorQuery(undefined, {
-    refetchOnMountOrArgChange: false,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+const TutorSection = async() => {
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  const response = await fetch(`https://study-platform-backend-drxm.onrender.com/api/v1/tutor`)
+  const tutors = await response.json()
+  // const { data: tutors, isLoading, isError } = useAllTutorQuery(undefined, {
+  //   refetchOnMountOrArgChange: false,
+  //   refetchOnFocus: false,
+  //   refetchOnReconnect: false,
+  // });
 
-  if (isError)
-    return (
-      <div className="text-center text-red-600 text-2xl">
-        something went wrong
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
+  //     </div>
+  //   );
+
+  // if (isError)
+  //   return (
+  //     <div className="text-center text-red-600 text-2xl">
+  //       something went wrong
+  //     </div>
+  //   );
 
   return (
     <section className="py-6">
