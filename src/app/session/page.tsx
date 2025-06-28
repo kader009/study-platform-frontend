@@ -25,22 +25,34 @@ const Page = () => {
   const startIndex = (page - 1) * limit;
   const paginatedSession = sessions.slice(startIndex, startIndex + limit);
 
-  const fetchSessions = async () => {
-    try {
-      setIsLoading(true);
-      const res = await fetch(
-        `https://study-platform-backend-drxm.onrender.com/api/v1/session`
-      );
-      const data = await res.json();
-      setSession(data);
-    } catch (error) {
-      console.error('Error fetching sessions:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchSessions = async (retry = 1) => {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          'https://study-platform-backend-drxm.onrender.com/api/v1/session'
+        );
+
+        const contentType = res.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Not a valid JSON (cold start?)');
+        }
+
+        const data = await res.json();
+        setSession(data);
+      } catch (err) {
+        if (retry < 3) {
+          console.warn(`Retrying (${retry})...`);
+
+          setTimeout(() => fetchSessions(retry + 1), 2000);
+        } else {
+          console.error('Session fetch failed after 3 retries:', err);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchSessions();
   }, [page]);
 
