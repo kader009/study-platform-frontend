@@ -39,6 +39,11 @@ const links = [
     roles: ['admin'],
   },
   {
+    href: '/dashboard/admin/profile',
+    label: 'Profile',
+    roles: ['admin'],
+  },
+  {
     href: '/dashboard/tutor/create-session',
     label: 'Create Session',
     roles: ['tutor'],
