@@ -5,6 +5,7 @@ import Testimonial from '@/components/Testimonial';
 import TutorSection from '@/components/TutorSection';
 import GallerySection from '@/components/GallerySection';
 import BlogSection from '@/components/BlogSection';
+import FeaturesSection from '@/components/FeatureSection';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <TutorSection />
       <GallerySection />
       <BlogSection/>
+      <FeaturesSection/>
       <Testimonial />
     </div>
   );
