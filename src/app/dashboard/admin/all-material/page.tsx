@@ -76,7 +76,7 @@ const Page = () => {
                       <Link href={material.GoogledriveLink} target="_blank">
                         <Button
                           type="submit"
-                          className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2"
+                          className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2 cursor-pointer"
                         >
                           Drive link
                         </Button>
@@ -84,7 +84,7 @@ const Page = () => {
                     </TableCell>
                     <Button
                       type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2"
+                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2 cursor-pointer"
                       onClick={() => deleteMaterial(material._id)}
                     >
                       Delete
