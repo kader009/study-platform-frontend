@@ -35,7 +35,7 @@ const Navbar = () => {
           <button
           aria-label="Open navigation menu"
             onClick={toggleMenu}
-            className="text-black focus:outline-none md:hidden mr-3" // Hide on medium and up
+            className="text-black focus:outline-none md:hidden mr-3" 
           >
             <svg
               className="w-6 h-6 fill-current"
@@ -74,7 +74,7 @@ const Navbar = () => {
                     All Session
                   </Link>
                   <button
-                    className="text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium w-full md:w-auto "
+                    className="text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium w-full md:w-auto cursor-pointer"
                     onClick={handleLogout}
                   >
                     Logout
