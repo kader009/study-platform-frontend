@@ -150,7 +150,7 @@ export default function AdminProfilePage() {
               <h3 className="text-lg font-semibold text-gray-700 mb-4">
                 Quick Actions
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <button className="bg-black text-white py-3 px-4 rounded-full shadow hover:bg-gray-600 transition-all">
                   <Link href="/dashboard/admin/all-user">All User</Link>
                 </button>
