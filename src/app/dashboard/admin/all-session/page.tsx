@@ -53,6 +53,11 @@ const Page = () => {
   const [isFree, setIsFree] = useState(true);
   const [fee, setFee] = useState('');
   const [updateSession] = useUpdateSessionMutation();
+  const [visibleCount, setVisibleCount] = useState(8);
+
+  const Handleview = () => {
+    setVisibleCount((prev) => prev + 5);
+  };
 
   const handleUpdateClick = (session: Sessionprops) => {
     setSelectedSession(session);
@@ -76,11 +81,13 @@ const Page = () => {
       const response = await updateSession(updatedSessionDB);
       console.log('Update fee response:', response);
       setIsOpen(false);
-      toast.success('session update successfully')
+      toast.success('session update successfully');
     } catch (err) {
       console.error('Update failed', err);
     }
   };
+
+  const visibleData = sessions?.slice(0, visibleCount);
 
   if (isLoading) return <Loader />;
   if (isError)
@@ -97,16 +104,18 @@ const Page = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[80px]">No</TableHead>
-                <TableHead >Session name</TableHead>
+                <TableHead>Session name</TableHead>
                 <TableHead>Tutor name</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Fee</TableHead>
-                <TableHead className='w-60 ms-10 text-center'>Actions</TableHead>
+                <TableHead className="w-60 ms-10 text-center">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sessions?.length > 0 ? (
-                sessions?.map((session: Sessionprops, index: number) => (
+              {visibleData?.length > 0 ? (
+                visibleData?.map((session: Sessionprops, index: number) => (
                   <TableRow key={session._id}>
                     <TableCell className="font-medium">{index + 1}.</TableCell>
                     <TableCell>{session.sessionTitle}</TableCell>
@@ -153,6 +162,17 @@ const Page = () => {
           </Table>
         </div>
       </div>
+
+      {visibleCount < sessions?.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={Handleview}
+            className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-full transition"
+          >
+            View More
+          </button>
+        </div>
+      )}
 
       {/* modal */}
 
