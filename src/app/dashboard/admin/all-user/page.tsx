@@ -30,6 +30,11 @@ const Page = () => {
 
   const [updateUser] = useUpdateUserMutation();
   const [searchTerm, setsearchTerm] = useState('');
+  const [visibleCount, setVisibleCount] = useState(8);
+
+  const Handleview = () => {
+    setVisibleCount((prev) => prev + 5);
+  };
 
   const handleRole = async (id: string, currentRole: string) => {
     if (currentRole !== 'admin') {
@@ -43,15 +48,17 @@ const Page = () => {
     }
   };
 
+  const visibleData = users?.slice(0, visibleCount);
+
   if (isLoading) return <Loader />;
   if (isError)
     return (
       <div className="flex justify-center items-center text-2xl text-red-600">
-        something went wrong with the api
+        something went wrong with api fetching
       </div>
     );
 
-  const filterUser = users?.filter(
+  const filterUser = visibleData?.filter(
     (user: Userprops) =>
       user?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user?.email?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -111,6 +118,17 @@ const Page = () => {
                 ))}
               </tbody>
             </table>
+
+            {visibleCount < users?.length && (
+              <div className="flex justify-center mt-6">
+                <button
+                  onClick={Handleview}
+                  className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-full transition cursor-pointer"
+                >
+                  View More
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

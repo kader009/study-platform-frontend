@@ -167,7 +167,7 @@ const Page = () => {
         <div className="flex justify-center mt-6">
           <button
             onClick={Handleview}
-            className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-full transition"
+            className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-full transition cursor-pointer"
           >
             View More
           </button>
