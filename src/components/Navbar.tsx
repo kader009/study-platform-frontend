@@ -73,6 +73,12 @@ const Navbar = () => {
                   >
                     All Session
                   </Link>
+                  <Link
+                    href="/contact"
+                    className="text-black px-3 py-2 rounded-md font-medium"
+                  >
+                    Contact
+                  </Link>
                   <button
                     className="text-black hover:bg-blue-600 hover:text-white px-3 py-2 rounded font-medium w-full md:w-auto cursor-pointer"
                     onClick={handleLogout}
