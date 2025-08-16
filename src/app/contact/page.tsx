@@ -29,7 +29,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen py-10 px-8">
+    <div className="min-h-screen py-10 px-6">
       <h1 className="text-3xl font-bold text-center mb-6">Contact Us</h1>
 
       <div className="w-full h-[400px] mb-10 rounded overflow-hidden shadow">

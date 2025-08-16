@@ -16,7 +16,7 @@ const TutorSection = async () => {
 
   return (
     <section className="py-6">
-      <div className="container mx-auto px-8 text-center">
+      <div className="container mx-auto px-6 text-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           Our Expert Tutors
         </h1>

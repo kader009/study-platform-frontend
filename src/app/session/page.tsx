@@ -58,7 +58,7 @@ const Page = () => {
 
   return (
     <div>
-      <div className="container mx-auto py-16 px-8">
+      <div className="container mx-auto py-16 px-6">
         <h1 className="text-3xl font-semibold mb-2 text-center">
           <span className="text-blue-600">Approved</span> Sessions
         </h1>
