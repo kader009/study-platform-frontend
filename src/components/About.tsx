@@ -25,17 +25,17 @@ const AboutUs = () => {
 
       {/* Left Side - Image */}
       <div className="w-full md:w-1/2 flex justify-center items-center">
-        <div className="relative w-[400px] h-[300px] md:w-[550px] md:h-[400px]">
-          <Image
-            src="/student4.webp"
-            alt="Happy student"
-            layout="fill"
-            loading='lazy'
-            objectFit="cover"
-            className="rounded-2xl"
-          />
-        </div>
-      </div>
+  <div className="relative w-full max-w-[500px] aspect-[4/3]">
+    <Image
+      src="/student4.webp"
+      alt="Happy student"
+      fill
+      loading="lazy"
+      className="rounded-2xl object-cover"
+    />
+  </div>
+</div>
+
     </section>
   );
 };
