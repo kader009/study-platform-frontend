@@ -1,5 +1,3 @@
-'use client';
-import { useEffect, useState } from 'react';
 import {
   FaFacebookF,
   FaTwitter,
@@ -8,12 +6,6 @@ import {
 } from 'react-icons/fa';
 
 function Footer() {
-  const [year, setYear] = useState('');
-
-  useEffect(() => {
-    setYear(new Date().getFullYear().toString());
-  }, []);
-
   return (
     <footer className=" bg-black text-gray-300 py-12">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -105,7 +97,9 @@ function Footer() {
 
       {/* Footer Bottom */}
       <div className="container mx-auto px-6 text-center text-sm text-gray-400 space-y-2">
-        <p>© {year} Edunest. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear().toString()} Edunest. All rights reserved.
+        </p>
         <p>Built with ❤️ by Md Abdul Kader Molla</p>
       </div>
     </footer>
