@@ -63,7 +63,7 @@ export default function AdminProfilePage() {
                 Stay tuned for more improvements. 🚀
               </p>
               {/* Facebook actions */}
-              <div className="flex justify-between text-gray-600">
+              <div className="flex flex-wrap justify-between text-gray-600">
                 <button className="flex items-center space-x-1 hover:text-blue-600 transition">
                   <HandThumbUpIcon className="w-5 h-5" />
                   <span>Like</span>
@@ -89,7 +89,7 @@ export default function AdminProfilePage() {
                 #DashboardUpdate
               </p>
               {/* Twitter actions */}
-              <div className="flex justify-between text-gray-600">
+              <div className="flex flex-wrap justify-between text-gray-600">
                 <button className="flex items-center space-x-1 hover:text-blue-500 transition">
                   <ChatBubbleOvalLeftEllipsisIcon className="w-5 h-5" />
                   <span>Reply</span>
