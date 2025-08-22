@@ -35,7 +35,7 @@ export default function AdminProfilePage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Profile Info Card */}
-          <div className="bg-blue-50 p-6 rounded-xl shadow-md text-center max-w-md mx-auto">
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md text-center w-full max-w-md mx-auto">
             <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-blue-300">
               <Image
                 src={adminInfo.profilePic}
