@@ -63,19 +63,19 @@ const Navbar = () => {
                 <div className="flex flex-col md:flex-row items-center gap-3 mt-4 md:mt-0">
                   <Link
                     href="/dashboard"
-                    className="text-black px-3 py-2 rounded-md font-medium"
+                    className="text-black px-3 py-2 rounded-md font-medium cursor-pointer"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/session"
-                    className="text-black px-3 py-2 rounded-md font-medium"
+                    className="text-black px-3 py-2 rounded-md font-medium cursor-pointer"
                   >
                     All Session
                   </Link>
                   <Link
                     href="/contact"
-                    className="text-black px-3 py-2 rounded-md font-medium"
+                    className="text-black px-3 py-2 rounded-md font-medium cursor-pointer"
                   >
                     Contact
                   </Link>

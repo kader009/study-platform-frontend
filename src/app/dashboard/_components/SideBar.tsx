@@ -107,7 +107,7 @@ const Sidebar = () => {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="block py-2 px-4 hover:bg-gray-700 rounded"
+                className="block py-2 px-4 hover:bg-gray-700 rounded cursor-pointer"
               >
                 {link.label}
               </Link>
