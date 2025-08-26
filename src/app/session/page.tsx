@@ -1,4 +1,5 @@
 'use client';
+import DynamicTitle from '@/components/DynamicTitle';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -58,6 +59,7 @@ const Page = () => {
 
   return (
     <div>
+      <DynamicTitle />
       <div className="container mx-auto py-16 px-6">
         <h1 className="text-3xl font-semibold mb-2 text-center">
           <span className="text-blue-600">Approved</span> Sessions
