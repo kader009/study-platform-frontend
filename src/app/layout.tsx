@@ -30,10 +30,9 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <Providers>
           <PersistProvider>
-            <Navbar />
-            <SessionProvider>{children}</SessionProvider>
-
-            <Footer />
+              <Navbar />
+              <SessionProvider>{children}</SessionProvider>
+              <Footer />
           </PersistProvider>
         </Providers>
       </body>
