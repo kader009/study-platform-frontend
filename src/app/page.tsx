@@ -6,10 +6,12 @@ import TutorSection from '@/components/TutorSection';
 import GallerySection from '@/components/GallerySection';
 import BlogSection from '@/components/BlogSection';
 import FeaturesSection from '@/components/FeatureSection';
+import DynamicTitle from '@/components/DynamicTitle';
 
 export default function Home() {
   return (
     <div>
+      <DynamicTitle/>
       <Banner />
       <About />
       <SessionData />

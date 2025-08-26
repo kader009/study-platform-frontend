@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useAllMaterilQuery, useDeleteMaterialMutation } from '@/redux/endApi';
 import Link from 'next/link';
+import DynamicTitle from '@/components/DynamicTitle';
 
 interface Materialprops {
   _id: string;
@@ -41,6 +42,7 @@ const Page = () => {
     );
   return (
     <div>
+      <DynamicTitle />
       <div>
         <h1 className="text-center font-semibold my-6 text-xl capitalize">
           A list of your all material

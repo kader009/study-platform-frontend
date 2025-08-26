@@ -1,5 +1,6 @@
 'use client';
 
+import DynamicTitle from '@/components/DynamicTitle';
 import Loader from '@/components/Loader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -66,6 +67,7 @@ const Page = () => {
 
   return (
     <div>
+      <DynamicTitle/>
       <div>
         <h1 className="text-center font-semibold my-6 text-xl capitalize">
           A list of all users

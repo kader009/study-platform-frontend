@@ -29,6 +29,7 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import DynamicTitle from '@/components/DynamicTitle';
 
 interface Sessionprops {
   _id: string;
@@ -95,6 +96,7 @@ const Page = () => {
 
   return (
     <div>
+      <DynamicTitle />
       <div>
         <h1 className="text-center font-semibold my-6 text-xl capitalize">
           A list of all study session
