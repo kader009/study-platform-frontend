@@ -1,8 +1,7 @@
-// components/SessionSkeleton.tsx
 const SessionSkeleton = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {Array.from({ length: 6 }).map((_, i) => (
+      {Array.from({ length: 7 }).map((_, i) => (
         <div
           key={i}
           className="bg-white rounded-lg shadow-md p-4 animate-pulse space-y-3"

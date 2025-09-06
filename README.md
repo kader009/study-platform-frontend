@@ -89,6 +89,6 @@ npm run dev
 ## 🧑 Author
 
 **Md Abdul Kader Molla**  
-4rd Semester Student, Bangladesh Open University  
+B.A Student, Bangladesh Open University  
 📧 **Email:** [kadermollarasel000@gmail.com](mailto:kadermollarasel000@gmail.com)  
-🌐 **Portfolio:** [https://abdul-kader.netlify.app/](https://abdul-kader.netlify.app/)
+🌐 **Portfolio:** [https://modern-portfolio-phi-flame.vercel.app/](https://modern-portfolio-phi-flame.vercel.app/)
