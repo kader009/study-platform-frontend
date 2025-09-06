@@ -10,7 +10,7 @@ const DynamicTitle = () => {
 
     if (pathname === '/') pageTitle = 'Edunest | Home';
     else if (pathname.startsWith('/session/')) pageTitle = 'Edunest | Session Details';
-    else if (pathname.startsWith('/session')) pageTitle = 'Edunest | Approved Session';
+    else if (pathname.startsWith('/session')) pageTitle = 'Edunest | Learning Session';
     else if (pathname.startsWith('/contact')) pageTitle = 'Edunest | Contact';
     else if (pathname.startsWith('/dashboard/admin/all-user')) pageTitle = 'Edunest | All User';
     else if (pathname.startsWith('/dashboard/admin/all-session')) pageTitle = 'Edunest | All Session';
