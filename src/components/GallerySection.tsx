@@ -14,7 +14,7 @@ const galleryImages = [
 ];
 
 function GallerySection() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<{ src: string; label: string } | null>(null);
 
   return (
     <section className="py-10">
@@ -56,7 +56,7 @@ function GallerySection() {
             onClick={() => setSelected(null)}
           >
             <button
-              className="absolute top-4 right-4 text-white text-3xl font-bold z-50"
+              className="absolute top-4 right-4 text-white text-3xl font-bold z-50 cursor-pointer"
               onClick={() => setSelected(null)}
             >
               &times;
