@@ -1,5 +1,7 @@
 'use client';
+
 import DynamicTitle from '@/components/DynamicTitle';
+import SessionSkeleton from '@/components/SessionSkeleton';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -62,7 +64,7 @@ const Page = () => {
       <DynamicTitle />
       <div className="container mx-auto py-16 px-6">
         <h1 className="text-3xl font-semibold mb-2 text-center">
-          <span className="text-blue-600">Approved</span> Sessions
+          <span className="text-blue-600">Learning</span> Sessions
         </h1>
         <p className="text-center mb-8">
           Browse sessions that are reviewed and officially approved
@@ -70,9 +72,7 @@ const Page = () => {
 
         {/* Spinner While Loading */}
         {isLoading ? (
-          <div className="flex justify-center items-center h-60">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600 border-solid"></div>
-          </div>
+          <SessionSkeleton />
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -11,7 +11,7 @@ function Footer() {
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* About Edunest */}
         <div className="space-y-4">
-          <h1 className="text-3xl font-extrabold text-white">About Edunest</h1>
+          <h1 className="text-3xl font-extrabold text-white">Edunest</h1>
           <p className="text-sm leading-relaxed">
             Empowering learners with live interactive sessions & cutting-edge
             tech. Join our community of curious minds.
@@ -77,7 +77,7 @@ function Footer() {
           </p>
 
           <div className="flex space-x-4 mt-2 cursor-pointer">
-            <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition list-none">
+            <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition list-none hover:transition-y-[-6px]">
               <FaFacebookF />
             </li>
             <li className="p-2 bg-gray-800 rounded-full hover:bg-blue-400 transition list-none">

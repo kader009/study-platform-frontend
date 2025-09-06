@@ -20,7 +20,7 @@ const SessionData = async () => {
   return (
     <div className="container mx-auto py-8 px-6">
       <h1 className="text-3xl font-semibold mb-2 text-center">
-        <span className="text-blue-600">Approved</span> Sessions
+        <span className="text-blue-600">Learning</span> Sessions
       </h1>
       <p className="text-center mb-8">
         Browse sessions that are reviewed and officially approved
