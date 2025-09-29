@@ -15,7 +15,7 @@ const Banner = () => {
             initial="hidden"
             animate="visible"
             variants={BannerVariants}
-            transition={{ duration: 0.4, ease: 'easeInOut', delay: 0.2 }}
+            transition={{ duration: 0.8, ease: 'easeInOut', delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-100 leading-tight mb-6"
           >
             Learn Smart with <span className="text-blue-600">Edunest</span>
