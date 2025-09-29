@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import * as motion from 'motion/react-client';
+import { BannerVariants } from '@/animation/variants';
 
 const Banner = () => {
   return (
@@ -11,10 +12,12 @@ const Banner = () => {
             Empower Your Learning
           </p>
           <motion.h1
-          initial={{filter:`blur(12px)`, opacity: 0, y: 12 }}
-          animate={{filter:`blur(0px)`, opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeIn", delay: 0.2 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-100 leading-tight mb-6">
+            initial="hidden"
+            animate="visible"
+            variants={BannerVariants}
+            transition={{ duration: 0.4, ease: 'easeInOut', delay: 0.2 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-100 leading-tight mb-6"
+          >
             Learn Smart with <span className="text-blue-600">Edunest</span>
             <br />
             Where Curiosity Meets Code
@@ -24,9 +27,13 @@ const Banner = () => {
             career the right way — one session at a time.
           </p>
           <Link href="/session">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded transition-all duration-300 cursor-pointer">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded transition-all duration-300 cursor-pointer"
+            >
               Get Started
-            </button>
+            </motion.button>
           </Link>
         </div>
 
