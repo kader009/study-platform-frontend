@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import * as motion from 'motion/react-client';
 
 const Banner = () => {
   return (
@@ -9,11 +10,15 @@ const Banner = () => {
           <p className="text-blue-600 uppercase tracking-wide font-semibold mb-3">
             Empower Your Learning
           </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-100 leading-tight mb-6">
+          <motion.h1
+          initial={{filter:`blur(12px)`, opacity: 0, y: 12 }}
+          animate={{filter:`blur(0px)`, opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeIn", delay: 0.2 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-100 leading-tight mb-6">
             Learn Smart with <span className="text-blue-600">Edunest</span>
             <br />
             Where Curiosity Meets Code
-          </h1>
+          </motion.h1>
           <p className="text-lg text-gray-300 mb-8">
             Join live sessions, master in-demand skills, and build your tech
             career the right way — one session at a time.
