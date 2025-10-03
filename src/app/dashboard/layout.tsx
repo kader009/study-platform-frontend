@@ -4,10 +4,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'EduNest | Dashboard',
-  description: 'A Learing Platform Dashboard',
+  description: 'A Learning Platform Dashboard',
 };
 
-const Dashbooardlayout = ({ children }: { children: ReactNode }) => {
+const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex min-h-screen w-full">
       <Sidebar />
@@ -16,4 +16,4 @@ const Dashbooardlayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Dashbooardlayout;
+export default DashboardLayout;
