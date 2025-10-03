@@ -49,8 +49,8 @@ function Footer() {
           <form className="flex flex-col sm:flex-row">
             <input
               type="email"
-              placeholder="Your email"
-              className="w-full sm:flex-1 px-4 py-2 rounded-lg focus:outline-none border"
+              placeholder="Enter your email..."
+              className="w-full sm:flex-1 px-4 py-2 rounded focus:outline-none border"
               required
             />
             <button
