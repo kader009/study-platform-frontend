@@ -1,4 +1,4 @@
-import { Link } from 'lucide-react';
+import Link from 'next/link';
 import {
   FaFacebookF,
   FaTwitter,
@@ -12,7 +12,9 @@ function Footer() {
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* About Edunest */}
         <div className="space-y-4">
-          <h1 className="text-3xl font-extrabold text-white"><Link href="/">Edunest</Link></h1>
+          <Link href='/'>
+            <h1 className="text-3xl font-extrabold text-white">Edunest</h1>
+          </Link>
           <p className="text-sm leading-relaxed">
             Empowering learners with live interactive sessions & cutting-edge
             tech. Join our community of curious minds.
