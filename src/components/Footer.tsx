@@ -46,7 +46,7 @@ function Footer() {
           <p className="text-sm">
             Subscribe for updates, offers, and news directly in your inbox.
           </p>
-          <form className="flex flex-col sm:flex-row gap-2">
+          <form className="flex flex-col sm:flex-row">
             <input
               type="email"
               placeholder="Your email"
