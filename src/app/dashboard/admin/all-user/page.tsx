@@ -67,7 +67,7 @@ const Page = () => {
 
   return (
     <div>
-      <DynamicTitle/>
+      <DynamicTitle />
       <div>
         <h1 className="text-center font-semibold my-6 text-xl capitalize">
           A list of all users

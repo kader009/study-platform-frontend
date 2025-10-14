@@ -92,7 +92,7 @@ const Page = () => {
 
   if (isLoading) return <Loader />;
   if (isError)
-    return <div className="text-red-500 text-center font bold"></div>;
+    return <div className="text-red-500 text-center font-bold"></div>;
 
   return (
     <div>
@@ -156,7 +156,7 @@ const Page = () => {
               ) : (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-4">
-                    No notes found
+                    No sessions found
                   </TableCell>
                 </TableRow>
               )}
