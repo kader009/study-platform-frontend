@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import { Heading } from '@/shared/HeadandPara';
 
 const galleryImages = [
   { src: '/image (8).webp', label: 'Student Lab' },
@@ -14,15 +15,18 @@ const galleryImages = [
 ];
 
 function GallerySection() {
-  const [selected, setSelected] = useState<{ src: string; label: string } | null>(null);
+  const [selected, setSelected] = useState<{
+    src: string;
+    label: string;
+  } | null>(null);
 
   return (
     <section className="py-10">
       <div className="container mx-auto px-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-          Our Gallery
-        </h1>
-        <p className="text-center mb-8">Explore the highlights and milestones that define our journey</p>
+        <Heading text="Our Gallery" />
+        <p className="text-center mb-8">
+          Explore the highlights and milestones that define our journey
+        </p>
 
         {/* Masonry Layout */}
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
