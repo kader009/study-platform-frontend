@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { CardContent } from '@/components/ui/card';
+import { Heading } from '@/shared/HeadandPara';
 
 interface Tutorprops {
   _id: string;
@@ -17,9 +18,7 @@ const TutorSection = async () => {
   return (
     <section className="py-6">
       <div className="container mx-auto px-6 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          Our Expert Tutors
-        </h1>
+        <Heading text='Our Expert Tutors'/>
         <p className="mb-10">Guiding you every step of your learning journey</p>
         {/* reduced gap-12 → gap-6 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
