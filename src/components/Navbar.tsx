@@ -24,6 +24,9 @@ const Navbar = () => {
     toast.success('logout successfully');
   };
 
+  const defaultImage =
+    'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg';
+
   return (
     <nav className="bg-white py-3 px-6 shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between">
@@ -33,9 +36,9 @@ const Navbar = () => {
             EduNest
           </Link>
           <button
-          aria-label="Open navigation menu"
+            aria-label="Open navigation menu"
             onClick={toggleMenu}
-            className="text-black focus:outline-none md:hidden mr-3" 
+            className="text-black focus:outline-none md:hidden mr-3"
           >
             <svg
               className="w-6 h-6 fill-current"
@@ -86,13 +89,11 @@ const Navbar = () => {
                     Logout
                   </button>
                   <Image
-                    src={
-                      'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg'
-                    }
+                    src={user.photoUrl || defaultImage}
                     alt="Profile"
                     width={40}
                     height={60}
-                    className="rounded-full object-cover"
+                    className="rounded-full object-cover h-10 w-10"
                   />
                 </div>
               </>
