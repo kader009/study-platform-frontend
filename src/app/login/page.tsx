@@ -4,7 +4,7 @@
 // import { GooglelogIn, logIn } from '@/lib/auth';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useLoginMutation } from '@/redux/endApi';
 import {
   SetEmail,
@@ -14,6 +14,7 @@ import { setUser } from '@/redux/features/authentication/userSlice';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const Page = () => {
   const error = useAppSelector((state: RootState) => state.user.error);
   const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -140,14 +142,27 @@ const Page = () => {
               >
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Your Password"
-                value={password}
-                onChange={(e) => dispatch(SetPassword(e.target.value))}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Your Password"
+                  value={password}
+                  onChange={(e) => dispatch(SetPassword(e.target.value))}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Submit Button */}
