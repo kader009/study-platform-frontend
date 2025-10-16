@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Providers from '@/Provider/Provider';
 import PersistProvider from '@/redux/PersistProvider';
 import { SessionProvider } from 'next-auth/react';
+import AIChatbot from '@/components/AIChatbot';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -30,9 +31,10 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <Providers>
           <PersistProvider>
-              <Navbar />
-              <SessionProvider>{children}</SessionProvider>
-              <Footer />
+            <Navbar />
+            <SessionProvider>{children}</SessionProvider>
+            <Footer />
+            <AIChatbot />
           </PersistProvider>
         </Providers>
       </body>
