@@ -7,17 +7,25 @@ interface Session {
   sessionTitle?: string;
   subject: string;
   description?: string;
+  sessionDescription?: string;
   price?: number;
   fee?: number;
+  registrationFee?: number;
   duration?: string;
+  sessionDuration?: string;
   date?: string;
   time?: string;
   registrationStart?: string;
+  registrationStartDate?: string;
   registrationEnd?: string;
+  registrationEndDate?: string;
   classStart?: string;
+  classStartDate?: string;
   classEnd?: string;
+  classEndDate?: string;
   rating?: number;
-  reviews?: Array<{ text: string; rating?: number }>;
+  averageRating?: number;
+  reviews?: Array<{ text: string; rating?: number; comment?: string }>;
   tutor?: {
     _id?: string;
     name: string;
@@ -28,6 +36,8 @@ interface Session {
     name: string;
     email?: string;
   };
+  tutorName?: string;
+  tutorEmail?: string;
 }
 
 // Helper function to extract tutor names (handles multiple field formats)
@@ -37,6 +47,11 @@ function extractTutorNames(sessions: Session[]): string[] {
   const tutors = sessions
     .map((session) => {
       console.log('Session data:', JSON.stringify(session, null, 2));
+
+      // Check for direct tutorName field first (your database format)
+      if (session.tutorName && typeof session.tutorName === 'string') {
+        return session.tutorName;
+      }
 
       // Try different possible field names
       if (session.tutor) {
@@ -278,9 +293,13 @@ export async function POST(request: Request) {
       }
     }
     // Price queries
-    else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+    else if (
+      lowerMessage.includes('price') ||
+      lowerMessage.includes('cost') ||
+      lowerMessage.includes('fee')
+    ) {
       const prices = allSessions
-        .map((s) => s.price)
+        .map((s) => s.registrationFee || s.price || s.fee)
         .filter((p): p is number => p !== undefined && p > 0);
 
       if (prices.length > 0) {
@@ -329,47 +348,80 @@ export async function POST(request: Request) {
           matchedSession.sessionTitle ||
           matchedSession.subject;
 
-        const price = matchedSession.price || matchedSession.fee;
+        const description =
+          matchedSession.sessionDescription ||
+          matchedSession.description ||
+          'No description available';
+
+        const price =
+          matchedSession.registrationFee ||
+          matchedSession.price ||
+          matchedSession.fee;
         const priceText = price ? `$${price}` : 'Contact for pricing';
 
-        const duration = matchedSession.duration || 'Not specified';
-        const rating = matchedSession.rating
-          ? `${matchedSession.rating}★`
-          : 'No ratings yet';
-        const description =
-          matchedSession.description || 'No description available';
+        const duration =
+          matchedSession.sessionDuration ||
+          matchedSession.duration ||
+          'Not specified';
+
+        const rating = matchedSession.averageRating || matchedSession.rating;
+        const ratingText = rating ? `${rating}★` : 'No ratings yet';
 
         // Build response with all available data
         let detailedResponse = `${title}\n\n`;
-        detailedResponse += `Tutor: ${tutorName}\n\n`;
+        detailedResponse += `Tutor: ${tutorName}\n`;
 
-        if (matchedSession.rating) {
-          detailedResponse += `Rating: ${rating}\n\n`;
+        if (matchedSession.tutorEmail) {
+          detailedResponse += `Email: ${matchedSession.tutorEmail}\n`;
+        }
+        detailedResponse += `\n`;
+
+        if (rating) {
+          detailedResponse += `Rating: ${ratingText}\n\n`;
         }
 
         detailedResponse += `${description}\n\n`;
 
-        if (matchedSession.registrationStart) {
-          detailedResponse += `Registration Start: ${matchedSession.registrationStart}\n`;
+        const regStart =
+          matchedSession.registrationStartDate ||
+          matchedSession.registrationStart;
+        const regEnd =
+          matchedSession.registrationEndDate || matchedSession.registrationEnd;
+        const classStart =
+          matchedSession.classStartDate || matchedSession.classStart;
+        const classEnd = matchedSession.classEndDate || matchedSession.classEnd;
+
+        if (regStart) {
+          detailedResponse += `Registration Start: ${new Date(
+            regStart
+          ).toLocaleDateString()}\n`;
         }
-        if (matchedSession.registrationEnd) {
-          detailedResponse += `Registration End: ${matchedSession.registrationEnd}\n\n`;
+        if (regEnd) {
+          detailedResponse += `Registration End: ${new Date(
+            regEnd
+          ).toLocaleDateString()}\n\n`;
         }
 
-        if (matchedSession.classStart) {
-          detailedResponse += `Class Start: ${matchedSession.classStart}\n`;
+        if (classStart) {
+          detailedResponse += `Class Start: ${new Date(
+            classStart
+          ).toLocaleString()}\n`;
         }
-        if (matchedSession.classEnd) {
-          detailedResponse += `Class End: ${matchedSession.classEnd}\n\n`;
+        if (classEnd) {
+          detailedResponse += `Class End: ${new Date(
+            classEnd
+          ).toLocaleString()}\n\n`;
         }
 
-        detailedResponse += `Duration: ${duration}\n`;
-        detailedResponse += `Fee: ${priceText}\n\n`;
+        detailedResponse += `Duration: ${duration} hours\n`;
+        detailedResponse += `Registration Fee: ${priceText}\n\n`;
 
         if (matchedSession.reviews && matchedSession.reviews.length > 0) {
-          detailedResponse += `Reviews:\n`;
-          matchedSession.reviews.slice(0, 2).forEach((review) => {
-            detailedResponse += `• ${review.text}\n`;
+          detailedResponse += `Reviews (${matchedSession.reviews.length}):\n`;
+          matchedSession.reviews.slice(0, 3).forEach((review, index) => {
+            const reviewText = review.text || review.comment || 'No comment';
+            const reviewRating = review.rating ? ` (${review.rating}★)` : '';
+            detailedResponse += `${index + 1}. ${reviewText}${reviewRating}\n`;
           });
           detailedResponse += `\n`;
         }
@@ -381,12 +433,11 @@ export async function POST(request: Request) {
           tutorName,
           priceText,
           duration,
-          rating,
+          rating: ratingText,
         });
 
         response = detailedResponse;
       } else {
-        // Default response
         response =
           'Ask me: "Who teaches React?", "Show sessions", "What are the prices?", or mention a specific session title for details!';
       }
