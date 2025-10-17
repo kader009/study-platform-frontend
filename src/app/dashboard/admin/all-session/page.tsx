@@ -127,7 +127,7 @@ const Page = () => {
                         <span className="text-black ">Approved</span>
                       ) : (
                         <Button
-                          className="bg-black text-white py-1 px-3 rounded-md"
+                          className="bg-black text-white py-1 px-3 rounded-full cursor-pointer"
                           onClick={() => approveSession(session._id)}
                         >
                           Pending
@@ -138,14 +138,14 @@ const Page = () => {
                     <TableCell>
                       <Button
                         type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2 mx-2"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full mt-2 mx-2"
                         onClick={() => handleUpdateClick(session)}
                       >
                         Update
                       </Button>
                       <Button
                         type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-md mt-2"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full mt-2"
                         onClick={() => deleteSession(session._id)}
                       >
                         Delete

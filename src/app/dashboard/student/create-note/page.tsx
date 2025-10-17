@@ -90,7 +90,7 @@ const Page = () => {
             </div>
             <Button
               type="submit"
-              className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg"
+              className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full"
             >
               Submit
             </Button>

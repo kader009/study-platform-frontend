@@ -75,6 +75,19 @@ const createSessionSlice = createSlice({
     SetStatus: (state, action: PayloadAction<string>) => {
       state.status = action.payload;
     },
+
+    // Reset all fields to initial state
+    resetSessionForm: (state) => {
+      state.sessionTitle = '';
+      state.sessionDescription = '';
+      state.registrationStartDate = '';
+      state.registrationEndDate = '';
+      state.classStartDate = '';
+      state.classEndDate = '';
+      state.sessionDuration = '';
+      state.registrationFee = '0';
+      state.status = 'pending';
+    },
   },
 });
 
@@ -89,7 +102,8 @@ export const {
   SetsessionDuration,
   SettutorName,
   SetStatus,
-  SettutorEmail
+  SettutorEmail,
+  resetSessionForm,
 } = createSessionSlice.actions;
 
 export default createSessionSlice.reducer;

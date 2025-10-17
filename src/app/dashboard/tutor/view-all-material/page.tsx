@@ -131,14 +131,14 @@ const Page = () => {
                     <div className="my-2 flex flex-wrap gap-2">
                       <Button
                         type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full"
                         onClick={() => handleOpenModal(material)}
                       >
                         Update
                       </Button>
                       <Button
                         type="submit"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full"
                         onClick={() => handleDeleteMaterial(material._id)}
                       >
                         Delete

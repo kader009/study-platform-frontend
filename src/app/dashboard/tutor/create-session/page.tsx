@@ -19,6 +19,7 @@ import {
   SettutorName,
   SettutorEmail,
   SetregistrationFee,
+  resetSessionForm,
 } from '@/redux/features/createSessionSlice';
 import { toast } from 'sonner';
 
@@ -59,10 +60,16 @@ const Page = () => {
       });
 
       console.log('post session', sessionData);
-      toast.success('session create successfully');
+
+      // Check if session was created successfully
+      if (sessionData) {
+        toast.success('Session created successfully');
+        // Reset form after successful submission
+        dispatch(resetSessionForm());
+      }
     } catch (error) {
       console.log(error);
-      toast.error('something went wrong.');
+      toast.error('Something went wrong.');
     }
   };
 
@@ -238,7 +245,7 @@ const Page = () => {
 
             <Button
               type="submit"
-              className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-lg"
+              className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full"
             >
               Submit
             </Button>

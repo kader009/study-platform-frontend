@@ -103,7 +103,7 @@ const Page = () => {
                       <td className="px-4 py-2 border">
                         <Button
                           disabled={user.role === 'admin'}
-                          className=" text-white px-3 py-1 rounded hover:bg-blue-6"
+                          className=" text-white px-3 py-1 rounded-full hover:bg-blue-6"
                           onClick={() => handleRole(user?._id, user?.role)}
                         >
                           {user.role === 'admin' ? (
