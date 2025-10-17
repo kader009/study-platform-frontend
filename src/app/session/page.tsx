@@ -93,7 +93,7 @@ const Page = () => {
                     <p className="text-gray-700 text-sm mb-3">
                       {session.sessionDescription}
                     </p>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center mb-3">
                       <Link href={`/session/${session._id}`}>
                         <span className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700 cursor-pointer">
                           Read More
