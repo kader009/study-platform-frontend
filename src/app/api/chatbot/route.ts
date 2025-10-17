@@ -1,46 +1,5 @@
+import { Session } from '@/types/routeSession';
 import { NextResponse } from 'next/server';
-
-// Define types
-interface Session {
-  _id: string;
-  title?: string;
-  sessionTitle?: string;
-  subject: string;
-  description?: string;
-  sessionDescription?: string;
-  price?: number;
-  fee?: number;
-  registrationFee?: number;
-  duration?: string;
-  sessionDuration?: string;
-  date?: string;
-  time?: string;
-  registrationStart?: string;
-  registrationStartDate?: string;
-  registrationEnd?: string;
-  registrationEndDate?: string;
-  classStart?: string;
-  classStartDate?: string;
-  classEnd?: string;
-  classEndDate?: string;
-  rating?: number;
-  averageRating?: number;
-  reviews?: Array<
-    string | { text?: string; rating?: number; comment?: string }
-  >;
-  tutor?: {
-    _id?: string;
-    name: string;
-    email?: string;
-  };
-  tutorId?: {
-    _id?: string;
-    name: string;
-    email?: string;
-  };
-  tutorName?: string;
-  tutorEmail?: string;
-}
 
 // Helper function to extract tutor names (handles multiple field formats)
 function extractTutorNames(sessions: Session[]): string[] {
@@ -294,31 +253,105 @@ export async function POST(request: Request) {
         }
       }
     }
-    // Price queries
-    else if (
-      lowerMessage.includes('price') ||
-      lowerMessage.includes('cost') ||
-      lowerMessage.includes('fee')
-    ) {
-      const prices = allSessions
-        .map((s) => s.registrationFee || s.price || s.fee)
-        .filter((p): p is number => p !== undefined && p > 0);
-
-      if (prices.length > 0) {
-        const avg = Math.round(
-          prices.reduce((a, b) => a + b, 0) / prices.length
-        );
-        response = `Prices: $${Math.min(...prices)} - $${Math.max(
-          ...prices
-        )}. Average: $${avg}.`;
-      } else {
-        response = 'Check Sessions page for pricing details.';
-      }
-    }
     // Greetings
     else if (lowerMessage.includes('hi') || lowerMessage.includes('hello')) {
       response =
         'Hello! Welcome to EduNest. Ask me about courses, tutors, or pricing!';
+    }
+    // How are you
+    else if (
+      lowerMessage.includes('how are you') ||
+      lowerMessage.includes('কেমন আছ') ||
+      lowerMessage.includes('কেমন আছেন')
+    ) {
+      response =
+        "I'm doing great! Thanks for asking 😊 I'm here to help you find the perfect learning session. What would you like to know?";
+    }
+    // What are you doing
+    else if (
+      lowerMessage.includes('what are you doing') ||
+      lowerMessage.includes('কি করছ') ||
+      lowerMessage.includes('কি করছেন')
+    ) {
+      response =
+        "I'm here assisting students like you! Ready to help you explore our courses, tutors, and sessions. How can I assist you today?";
+    } else if (
+      lowerMessage.includes('time') ||
+      lowerMessage.includes('সময়') ||
+      lowerMessage.includes('what time')
+    ) {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      });
+      const dateString = now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+      response = `It's ${timeString} on ${dateString}. Perfect time to explore our learning sessions! 🕒`;
+    }
+    // Total sessions count / কত sessions আছে
+    else if (
+      lowerMessage.includes('how many session') ||
+      lowerMessage.includes('total session') ||
+      lowerMessage.includes('কত session') ||
+      lowerMessage.includes('কতগুলো session')
+    ) {
+      response = `We currently have ${allSessions.length} learning sessions available across various subjects! Want to explore them?`;
+    }
+    // Specific course price by name
+    else if (
+      lowerMessage.match(/price of|cost of|fee of|এর দাম|এর ফি/) ||
+      (lowerMessage.includes('price') && allSessions.length > 0)
+    ) {
+      // Try to find a session matching words in the message
+      const matchedSession = allSessions.find((s) => {
+        const title = (
+          s.sessionTitle ||
+          s.title ||
+          s.subject ||
+          ''
+        ).toLowerCase();
+        const words = title.split(' ');
+        // Check if any significant word from title appears in message
+        return words.some(
+          (word) => word.length > 3 && lowerMessage.includes(word.toLowerCase())
+        );
+      });
+
+      if (matchedSession) {
+        const title =
+          matchedSession.sessionTitle ||
+          matchedSession.title ||
+          matchedSession.subject;
+        const price =
+          matchedSession.registrationFee ||
+          matchedSession.price ||
+          matchedSession.fee;
+        const priceText = price ? `$${price}` : 'Contact for pricing';
+        response = `${title} - Registration Fee: ${priceText}. Want more details about this session?`;
+      } else {
+        const prices = allSessions
+          .map((s) => s.registrationFee || s.price || s.fee)
+          .filter((p): p is number => p !== undefined && p > 0);
+
+        if (prices.length > 0) {
+          const avg = Math.round(
+            prices.reduce((a, b) => a + b, 0) / prices.length
+          );
+          response = `Overall prices range: $${Math.min(
+            ...prices
+          )} - $${Math.max(
+            ...prices
+          )}. Average: $${avg}. Ask about a specific course for exact pricing!`;
+        } else {
+          response = 'Check Sessions page for pricing details.';
+        }
+      }
     }
     // Check if asking for specific session details by title
     else {
