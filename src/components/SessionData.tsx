@@ -1,20 +1,10 @@
+import { SessionProps } from '@/types/sesstionType';
 import Link from 'next/link';
 
-interface SessionProps {
-  _id: string;
-  sessionTitle: string;
-  tutorName: string;
-  averageRating: number;
-  sessionDescription: string;
-  registrationStartDate: string;
-  registrationEndDate: string;
-  classStartTime: string;
-  classEndDate: string;
-  sessionDuration: string;
-}
-
 const SessionData = async () => {
-  const data = await fetch('https://study-platform-backend-drxm.onrender.com/api/v1/session/approved');
+  const data = await fetch(
+    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved'
+  );
   const sessions = await data.json();
 
   return (
@@ -36,6 +26,17 @@ const SessionData = async () => {
               key={session?._id}
               className="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
             >
+              <div className="mt-2 mb-3">
+                {isSessionEnded ? (
+                  <span className="bg-red-200 text-red-400 text-sm font-semibold py-2 px-4 rounded-full">
+                    Closed
+                  </span>
+                ) : (
+                  <span className="bg-green-200 text-green-400 text-xs font-semibold py-2 px-4 rounded-full">
+                    Open
+                  </span>
+                )}
+              </div>
               <h3 className="text-lg font-semibold text-blue-600 mb-3 truncate">
                 {session?.sessionTitle}
               </h3>
@@ -43,16 +44,6 @@ const SessionData = async () => {
                 {session?.sessionDescription}
               </p>
               <div className="flex justify-between items-center">
-                {isSessionEnded ? (
-                  <span className="bg-black text-white text-sm font-semibold py-2 px-4 rounded-full">
-                    Closed
-                  </span>
-                ) : (
-                  <span className="bg-slate-800 text-white text-xs font-semibold py-2 px-4 rounded-full">
-                    Open
-                  </span>
-                )}
-
                 <Link href={`/session/${session._id}`}>
                   <span className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700">
                     Read More
