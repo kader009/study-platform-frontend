@@ -95,7 +95,7 @@ export default function FeaturesSection() {
           Our platform is packed with modern and interactive tools to make your learning experience smooth, efficient, and enjoyable.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}

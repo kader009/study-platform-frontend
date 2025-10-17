@@ -21,7 +21,7 @@ const TutorSection = async () => {
         <Heading text='Our Expert Tutors'/>
         <p className="mb-10">Guiding you every step of your learning journey</p>
         {/* reduced gap-12 → gap-6 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {tutors?.map((tutor: Tutorprops) => (
             <div
               key={tutor._id}

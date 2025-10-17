@@ -43,7 +43,7 @@ const TestimonialCarousel = () => {
         </p>
       </div>
 
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {testimonials.map((t) => (
           <div
             key={t.id}

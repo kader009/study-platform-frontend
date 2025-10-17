@@ -29,7 +29,7 @@ function GallerySection() {
         </p>
 
         {/* Masonry Layout */}
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
           {galleryImages.map(({ src, label }, idx) => (
             <div
               key={idx}

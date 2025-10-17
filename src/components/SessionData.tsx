@@ -12,8 +12,9 @@ const SessionData = async () => {
       <h1 className="text-3xl font-semibold mb-2 text-center">
         <span className="text-blue-600">Learning</span> Sessions
       </h1>
-      <p className="text-center mb-8">
-        Browse sessions that are reviewed and officially approved
+      <p className="text-center mb-8 text-gray-600">
+        Discover expertly curated sessions designed to accelerate your learning
+        journey
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sessions?.slice(0, 6).map((session: SessionProps) => {

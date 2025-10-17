@@ -55,7 +55,8 @@ const Page = () => {
           <span className="text-blue-600">Learning</span> Sessions
         </h1>
         <p className="text-center mb-8">
-          Browse sessions that are reviewed and officially approved
+          Discover expertly curated sessions designed to accelerate your
+          learning journey
         </p>
 
         {/* Spinner While Loading */}
