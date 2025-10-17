@@ -7,6 +7,7 @@ import {
   GlobeAltIcon,
   ShareIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 interface Tutorprops {
   _id: string;
@@ -53,38 +54,38 @@ const TutorSection = async () => {
 
                 {/* Contact & Social Icons */}
                 <div className="flex justify-center gap-3 mt-3">
-                  <a
+                  <Link
                     href={`mailto:${tutor.email}`}
                     className="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition-all"
                     aria-label="Email"
                     title="Send Email"
                   >
                     <EnvelopeIcon className="w-5 h-5" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-all"
                     aria-label="Message"
                     title="Send Message"
                   >
                     <ChatBubbleLeftIcon className="w-5 h-5" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="p-2 rounded-full bg-purple-100 text-purple-600 hover:bg-purple-600 hover:text-white transition-all"
                     aria-label="Website"
                     title="Visit Website"
                   >
                     <GlobeAltIcon className="w-5 h-5" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-700 hover:text-white transition-all"
                     aria-label="Share"
                     title="Share Profile"
                   >
                     <ShareIcon className="w-5 h-5" />
-                  </a>
+                  </Link>
                 </div>
               </CardContent>
             </div>

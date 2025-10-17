@@ -1,9 +1,11 @@
 const features = [
   {
     title: 'Live Classes',
-    description: 'Interactive real-time classes where you can ask questions directly.',
+    description:
+      'Interactive real-time classes where you can ask questions directly.',
     icon: (
       <svg
+        xmlns="http://www.w3.org/2000/svg"
         className="w-10 h-10 text-blue-400"
         fill="none"
         stroke="currentColor"
@@ -59,14 +61,15 @@ const features = [
         strokeWidth="2"
         viewBox="0 0 24 24"
       >
-        <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m0-4v4m0-4L9 10m6 4l-6-2"></path>
-        <rect x="3" y="5" width="18" height="14" rx="2" ry="2"></rect>
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="10 8 16 12 10 16 10 8"></polygon>
       </svg>
     ),
   },
   {
     title: 'Quiz & Exams',
-    description: 'Take quizzes and exams to assess your learning after each module.',
+    description:
+      'Take quizzes and exams to assess your learning after each module.',
     icon: (
       <svg
         className="w-10 h-10 text-blue-400"
@@ -92,7 +95,8 @@ export default function FeaturesSection() {
           Platform Features
         </h1>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Our platform is packed with modern and interactive tools to make your learning experience smooth, efficient, and enjoyable.
+          Our platform is packed with modern and interactive tools to make your
+          learning experience smooth, efficient, and enjoyable.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
