@@ -25,7 +25,9 @@ interface Session {
   classEndDate?: string;
   rating?: number;
   averageRating?: number;
-  reviews?: Array<{ text: string; rating?: number; comment?: string }>;
+  reviews?: Array<
+    string | { text?: string; rating?: number; comment?: string }
+  >;
   tutor?: {
     _id?: string;
     name: string;
@@ -419,11 +421,28 @@ export async function POST(request: Request) {
         if (matchedSession.reviews && matchedSession.reviews.length > 0) {
           detailedResponse += `Reviews (${matchedSession.reviews.length}):\n`;
           matchedSession.reviews.slice(0, 3).forEach((review, index) => {
-            const reviewText = review.text || review.comment || 'No comment';
-            const reviewRating = review.rating ? ` (${review.rating}★)` : '';
-            detailedResponse += `${index + 1}. ${reviewText}${reviewRating}\n`;
+            // Handle both string and object format
+            let reviewText = '';
+            let reviewRating = '';
+
+            if (typeof review === 'string') {
+              // Direct string review (your database format)
+              reviewText = review;
+            } else if (typeof review === 'object') {
+              // Object format review
+              reviewText = review.text || review.comment || 'No comment';
+              reviewRating = review.rating ? ` (${review.rating}★)` : '';
+            }
+
+            if (reviewText.trim()) {
+              detailedResponse += `${
+                index + 1
+              }. ${reviewText}${reviewRating}\n`;
+            }
           });
           detailedResponse += `\n`;
+        } else {
+          detailedResponse += `Reviews: No reviews yet\n\n`;
         }
 
         detailedResponse += `Visit our Sessions page to book this session!`;
