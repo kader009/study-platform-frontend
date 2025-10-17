@@ -27,6 +27,14 @@ const blogPosts = [
     image: '/How Edunest is Changing Online Learning in Bangladesh.webp',
     slug: 'https://online.umn.edu/story/how-online-education-shaping-future-workforce',
   },
+  {
+    id: 4,
+    title: 'How to Learn Anything Faster? | Effective Learning Tips',
+    excerpt:
+      'Discover proven strategies to enhance your learning speed and retention.',
+    image: '/effective.webp',
+    slug: 'https://blog.madeeasy.in/how-learn-anything-faster-effective-learning-tips',
+  },
 ];
 
 export default function BlogSection() {
@@ -40,7 +48,7 @@ export default function BlogSection() {
           Discover practical tips, expert insights, and the latest updates on
           learning
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {blogPosts.map((post) => (
             <Card
               key={post.id}
