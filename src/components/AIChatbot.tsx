@@ -47,8 +47,41 @@ export default function AIChatbot() {
     setInputMessage('');
     setIsLoading(true);
 
+    // Handle time query on client side for accurate local time
+    const lowerMessage = currentMessage.toLowerCase();
+    if (
+      lowerMessage.includes('time') ||
+      lowerMessage.includes('সময়') ||
+      lowerMessage.includes('what time')
+    ) {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZoneName: 'short',
+      });
+      const dateString = now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+
+      const botResponse: Message = {
+        id: messages.length + 2,
+        text: `Your Local Time: ${timeString}\nDate: ${dateString}\n\nPerfect time to explore our learning sessions! 🕒`,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, botResponse]);
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      // Call API to get AI response with real data
       const response = await fetch('/api/chatbot', {
         method: 'POST',
         headers: {
@@ -62,7 +95,7 @@ export default function AIChatbot() {
       }
 
       const data = await response.json();
-      console.log('API Response:', data); // Debug log
+      console.log('API Response:', data);
 
       const botResponse: Message = {
         id: messages.length + 2,
@@ -91,7 +124,6 @@ export default function AIChatbot() {
 
   return (
     <>
-      {/* Chat Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
@@ -102,10 +134,8 @@ export default function AIChatbot() {
         </button>
       )}
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-0 right-0 left-0 md:bottom-6 md:right-6 md:left-auto w-full md:w-96 h-[100vh] md:h-[600px] bg-white md:rounded-2xl shadow-2xl flex flex-col z-50 border-t md:border border-gray-200">
-          {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 md:p-4 md:rounded-t-2xl flex justify-between items-center">
             <div className="flex items-center gap-2 md:gap-3">
               <Bot className="w-5 h-5 md:w-6 md:h-6" />
@@ -124,7 +154,6 @@ export default function AIChatbot() {
             </button>
           </div>
 
-          {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4 bg-gray-50">
             {messages.map((message) => (
               <div

@@ -77,6 +77,12 @@ const Navbar = () => {
                     All Session
                   </Link>
                   <Link
+                    href="/whychoseus"
+                    className="text-black px-3 py-2 rounded-md font-medium cursor-pointer"
+                  >
+                    Commitment
+                  </Link>
+                  <Link
                     href="/contact"
                     className="text-black px-3 py-2 rounded-md font-medium cursor-pointer"
                   >

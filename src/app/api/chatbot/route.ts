@@ -1,7 +1,6 @@
 import { Session } from '@/types/routeSession';
 import { NextResponse } from 'next/server';
 
-// Helper function to extract tutor names (handles multiple field formats)
 function extractTutorNames(sessions: Session[]): string[] {
   console.log('Extracting tutors from sessions:', sessions.length);
 
@@ -9,12 +8,10 @@ function extractTutorNames(sessions: Session[]): string[] {
     .map((session) => {
       console.log('Session data:', JSON.stringify(session, null, 2));
 
-      // Check for direct tutorName field first (your database format)
       if (session.tutorName && typeof session.tutorName === 'string') {
         return session.tutorName;
       }
 
-      // Try different possible field names
       if (session.tutor) {
         if (typeof session.tutor === 'string') {
           return session.tutor;
@@ -107,8 +104,14 @@ export async function POST(request: Request) {
       console.log('Processing React query...');
 
       const reactSessions = allSessions.filter((s) => {
-        const match = s.subject?.toLowerCase().includes('react');
-        console.log(`Session "${s.subject}" matches React:`, match);
+        const title = (
+          s.sessionTitle ||
+          s.title ||
+          s.subject ||
+          ''
+        ).toLowerCase();
+        const match = title.includes('react');
+        console.log(`Session "${s.sessionTitle}" matches React:`, match);
         return match;
       });
 
@@ -134,9 +137,15 @@ export async function POST(request: Request) {
     }
     // Next.js queries
     else if (lowerMessage.includes('next') || lowerMessage.includes('nextjs')) {
-      const nextSessions = allSessions.filter((s) =>
-        s.subject?.toLowerCase().includes('next')
-      );
+      const nextSessions = allSessions.filter((s) => {
+        const title = (
+          s.sessionTitle ||
+          s.title ||
+          s.subject ||
+          ''
+        ).toLowerCase();
+        return title.includes('next');
+      });
 
       if (nextSessions.length > 0) {
         const tutors = extractTutorNames(nextSessions);
@@ -156,9 +165,15 @@ export async function POST(request: Request) {
       lowerMessage.includes('typescript') ||
       lowerMessage.includes('ts')
     ) {
-      const tsSessions = allSessions.filter((s) =>
-        s.subject?.toLowerCase().includes('type')
-      );
+      const tsSessions = allSessions.filter((s) => {
+        const title = (
+          s.sessionTitle ||
+          s.title ||
+          s.subject ||
+          ''
+        ).toLowerCase();
+        return title.includes('type') || title.includes('typescript');
+      });
 
       if (tsSessions.length > 0) {
         const tutors = extractTutorNames(tsSessions);
@@ -181,12 +196,22 @@ export async function POST(request: Request) {
       lowerMessage.includes('session')
     ) {
       if (allSessions.length > 0) {
-        const subjects = [...new Set(allSessions.map((s) => s.subject))];
+        // Get unique subjects from sessionTitle
+        const subjects = [
+          ...new Set(
+            allSessions.map((s) => {
+              const title = s.sessionTitle || s.title || s.subject || '';
+              // Extract main subject from title (e.g., "React" from "React for Beginners")
+              const words = title.split(' ');
+              return words[0] || title;
+            })
+          ),
+        ].filter(Boolean);
 
         // Show some session titles
         const sessionTitles = allSessions
           .slice(0, 5)
-          .map((s) => s.title || s.sessionTitle || s.subject)
+          .map((s) => s.sessionTitle || s.title || s.subject)
           .filter(Boolean);
 
         if (sessionTitles.length > 0) {
@@ -205,51 +230,106 @@ export async function POST(request: Request) {
         response = 'No sessions available at the moment.';
       }
     }
-    // Tutor queries
+    // Tutor queries (including "who teaches X")
     else if (
       lowerMessage.includes('tutor') ||
       lowerMessage.includes('teacher') ||
-      lowerMessage.includes('name')
+      lowerMessage.includes('who teaches') ||
+      lowerMessage.includes('which teacher') ||
+      lowerMessage.includes('instructor')
     ) {
       console.log('Processing tutor query...');
       console.log('Total sessions to extract tutors from:', allSessions.length);
 
-      const allTutors = extractTutorNames(allSessions);
-      console.log('Extracted all tutors:', allTutors);
+      // Check if asking about specific subject
+      let specificSubject = '';
+      if (lowerMessage.includes('react')) specificSubject = 'react';
+      else if (lowerMessage.includes('next')) specificSubject = 'next';
+      else if (
+        lowerMessage.includes('typescript') ||
+        lowerMessage.includes('ts')
+      )
+        specificSubject = 'typescript';
+      else if (
+        lowerMessage.includes('javascript') ||
+        lowerMessage.includes('js')
+      )
+        specificSubject = 'javascript';
+      else if (lowerMessage.includes('python')) specificSubject = 'python';
+      else if (lowerMessage.includes('mongodb')) specificSubject = 'mongodb';
+      else if (lowerMessage.includes('redux')) specificSubject = 'redux';
 
-      if (allTutors.length > 0) {
-        response = `Our tutors: ${allTutors.join(
-          ', '
-        )}. Visit Sessions page to see their courses.`;
+      if (specificSubject) {
+        // Filter sessions by subject
+        const subjectSessions = allSessions.filter((s) => {
+          const title = (
+            s.sessionTitle ||
+            s.title ||
+            s.subject ||
+            ''
+          ).toLowerCase();
+          return title.includes(specificSubject);
+        });
+
+        if (subjectSessions.length > 0) {
+          const tutors = extractTutorNames(subjectSessions);
+          if (tutors.length > 0) {
+            const sessionsList = subjectSessions
+              .map(
+                (s, i) =>
+                  `${i + 1}. ${s.sessionTitle || s.title} - ${
+                    tutors[i] || 'Unknown'
+                  }`
+              )
+              .join('\n');
+            response = `${
+              specificSubject.charAt(0).toUpperCase() + specificSubject.slice(1)
+            } sessions taught by:\n\n${sessionsList}`;
+          } else {
+            response = `Found ${subjectSessions.length} ${specificSubject} sessions, but tutor info is not available.`;
+          }
+        } else {
+          response = `No ${specificSubject} sessions found currently.`;
+        }
       } else {
-        // Fallback: Try to fetch tutors from user API
-        console.log('No tutors from sessions, trying user API...');
-        try {
-          const tutorsRes = await fetch(`${baseUrl}/user?role=tutor`, {
-            cache: 'no-store',
-          });
+        // General tutor query
+        const allTutors = extractTutorNames(allSessions);
+        console.log('Extracted all tutors:', allTutors);
 
-          if (tutorsRes.ok) {
-            const tutorsData = await tutorsRes.json();
-            const tutorsList = parseApiResponse<{ name: string }>(tutorsData);
+        if (allTutors.length > 0) {
+          response = `Our tutors: ${allTutors.join(
+            ', '
+          )}. Visit Sessions page to see their courses.`;
+        } else {
+          // Fallback: Try to fetch tutors from user API
+          console.log('No tutors from sessions, trying user API...');
+          try {
+            const tutorsRes = await fetch(`${baseUrl}/user?role=tutor`, {
+              cache: 'no-store',
+            });
 
-            if (tutorsList.length > 0) {
-              const tutorNames = tutorsList.map((t) => t.name);
-              response = `Our tutors: ${tutorNames.join(
-                ', '
-              )}. Check Sessions page for details!`;
+            if (tutorsRes.ok) {
+              const tutorsData = await tutorsRes.json();
+              const tutorsList = parseApiResponse<{ name: string }>(tutorsData);
+
+              if (tutorsList.length > 0) {
+                const tutorNames = tutorsList.map((t) => t.name);
+                response = `Our tutors: ${tutorNames.join(
+                  ', '
+                )}. Check Sessions page for details!`;
+              } else {
+                response =
+                  'We have tutors but their information is being updated. Please check Sessions page.';
+              }
             } else {
               response =
-                'We have tutors but their information is being updated. Please check Sessions page.';
+                'Tutor information is temporarily unavailable. Visit Sessions page for details.';
             }
-          } else {
+          } catch (error) {
+            console.error('Error fetching tutors:', error);
             response =
-              'Tutor information is temporarily unavailable. Visit Sessions page for details.';
+              'Unable to fetch tutor information right now. Please visit Sessions page.';
           }
-        } catch (error) {
-          console.error('Error fetching tutors:', error);
-          response =
-            'Unable to fetch tutor information right now. Please visit Sessions page.';
         }
       }
     }
@@ -280,22 +360,27 @@ export async function POST(request: Request) {
       lowerMessage.includes('সময়') ||
       lowerMessage.includes('what time')
     ) {
+      // Get current UTC time - server timezone
       const now = new Date();
+
+      // Format with timezone info
       const timeString = now.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
+        second: '2-digit',
         hour12: true,
+        timeZoneName: 'short',
       });
+
       const dateString = now.toLocaleDateString('en-US', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       });
-      response = `It's ${timeString} on ${dateString}. Perfect time to explore our learning sessions! 🕒`;
-    }
-    // Total sessions count / কত sessions আছে
-    else if (
+
+      response = `Server Time: ${timeString}\nDate: ${dateString}\n\nNote: This is the server time. Your local time may differ based on your timezone. Perfect time to explore our learning sessions! 🕒`;
+    } else if (
       lowerMessage.includes('how many session') ||
       lowerMessage.includes('total session') ||
       lowerMessage.includes('কত session') ||
@@ -308,7 +393,6 @@ export async function POST(request: Request) {
       lowerMessage.match(/price of|cost of|fee of|এর দাম|এর ফি/) ||
       (lowerMessage.includes('price') && allSessions.length > 0)
     ) {
-      // Try to find a session matching words in the message
       const matchedSession = allSessions.find((s) => {
         const title = (
           s.sessionTitle ||
@@ -357,7 +441,6 @@ export async function POST(request: Request) {
     else {
       console.log('Checking for specific session match...');
 
-      // Try to find session by title match
       const matchedSession = allSessions.find((s) => {
         const sessionTitle = (
           s.title ||
