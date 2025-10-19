@@ -72,7 +72,7 @@ const Navbar = () => {
                   All Session
                 </Link>
                 <Link
-                  href="/whychoseus"
+                  href="/commitment"
                   className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
                 >
                   Commitment
@@ -184,7 +184,7 @@ const Navbar = () => {
                   All Session
                 </Link>
                 <Link
-                  href="/whychoseus"
+                  href="/commitment"
                   onClick={toggleMenu}
                   className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
                 >

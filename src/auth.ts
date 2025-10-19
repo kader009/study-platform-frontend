@@ -1,66 +1,86 @@
 import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 import Google from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
+
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://study-platform-backend-drxm.onrender.com/api/v1';
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: [
-    GitHub,
-    Google,
-    CredentialsProvider({
-      name: 'Credentials',
-      async authorize(credentials) {
-        const { name, email, image } = credentials;
-
-        try {
-          const res = await axios.post(
-            `http://localhost:5000/api/v1/social-login`,
-            { name, email, image },
-            { withCredentials: true }
-          );
-
-          if (res.status === 200 && res.data) {
-            return {
-              id: res.data._id || res.data.id,
-              name: res.data.name,
-              email: res.data.email,
-              image: res.data.image,
-            };
-          } else {
-            return null;
-          }
-        } catch (error) {
-          console.error('Authorization error:', error);
-          return null;
-        }
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+        },
       },
+    }),
+    GitHub({
+      clientId: process.env.AUTH_GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET!,
     }),
   ],
 
   callbacks: {
     async signIn({ user, account }) {
       // This will run for Google/GitHub logins
-      if (account?.provider !== 'credentials') {
+      if (account?.provider === 'google' || account?.provider === 'github') {
         try {
-          await axios.post(
-            `http://localhost:5000/api/v1/social-login`,
+          const response = await axios.post(
+            `${API_URL}/social-login`,
             {
               name: user.name,
               email: user.email,
-              image: user.image,
+              photoUrl: user.image,
+              provider: account.provider,
             },
             {
-              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json',
+              },
             }
           );
+
+          if (response.data) {
+            // Store user data in the user object to access in jwt callback
+            user.userId = response.data.user?._id || response.data._id;
+            user.userRole = response.data.user?.role || response.data.role;
+            user.userToken = response.data.token;
+          }
+
+          return true;
         } catch (error) {
           console.error('Error saving user during signIn callback:', error);
-          return false; // block sign in if needed
+          return false; // block sign in if error
         }
       }
 
       return true;
+    },
+
+    async jwt({ token, user }) {
+      // Add user data to token after sign in
+      if (user) {
+        token.id = user.userId || user.id;
+        token.role = user.userRole || 'student';
+        token.accessToken = user.userToken || '';
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      // Add token data to session
+      if (token && session.user) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+        session.user.accessToken = token.accessToken as string;
+      }
+      return session;
     },
   },
 
@@ -68,5 +88,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     signIn: '/login',
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+  },
+
+  secret: process.env.AUTH_SECRET,
 });

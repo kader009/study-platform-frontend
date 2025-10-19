@@ -127,7 +127,7 @@ export default function AIChatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all z-50"
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-gradient-to-r from-blue-600 to-gray-600 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all z-50"
           aria-label="Open AI chat"
         >
           <MessageCircle className="w-6 h-6 md:w-7 md:h-7 cursor-pointer" />

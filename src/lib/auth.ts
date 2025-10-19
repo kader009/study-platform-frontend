@@ -1,18 +1,14 @@
-'use server'; 
+'use server';
 import { signIn, signOut } from '@/auth';
 
-export const logIn = async () => {
-  await signIn('github', { redirectTo: '/' }); 
+export const githubLogin = async () => {
+  await signIn('github', { redirectTo: '/auth/callback' });
 };
 
-export const GooglelogIn = async () => {
-  await signIn('google', { redirectTo: '/' });
+export const googleLogin = async () => {
+  await signIn('google', { redirectTo: '/auth/callback' });
 };
 
 export const logOut = async () => {
-  await signOut({ redirectTo: '/' });
-};
-
-export const GooglelogOut = async () => {
-  await signOut({ redirectTo: '/' });
+  await signOut({ redirectTo: '/login' });
 };
