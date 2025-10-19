@@ -229,7 +229,7 @@ export default function AIChatbot() {
               </button>
             </div>
             <p className="text-xs text-gray-400 mt-2 text-center">
-              Powered by EduNest AI • Always available
+              EduNest AI • Always available
             </p>
           </div>
         </div>
