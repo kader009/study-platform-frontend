@@ -116,9 +116,9 @@ const WhyChooseUs = () => {
       <div className="py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10 md:mb-12">
+            <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10 md:mb-12">
               What Our Students Say
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
@@ -174,14 +174,14 @@ const WhyChooseUs = () => {
       <div className="py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Ready to Start Your Learning Journey?
-            </h2>
+            </h1>
             <p className="text-lg text-gray-600 mb-8">
               Join thousands of learners who have chosen Edunest to achieve
               their personal and professional goals.
             </p>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-4 py-4 rounded-full text-lg hover:shadow-xl transition-all hover:scale-105">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-3 py-4 rounded-full text-md hover:shadow-sm transition-all hover:scale-105">
               Join Edunest Today
             </button>
           </div>
