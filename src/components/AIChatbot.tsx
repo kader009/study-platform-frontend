@@ -1,13 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, Bot } from 'lucide-react';
-
-interface Message {
-  id: number;
-  text: string;
-  sender: 'user' | 'bot';
-  timestamp: Date;
-}
+import { Message } from '@/types/chatMessage';
 
 export default function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
