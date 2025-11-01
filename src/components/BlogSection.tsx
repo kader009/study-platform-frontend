@@ -62,7 +62,7 @@ export default function BlogSection() {
                 className="w-full object-cover rounded-t-xl"
               />
               <CardContent className="p-4 pt-0">
-                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                 <p className="text-sm text-gray-600 mb-4">{post.excerpt}</p>
                 <Link href={`${post.slug}`} target="_blank">
                   <span className="text-blue-600 hover:underline font-medium">
