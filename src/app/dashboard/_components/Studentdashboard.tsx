@@ -48,14 +48,14 @@ export default function StudentDashboard() {
               </thead>
               <tbody>
                 <tr>
-                  <td className="border px-4 py-2 text-center">May 10</td>
+                  <td className="border px-4 py-2 text-center">August 10</td>
                   <td className="border px-4 py-2 text-center">
                     Redux Toolkit
                   </td>
                   <td className="border px-4 py-2 text-center">Mr. Rahim</td>
                 </tr>
                 <tr>
-                  <td className="border px-4 py-2 text-center">May 15</td>
+                  <td className="border px-4 py-2 text-center">August 15</td>
                   <td className="border px-4 py-2 text-center">TypeScript</td>
                   <td className="border px-4 py-2 text-center">Ms. Sarah</td>
                 </tr>
