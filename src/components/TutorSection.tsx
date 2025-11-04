@@ -14,6 +14,7 @@ const TutorSection = async () => {
     `https://study-platform-backend-drxm.onrender.com/api/v1/tutor`,
     { next: { revalidate: 100 } }
   );
+
   const tutors = await response.json();
 
   return (
