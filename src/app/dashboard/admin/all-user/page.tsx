@@ -2,12 +2,10 @@
 
 import DynamicTitle from '@/components/DynamicTitle';
 import Loader from '@/components/Loader';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useAllUserQuery, useUpdateUserMutation } from '@/redux/endApi';
+import { useAllUserQuery } from '@/redux/endApi';
 import { useState } from 'react';
 import { FaUserTie, FaUserShield } from 'react-icons/fa';
-import { toast } from 'sonner';
 
 interface Userprops {
   _id: string;
@@ -29,24 +27,11 @@ const Page = () => {
     }
   );
 
-  const [updateUser] = useUpdateUserMutation();
   const [searchTerm, setsearchTerm] = useState('');
   const [visibleCount, setVisibleCount] = useState(8);
 
   const Handleview = () => {
     setVisibleCount((prev) => prev + 5);
-  };
-
-  const handleRole = async (id: string, currentRole: string) => {
-    if (currentRole !== 'admin') {
-      try {
-        await updateUser({ id, role: 'admin' });
-        toast.success('user role updated');
-      } catch (error) {
-        console.log(error);
-        toast.error('something went wrong');
-      }
-    }
   };
 
   const visibleData = users?.slice(0, visibleCount);
@@ -89,7 +74,7 @@ const Page = () => {
                   <th className="px-4 py-2 border">User Name</th>
                   <th className="px-4 py-2 border">User Email</th>
                   <th className="px-4 py-2 border">Role</th>
-                  <th className="px-4 py-2 border">Actions</th>
+                  <th className="px-4 py-2 border">Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -101,21 +86,30 @@ const Page = () => {
                       <td className="px-4 py-2 border">{user.email}</td>
                       <td className="px-4 py-2 border">{user.role}</td>
                       <td className="px-4 py-2 border">
-                        <Button
-                          disabled={user.role === 'admin'}
-                          className=" text-white px-3 py-1 rounded-full hover:bg-blue-6"
-                          onClick={() => handleRole(user?._id, user?.role)}
-                        >
+                        <div className="flex items-center gap-2">
                           {user.role === 'admin' ? (
                             <>
-                              <FaUserShield /> Admin
+                              <FaUserShield className="text-blue-600" />
+                              <span className="text-blue-600 font-medium">
+                                Admin
+                              </span>
+                            </>
+                          ) : user.role === 'tutor' ? (
+                            <>
+                              <FaUserTie className="text-green-600" />
+                              <span className="text-green-600 font-medium">
+                                Tutor
+                              </span>
                             </>
                           ) : (
                             <>
-                              <FaUserTie /> Make Admin
+                              <FaUserTie className="text-gray-600" />
+                              <span className="text-gray-600 font-medium">
+                                Student
+                              </span>
                             </>
                           )}
-                        </Button>
+                        </div>
                       </td>
                     </tr>
                   ))
