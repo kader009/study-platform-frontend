@@ -4,16 +4,9 @@ import DynamicTitle from '@/components/DynamicTitle';
 import Loader from '@/components/Loader';
 import { Input } from '@/components/ui/input';
 import { useAllUserQuery } from '@/redux/endApi';
+import { Userprops } from '@/types/userProps';
 import { useState } from 'react';
 import { FaUserTie, FaUserShield } from 'react-icons/fa';
-
-interface Userprops {
-  _id: string;
-  no: number;
-  name: string;
-  email: string;
-  role: string;
-}
 
 const Page = () => {
   const {
