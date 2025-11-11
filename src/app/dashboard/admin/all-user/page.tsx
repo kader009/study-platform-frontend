@@ -89,22 +89,22 @@ const Page = () => {
                         <div className="flex items-center gap-2">
                           {user.role === 'admin' ? (
                             <>
-                              <FaUserShield className="text-blue-600" />
-                              <span className="text-blue-600 font-medium">
+                              <FaUserShield className="text-black" />
+                              <span className="text-black font-medium">
                                 Admin
                               </span>
                             </>
                           ) : user.role === 'tutor' ? (
                             <>
-                              <FaUserTie className="text-green-600" />
-                              <span className="text-green-600 font-medium">
+                              <FaUserTie className="text-black" />
+                              <span className="text-black font-medium">
                                 Tutor
                               </span>
                             </>
                           ) : (
                             <>
-                              <FaUserTie className="text-gray-600" />
-                              <span className="text-gray-600 font-medium">
+                              <FaUserTie className="text-black" />
+                              <span className="text-black font-medium">
                                 Student
                               </span>
                             </>
