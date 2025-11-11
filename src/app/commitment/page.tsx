@@ -181,8 +181,8 @@ const WhyChooseUs = () => {
               Join thousands of learners who have chosen Edunest to achieve
               their personal and professional goals.
             </p>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-3 py-4 rounded-full text-md hover:shadow-sm transition-all hover:scale-105">
-              Join Edunest Today
+            <button className="bg-black text-white font-semibold px-4 py-3 rounded-full text-md hover:shadow-sm transition-all hover:scale-105">
+              Join Today
             </button>
           </div>
         </div>
