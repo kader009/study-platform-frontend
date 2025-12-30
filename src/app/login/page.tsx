@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
 import { googleLogin, githubLogin } from '@/lib/auth';
+import AdminLogin from '@/shared/AdminAccess';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -63,35 +64,12 @@ const Page = () => {
           </h1>
 
           {/*  Admin Access Info */}
-          <div className="text-center text-sm text-gray-600 mb-6">
-            <p className="font-semibold text-gray-700 mb-2">
-              Admin Demo Access
-            </p>
-
-            <div className="flex justify-center items-center space-x-2 mb-1">
-              <span>
-                Email: <span className="text-blue-600">kader@gmail.com</span>
-              </span>
-              <button
-                onClick={() => navigator.clipboard.writeText('kader@gmail.com')}
-                className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded"
-              >
-                Copy
-              </button>
-            </div>
-
-            <div className="flex justify-center items-center space-x-2">
-              <span>
-                Password: <span className="text-blue-600">78757278</span>
-              </span>
-              <button
-                onClick={() => navigator.clipboard.writeText('78757278')}
-                className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded"
-              >
-                Copy
-              </button>
-            </div>
-          </div>
+          <AdminLogin
+            onDemoLogin={(email, password) => {
+              dispatch(SetEmail(email));
+              dispatch(SetPassword(password));
+            }}
+          />
 
           {/* Social Login Buttons */}
           <div className="flex gap-3 mb-4">
