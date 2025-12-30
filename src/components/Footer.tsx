@@ -53,7 +53,7 @@ function Footer() {
             <input
               type="email"
               placeholder="Enter your email..."
-              className="w-full sm:flex-1 px-4 py-2 rounded focus:outline-none border"
+              className="w-full sm:flex-1 px-4 py-2 rounded focus:outline-none border border-gray-700"
               required
             />
             <button
