@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const SessionData = async () => {
   const data = await fetch(
-    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved'
+    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved',
   );
   const sessions = await data.json();
 
