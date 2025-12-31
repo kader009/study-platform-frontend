@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
@@ -15,6 +15,8 @@ const Navbar = () => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const profileRef = useRef<HTMLDivElement | null>(null);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -22,6 +24,11 @@ const Navbar = () => {
   // Close menu on route change
   useEffect(() => {
     setIsOpen(false);
+  }, [router]);
+
+  // Close profile dropdown on route change
+  useEffect(() => {
+    setShowProfileMenu(false);
   }, [router]);
 
   // Prevent body scroll when menu is open
@@ -35,6 +42,25 @@ const Navbar = () => {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  // close profile menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        setShowProfileMenu(false);
+      }
+    }
+
+    if (showProfileMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showProfileMenu]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -83,19 +109,32 @@ const Navbar = () => {
                 >
                   Contact
                 </Link>
-                <button
-                  className="text-black hover:bg-blue-600 hover:text-white px-4 py-2 rounded font-medium transition-colors"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-                <Image
-                  src={user.photoUrl || defaultImage}
-                  alt="Profile"
-                  width={40}
-                  height={40}
-                  className="rounded-full object-cover h-10 w-10"
-                />
+                <div className="relative" ref={profileRef}>
+                  <button
+                    onClick={() => setShowProfileMenu((s) => !s)}
+                    className="rounded-full overflow-hidden border-0 p-0"
+                    aria-label="Open profile menu"
+                  >
+                    <Image
+                      src={user.photoUrl || defaultImage}
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className="rounded-full object-cover h-10 w-10"
+                    />
+                  </button>
+
+                  {showProfileMenu && (
+                    <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg py-2 z-50">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               </>
             ) : (
               <Link
