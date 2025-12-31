@@ -65,7 +65,7 @@ export default function AIChatbot() {
 
       const botResponse: Message = {
         id: messages.length + 2,
-        text: `Your Local Time: ${timeString}\nDate: ${dateString}\n\nPerfect time to explore our learning sessions! 🕒`,
+        text: `Your Local Time: ${timeString}\nDate: ${dateString}\n\nPerfect time to explore our learning sessions!`,
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -143,7 +143,7 @@ export default function AIChatbot() {
 
       {isOpen && (
         <div className="fixed bottom-0 right-0 left-0 md:bottom-6 md:right-6 md:left-auto w-full md:w-96 h-screen md:h-150 bg-white md:rounded-2xl shadow-2xl flex flex-col z-50 border-t md:border border-gray-200">
-          <div className="bg-linear-to-r from-blue-600 to-purple-600 text-white p-3 md:p-4 md:rounded-t-2xl flex justify-between items-center">
+          <div className="bg-linear-to-r from-black via-gray-900 to-blue-900 text-white p-3 md:p-4 md:rounded-t-2xl flex justify-between items-center">
             <div className="flex items-center gap-2 md:gap-3">
               <Bot className="w-5 h-5 md:w-6 md:h-6" />
               <div>
@@ -230,7 +230,7 @@ export default function AIChatbot() {
               <button
                 onClick={handleSendMessage}
                 disabled={isLoading || inputMessage.trim() === ''}
-                className="bg-linear-to-r from-blue-600 to-purple-600 text-white p-2 md:p-2.5 rounded-full hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-linear-to-r from-black via-gray-900 to-blue-900 text-white p-2 md:p-2.5 rounded-full hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5 md:w-5 md:h-5" />
               </button>

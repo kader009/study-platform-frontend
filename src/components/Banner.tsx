@@ -4,7 +4,7 @@ import { BannerVariants } from '@/animation/variants';
 
 const Banner = () => {
   return (
-    <section className="min-h-screen flex items-center bg-gradient-to-br from-black via-gray-900 to-blue-900 px-6 py-12">
+    <section className="min-h-screen flex items-center bg-linear-to-br from-black via-gray-900 to-blue-900 px-6 py-12">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Text Content */}
         <div>
