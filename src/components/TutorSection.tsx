@@ -13,7 +13,7 @@ interface Tutorprops {
 
 const TutorSection = async () => {
   const response = await fetch(
-    `https://study-platform-backend-drxm.onrender.com/api/v1/tutor`,
+    `https://study-platform-backend-drxm.onrender.com/api/v1/user/tutor`,
     { next: { revalidate: 100 } }
   );
 
