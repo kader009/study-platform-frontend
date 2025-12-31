@@ -1,15 +1,7 @@
 import Image from 'next/image';
 import { CardContent } from '@/components/ui/card';
 import { Heading } from '@/shared/HeadandPara';
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-interface Tutorprops {
-  _id: string;
-  name: string;
-  email: string;
-  photoUrl: string;
-}
+import { Tutorprops } from '@/types/tutorProps';
 
 const TutorSection = async () => {
   const response = await fetch(

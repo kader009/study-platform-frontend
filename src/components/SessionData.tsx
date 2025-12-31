@@ -1,12 +1,9 @@
 import { SessionProps } from '@/types/sesstionType';
 import Link from 'next/link';
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 const SessionData = async () => {
   const data = await fetch(
-    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved',
-    { cache: 'no-store' }
+    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved'
   );
 
   const sessions = await data.json();
