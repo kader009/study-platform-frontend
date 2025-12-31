@@ -95,7 +95,7 @@ const Page = () => {
                     </p>
                     <div className="flex justify-between items-center mb-3">
                       <Link href={`/session/${session._id}`}>
-                        <span className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700 cursor-pointer">
+                        <span className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700 cursor-pointer">
                           Read More
                         </span>
                       </Link>
@@ -120,7 +120,7 @@ const Page = () => {
               <button
                 onClick={() => setPage((prev) => Math.min(prev + 1, totalPage))}
                 disabled={page === totalPage}
-                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 bg-linear-to-r from-blue-500 to-indigo-600 text-white rounded disabled:opacity-50 cursor-pointer"
               >
                 Next
               </button>

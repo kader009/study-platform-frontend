@@ -83,7 +83,7 @@ const Page = () => {
   return (
     <div>
       <div className="flex justify-center items-center px-4 mt-4">
-        <div className="max-w-[800px] w-full mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
+        <div className="max-w-200 w-full mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
           <h1 className="text-center text-2xl font-bold text-black mb-2">
             Create study session
           </h1>
