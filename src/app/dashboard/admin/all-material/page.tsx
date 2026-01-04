@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useAllMaterilQuery, useDeleteMaterialMutation } from '@/redux/endApi';
 import Link from 'next/link';
 import DynamicTitle from '@/components/DynamicTitle';
+import MaterialTableSkeleton from '@/components/skeleton/MaterialTableSkeleton';
 
 interface Materialprops {
   _id: string;
@@ -27,12 +28,7 @@ const Page = () => {
   } = useAllMaterilQuery({}, { pollingInterval: 2000 });
   const [deleteMaterial] = useDeleteMaterialMutation();
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  if (isLoading) return <MaterialTableSkeleton />;
 
   if (isError)
     return (
@@ -48,10 +44,10 @@ const Page = () => {
           A list of your all material
         </h1>
         <div className="overflow-x-auto w-full">
-          <Table className=" min-w-[600px] w-full ">
+          <Table className=" min-w-150 w-full ">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Image</TableHead>
                 <TableHead>Drive link</TableHead>

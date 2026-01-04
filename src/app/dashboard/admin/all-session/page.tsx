@@ -15,7 +15,7 @@ import {
   useDeleteSessionMutation,
   useUpdateSessionMutation,
 } from '@/redux/endApi';
-import Loader from '@/components/Loader';
+import SessionTableSkeleton from '@/components/skeleton/SessionTableSkeleton';
 import {
   Dialog,
   DialogContent,
@@ -90,7 +90,7 @@ const Page = () => {
 
   const visibleData = sessions?.slice(0, visibleCount);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <SessionTableSkeleton />;
   if (isError)
     return <div className="text-red-500 text-center font-bold"></div>;
 
@@ -102,10 +102,10 @@ const Page = () => {
           A list of all study session
         </h1>
         <div className="overflow-x-auto w-full">
-          <Table className="min-w-[600px] w-full">
+          <Table className="min-w-150 w-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Session name</TableHead>
                 <TableHead>Tutor name</TableHead>
                 <TableHead>Status</TableHead>
@@ -179,7 +179,7 @@ const Page = () => {
       {/* modal */}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className="sm:max-w-125">
           <DialogHeader>
             <DialogTitle>Update Session</DialogTitle>
             <DialogDescription>

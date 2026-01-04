@@ -1,7 +1,7 @@
 'use client';
 
 import DynamicTitle from '@/components/DynamicTitle';
-import SessionSkeleton from '@/components/SessionSkeleton';
+import SessionSkeleton from '@/components/skeleton/SessionSkeleton';
 import { SessionProps } from '@/types/sesstionType';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

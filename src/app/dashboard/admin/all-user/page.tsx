@@ -1,7 +1,7 @@
 'use client';
 
 import DynamicTitle from '@/components/DynamicTitle';
-import Loader from '@/components/Loader';
+import UserTableSkeleton from '@/components/skeleton/UserTableSkeleton';
 import { Input } from '@/components/ui/input';
 import { useAllUserQuery } from '@/redux/endApi';
 import { Userprops } from '@/types/userProps';
@@ -29,7 +29,7 @@ const Page = () => {
 
   const visibleData = users?.slice(0, visibleCount);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <UserTableSkeleton />;
   if (isError)
     return (
       <div className="flex justify-center items-center text-2xl text-red-600">
@@ -109,7 +109,7 @@ const Page = () => {
                 ) : (
                   <tr>
                     <td colSpan={5} className="text-center py-4 text-gray-500">
-                      🚫 No user found
+                      No user found...
                     </td>
                   </tr>
                 )}
