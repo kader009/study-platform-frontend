@@ -112,7 +112,7 @@ const Page = () => {
           </div>
 
           <div className="text-center text-gray-500 mb-4">
-            Or continue with email
+            Or continue with email & password
           </div>
 
           <form onSubmit={handleSubmit}>

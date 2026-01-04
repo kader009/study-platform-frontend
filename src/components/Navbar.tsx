@@ -83,59 +83,64 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            {user ? (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/session"
-                  className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
-                >
-                  All Session
-                </Link>
-                <Link
-                  href="/commitment"
-                  className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
-                >
-                  Commitment
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
-                >
-                  Contact
-                </Link>
-                <div className="relative" ref={profileRef}>
-                  <button
-                    onClick={() => setShowProfileMenu((s) => !s)}
-                    className="rounded-full overflow-hidden border-0 p-0"
-                    aria-label="Open profile menu"
-                  >
-                    <Image
-                      src={user.photoUrl || defaultImage}
-                      alt="Profile"
-                      width={40}
-                      height={40}
-                      className="rounded-full object-cover h-10 w-10"
-                    />
-                  </button>
+            {/* Dashboard only for authenticated users */}
+            {user && (
+              <Link
+                href="/dashboard"
+                className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+              >
+                Dashboard
+              </Link>
+            )}
 
-                  {showProfileMenu && (
-                    <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg py-2 z-50">
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </>
+            {/* Public links visible to everyone */}
+            <Link
+              href="/session"
+              className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+            >
+              All Session
+            </Link>
+            <Link
+              href="/commitment"
+              className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+            >
+              Commitment
+            </Link>
+            <Link
+              href="/contact"
+              className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+            >
+              Contact
+            </Link>
+
+            {/* Profile / Auth actions */}
+            {user ? (
+              <div className="relative" ref={profileRef}>
+                <button
+                  onClick={() => setShowProfileMenu((s) => !s)}
+                  className="rounded-full overflow-hidden border-0 p-0"
+                  aria-label="Open profile menu"
+                >
+                  <Image
+                    src={user.photoUrl || defaultImage}
+                    alt="Profile"
+                    width={40}
+                    height={40}
+                    className="rounded-full object-cover h-10 w-10"
+                  />
+                </button>
+
+                {showProfileMenu && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg py-2 z-50">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <Link
                 href="/login"
@@ -190,24 +195,26 @@ const Navbar = () => {
 
           {/* Sidebar Content */}
           <div className="flex-1 overflow-y-auto p-4">
-            {user ? (
-              <div className="flex flex-col space-y-4">
-                {/* Profile Section */}
-                <div className="flex items-center gap-3 pb-4 border-b">
-                  <Image
-                    src={user.photoUrl || defaultImage}
-                    alt="Profile"
-                    width={50}
-                    height={50}
-                    className="rounded-full object-cover w-10 h-10"
-                  />
-                  <div>
-                    <p className="font-semibold text-black">{user.name}</p>
-                    <p className="text-sm text-gray-500">{user.email}</p>
-                  </div>
+            {/* Show profile header only for logged-in users */}
+            {user && (
+              <div className="flex items-center gap-3 pb-4 border-b">
+                <Image
+                  src={user.photoUrl || defaultImage}
+                  alt="Profile"
+                  width={50}
+                  height={50}
+                  className="rounded-full object-cover w-10 h-10"
+                />
+                <div>
+                  <p className="font-semibold text-black">{user.name}</p>
+                  <p className="text-sm text-gray-500">{user.email}</p>
                 </div>
+              </div>
+            )}
 
-                {/* Navigation Links */}
+            <div className="flex flex-col space-y-2 mt-4">
+              {/* Dashboard only for authenticated users */}
+              {user && (
                 <Link
                   href="/dashboard"
                   onClick={toggleMenu}
@@ -215,45 +222,49 @@ const Navbar = () => {
                 >
                   Dashboard
                 </Link>
-                <Link
-                  href="/session"
-                  onClick={toggleMenu}
-                  className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
-                >
-                  All Session
-                </Link>
-                <Link
-                  href="/commitment"
-                  onClick={toggleMenu}
-                  className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Commitment
-                </Link>
-                <Link
-                  href="/contact"
-                  onClick={toggleMenu}
-                  className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Contact
-                </Link>
+              )}
 
-                {/* Logout Button */}
+              {/* Public links visible to everyone */}
+              <Link
+                href="/session"
+                onClick={toggleMenu}
+                className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
+              >
+                All Session
+              </Link>
+              <Link
+                href="/commitment"
+                onClick={toggleMenu}
+                className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
+              >
+                Commitment
+              </Link>
+              <Link
+                href="/contact"
+                onClick={toggleMenu}
+                className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
+              >
+                Contact
+              </Link>
+
+              {/* Auth action */}
+              {user ? (
                 <button
                   onClick={handleLogout}
                   className="w-full text-white bg-blue-600 hover:bg-blue-700 px-2 py-2 rounded-full font-medium transition-colors text-center"
                 >
                   Logout
                 </button>
-              </div>
-            ) : (
-              <Link
-                href="/login"
-                onClick={toggleMenu}
-                className="block text-white bg-black hover:bg-gray-800 px-4 py-3 rounded-full font-medium text-center transition-colors"
-              >
-                Login
-              </Link>
-            )}
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={toggleMenu}
+                  className="block text-white bg-black hover:bg-gray-800 px-4 py-3 rounded-full font-medium text-center transition-colors"
+                >
+                  Login
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
