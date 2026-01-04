@@ -30,7 +30,7 @@ const Banner = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded transition-all duration-300 cursor-pointer"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 transition-all duration-300 cursor-pointer rounded-full"
             >
               Get Started
             </motion.button>

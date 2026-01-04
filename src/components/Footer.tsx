@@ -49,16 +49,16 @@ function Footer() {
           <p className="text-sm">
             Subscribe for updates, offers, and news directly in your inbox.
           </p>
-          <form className="flex flex-col sm:flex-row">
+          <form className="flex flex-col sm:flex-row items-center gap-2 sm:gap-0">
             <input
               type="email"
               placeholder="Enter your email..."
-              className="w-full sm:flex-1 px-4 py-2 rounded focus:outline-none border border-gray-700"
+              className="w-full sm:flex-1 px-4 py-2 rounded-full sm:rounded-r-none sm:rounded-l-full focus:outline-none border border-gray-700 sm:border-r-0"
               required
             />
             <button
               type="submit"
-              className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded transition cursor-pointer"
+              className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2 rounded-full sm:rounded-l-none sm:rounded-r-full transition cursor-pointer"
             >
               Subscribe
             </button>

@@ -45,7 +45,7 @@ const SessionData = async () => {
               <p className="text-gray-700 text-sm mb-4 leading-relaxed">
                 {session?.sessionDescription}
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-end items-center">
                 <Link href={`/session/${session._id}`}>
                   <span className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700">
                     Read More
