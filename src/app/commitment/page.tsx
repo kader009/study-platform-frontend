@@ -11,7 +11,7 @@ import {
 const WhyChooseUs = () => {
   return (
     <main className="flex-1">
-      <div className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 py-20 md:py-32 overflow-hidden">
+      <div className="relative bg-linear-to-br from-black via-gray-900 to-blue-900 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -94,7 +94,7 @@ const WhyChooseUs = () => {
                   className="group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-xl hover:border-blue-300 transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="flex flex-col items-center text-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-600 transition-colors flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-600 transition-colors shrink-0">
                       <item.Icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
                     </div>
                     <div>
