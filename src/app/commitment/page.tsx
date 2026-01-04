@@ -8,7 +8,7 @@ import {
   BriefcaseIcon,
 } from '@heroicons/react/24/outline';
 
-const WhyChooseUs = () => {
+const Commitment = () => {
   return (
     <main className="flex-1">
       <div className="relative bg-linear-to-br from-black via-gray-900 to-blue-900 py-20 md:py-32 overflow-hidden">
@@ -191,4 +191,4 @@ const WhyChooseUs = () => {
   );
 };
 
-export default WhyChooseUs;
+export default Commitment;

@@ -13,9 +13,26 @@ import {
   ChatBubbleOvalLeftEllipsisIcon,
 } from '@heroicons/react/24/outline';
 import DynamicTitle from '@/components/DynamicTitle';
+import {
+  useAllSessionQuery,
+  useAllUserQuery,
+  useAllMaterilQuery,
+} from '@/redux/endApi';
 
 export default function AdminProfilePage() {
   const admin = useSelector((state: RootState) => state?.user?.user);
+  const { data: sessionsData, isLoading: sessionsLoading } =
+    useAllSessionQuery(undefined);
+  const { data: usersData, isLoading: usersLoading } =
+    useAllUserQuery(undefined);
+  const { data: materialsData, isLoading: materialsLoading } =
+    useAllMaterilQuery(undefined);
+
+  const totalSessions = Array.isArray(sessionsData) ? sessionsData.length : 0;
+  const totalUsers = Array.isArray(usersData) ? usersData.length : 0;
+  const totalMaterials = Array.isArray(materialsData)
+    ? materialsData.length
+    : 0;
 
   const adminInfo = {
     name: admin?.name || 'Md Abdul Kader Molla',
@@ -33,7 +50,7 @@ export default function AdminProfilePage() {
     <div>
       <DynamicTitle />
       <section className="min-h-screen bg-gray-100 py-12 px-4 md:px-12">
-        <div className="max-w-[86rem] mx-auto bg-white rounded-2xl shadow-md p-8">
+        <div className="max-w-344 mx-auto bg-white rounded-2xl shadow-md p-8">
           <h1 className="text-3xl font-bold mb-10">Admin Profile</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -63,7 +80,7 @@ export default function AdminProfilePage() {
                 </h3>
                 <p className="text-gray-700 mb-4">
                   Excited to share the latest updates from our admin dashboard!
-                  Stay tuned for more improvements. 🚀
+                  Stay tuned for more improvements.
                 </p>
                 {/* Facebook actions */}
                 <div className="flex flex-wrap justify-between text-gray-600">
@@ -133,19 +150,19 @@ export default function AdminProfilePage() {
               {/* Widgets */}
               <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                 <div className="bg-yellow-100 p-5 rounded-xl shadow-sm text-center">
-                  <h6 className="text-xl font-bold text-yellow-800">50</h6>
+                  <h6 className="text-xl font-bold text-yellow-800">{sessionsLoading ? '...' : totalSessions}</h6>
                   <p className="text-sm text-yellow-700">
                     Total Sessions Created
                   </p>
                 </div>
                 <div className="bg-purple-100 p-5 rounded-xl shadow-sm text-center">
-                  <h1 className="text-xl font-bold text-purple-800">30</h1>
+                  <h1 className="text-xl font-bold text-purple-800">{materialsLoading ? '...' : totalMaterials}</h1>
                   <p className="text-sm text-purple-700">
                     Study Materials Uploaded
                   </p>
                 </div>
                 <div className="bg-green-100 p-5 rounded-xl shadow-sm text-center">
-                  <h2 className="text-xl font-bold text-green-800">120</h2>
+                  <h2 className="text-xl font-bold text-green-800">{usersLoading ? '...' : totalUsers}</h2>
                   <p className="text-sm text-green-700">
                     Total Users Registered
                   </p>

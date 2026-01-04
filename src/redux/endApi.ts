@@ -30,7 +30,7 @@ const EduNestApi = baseApi.injectEndpoints({
     // tutor get route
     allTutor: build.query({
       query: () => ({
-        url: '/api/v1/tutor',
+        url: '/api/v1/user/tutor',
         method: 'GET',
       }),
     }),

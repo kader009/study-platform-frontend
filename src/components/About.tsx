@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const AboutUs = () => {
   return (
-    <section className="flex flex-col lg:flex-row-reverse items-center justify-between px-8 md:px-24 py-24 min-h-[600px]">
+    <section className="flex flex-col lg:flex-row-reverse items-center justify-between px-8 md:px-24 py-24 min-h-150">
       {/* Right Side - Text Content */}
       <div className="w-full lg:w-1/2 text-center lg:text-left space-y-3 order-2 lg:order-1">
         <h1 className="text-blue-600 font-bold text-xl tracking-wide uppercase">
@@ -30,7 +30,7 @@ const AboutUs = () => {
 
       {/* Left Side - Image */}
       <div className="w-full lg:w-1/2 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0">
-        <div className="relative w-full max-w-[500px] aspect-[4/3]">
+        <div className="relative w-full max-w-125 aspect-4/3">
           <Image
             src="/student4.webp"
             alt="Happy student"
