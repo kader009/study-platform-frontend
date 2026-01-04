@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import ManageNoteSkeleton from '@/components/skeleton/ManageNoteSkeleton';
 import {
   Dialog,
   DialogContent,
@@ -79,12 +80,7 @@ const Page = () => {
     }
   };
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  if (isLoading) return <ManageNoteSkeleton />;
 
   if (isError)
     return (
@@ -100,10 +96,10 @@ const Page = () => {
           Manage your notes
         </h1>
         <div className="overflow-x-auto">
-          <Table className=" min-w-[600px] w-full ">
+          <Table className=" min-w-150 w-full ">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Note name</TableHead>
                 <TableHead>Note description</TableHead>
                 <TableHead>Actions</TableHead>

@@ -35,7 +35,7 @@ export default function ContactPage() {
       <div className="min-h-screen py-10 px-6">
         <h1 className="text-3xl font-bold text-center mb-6">Contact Us</h1>
 
-        <div className="w-full h-[400px] mb-10 rounded overflow-hidden shadow">
+        <div className="w-full h-100 mb-10 rounded overflow-hidden shadow">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.9026843174487!2d90.39150957529312!3d23.75087637867796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b855aa5ef77d%3A0x10b1872d73be899!2sDhaka%20University!5e0!3m2!1sen!2sbd!4v1719674505201!5m2!1sen!2sbd"
             width="100%"

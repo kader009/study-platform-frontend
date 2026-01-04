@@ -41,59 +41,67 @@ const Page = () => {
   }, [user?.email, dispatch]);
 
   return (
-    <div>
-      <div className="flex justify-center items-center min-h-screen px-4">
-        <div className="max-w-[800px] w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-          <h1 className="text-center text-2xl font-bold text-black mb-4">
+    <div className="min-h-screenflex items-center justify-center px-4 mt-10">
+      <div className="w-full max-w-3xl mx-auto">
+        <div className="bg-white rounded-2xl p-10 shadow-sm">
+          <h1 className="text-center text-3xl font-extrabold text-black mb-8">
             Create Your Note
           </h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
+
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <Label htmlFor="email" className="mb-2 font-semibold">
+              <Label htmlFor="email" className="block mb-2 font-medium text-sm">
                 Email
               </Label>
               <Input
                 id="email"
                 type="email"
                 disabled
-                defaultValue={user?.email}
                 value={email}
-                className="border border-black"
+                className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400"
               />
             </div>
+
             <div>
-              <Label htmlFor="title" className="mb-2 font-semibold">
+              <Label htmlFor="title" className="block mb-2 font-medium text-sm">
                 Title
               </Label>
               <Input
                 id="title"
                 type="text"
-                placeholder="Enter a title"
-                className="border border-black"
+                placeholder="Enter a title for your note"
+                className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm"
                 value={title}
                 onChange={(e) => dispatch(setTitle(e.target.value))}
                 required
               />
             </div>
+
             <div>
-              <Label htmlFor="description" className="mb-2 font-semibold">
+              <Label
+                htmlFor="description"
+                className="block mb-2 font-medium text-sm"
+              >
                 Description
               </Label>
               <Textarea
                 id="description"
                 placeholder="Write your notes here"
-                className="border border-black"
+                className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm h-44 resize-none"
                 value={description}
                 onChange={(e) => dispatch(setDescription(e.target.value))}
                 required
               />
             </div>
-            <Button
-              type="submit"
-              className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full"
-            >
-              Submit
-            </Button>
+
+            <div className="pt-2">
+              <Button
+                type="submit"
+                className="w-full max-w-2xl mx-auto bg-black text-white py-4 rounded-full text-lg"
+              >
+                Submit
+              </Button>
+            </div>
           </form>
         </div>
       </div>

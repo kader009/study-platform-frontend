@@ -112,10 +112,10 @@ const Page = () => {
           your session material
         </h1>
         <div className="overflow-x-auto w-full">
-          <Table className=" min-w-[600px] w-full ">
+          <Table className=" min-w-150 w-full ">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>Session id</TableHead>
                 <TableHead>Actions</TableHead>

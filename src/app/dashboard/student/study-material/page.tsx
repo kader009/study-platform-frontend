@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useGetbookByemailQuery } from '../../../../redux/endApi';
+import StudyMaterialSkeleton from '@/components/skeleton/StudyMaterialSkeleton';
 import { RootState } from '@/redux/store/store';
 import { useAppSelector } from '@/redux/hook';
 import Link from 'next/link';
@@ -28,12 +29,7 @@ const Page = () => {
     isError,
   } = useGetbookByemailQuery(user?.email);
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  if (isLoading) return <StudyMaterialSkeleton />;
 
   if (isError)
     return (
@@ -49,10 +45,10 @@ const Page = () => {
           A list of your session material
         </h1>
         <div className="overflow-x-auto w-full">
-          <Table className=" min-w-[600px] w-full ">
+          <Table className=" min-w-150 w-full ">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Session id</TableHead>
                 <TableHead>Tutor email</TableHead>
                 <TableHead>Transaction (free/paid)</TableHead>

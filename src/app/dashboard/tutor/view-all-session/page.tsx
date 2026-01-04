@@ -53,10 +53,10 @@ const Page = () => {
           A list of your create session
         </h1>
         <div className="overflow-x-auto w-full">
-          <Table className=" min-w-[600px] w-full ">
+          <Table className=" min-w-150 w-full ">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Session name</TableHead>
                 <TableHead>Register deadline</TableHead>
                 <TableHead>status</TableHead>
