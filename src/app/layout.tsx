@@ -28,6 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://lottie.host" />
+      </head>
       <body className={`${poppins.className} antialiased`}>
         <Providers>
           <PersistProvider>
