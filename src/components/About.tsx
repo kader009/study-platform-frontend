@@ -31,13 +31,7 @@ const AboutUs = () => {
       {/* Left Side - Image */}
       <div className="w-full lg:w-1/2 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0">
         <div className="relative w-full max-w-125 aspect-4/3">
-          <Image
-            src="/student4.webp"
-            alt="Happy student"
-            fill
-            loading="lazy"
-            className="rounded-2xl object-cover"
-          />
+          <iframe className='w-full h-full' src="https://lottie.host/embed/3f429093-5466-4aea-a12d-31f788f059d8/APh8K0Dva0.lottie"></iframe>
         </div>
       </div>
     </section>
