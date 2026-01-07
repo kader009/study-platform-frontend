@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const AboutUs = () => {
   return (
     <section className="flex flex-col lg:flex-row-reverse items-center justify-between px-8 md:px-24 py-24 min-h-150">
@@ -29,11 +31,14 @@ const AboutUs = () => {
       {/* Left Side - Image */}
       <div className="w-full lg:w-1/2 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0">
         <div className="relative w-full max-w-125 aspect-4/3">
-          <iframe
+          <Image
             title="about image"
             className="w-full h-full"
-            src="https://lottie.host/embed/3f429093-5466-4aea-a12d-31f788f059d8/APh8K0Dva0.lottie"
-          ></iframe>
+            src="/student4.webp"
+            alt="About Us Image"
+            width={500}
+            height={600}
+          ></Image>
         </div>
       </div>
     </section>
