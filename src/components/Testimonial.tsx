@@ -39,7 +39,7 @@ const TestimonialCarousel = () => {
         <h1 className="text-3xl font-extrabold mb-3">What Our Users Say</h1>
         <p className="text-gray-600 max-w-xl mx-auto">
           Hear from professionals who have elevated their skills with{' '}
-          <span className="font-bold text-blue-500">EduNest</span>
+          <span className="font-bold text-blue-700">EduNest</span>
         </p>
       </div>
 

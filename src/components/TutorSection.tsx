@@ -38,7 +38,7 @@ const TutorSection = async () => {
                 />
               </div>
               <CardContent className="p-4 text-center">
-                <h3 className="text-xl font-semibold">{tutor.name}</h3>
+                <h1 className="text-xl font-semibold">{tutor.name}</h1>
                 <p className="text-sm mt-1 mb-3">{tutor.email}</p>
               </CardContent>
             </div>

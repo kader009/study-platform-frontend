@@ -30,11 +30,11 @@ const SessionData = async () => {
             >
               <div className="mt-2 mb-3">
                 {isSessionEnded ? (
-                  <span className="bg-red-200 text-red-400 text-sm font-semibold py-2 px-4 rounded-full">
+                  <span className="bg-red-100 text-red-700 text-sm font-semibold py-2 px-4 rounded-full">
                     Closed
                   </span>
                 ) : (
-                  <span className="bg-green-200 text-green-400 text-xs font-semibold py-2 px-4 rounded-full">
+                  <span className="bg-green-200 text-green-700 text-xs font-semibold py-2 px-4 rounded-full">
                     Open
                   </span>
                 )}

@@ -30,6 +30,7 @@ const AboutUs = () => {
       <div className="w-full lg:w-1/2 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0">
         <div className="relative w-full max-w-125 aspect-4/3">
           <iframe
+            title="about image"
             className="w-full h-full"
             src="https://lottie.host/embed/3f429093-5466-4aea-a12d-31f788f059d8/APh8K0Dva0.lottie"
           ></iframe>
