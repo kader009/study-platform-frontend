@@ -96,10 +96,10 @@ const Page = () => {
                     <div className="flex justify-end items-center mb-3">
                       <Link
                         href={`/session/${session._id}`}
-                        aria-label="learn more about our course"
+                        aria-label={`Continue learning ${session.sessionTitle}`}
                       >
                         <button
-                          aria-label="learn more about our course"
+                          aria-label={`Continue learning ${session.sessionTitle}`}
                           className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold py-2 px-5 rounded-full transition-all shadow-md hover:from-blue-600 hover:to-indigo-700 cursor-pointer"
                         >
                           Read More

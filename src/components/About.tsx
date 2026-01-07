@@ -33,7 +33,7 @@ const AboutUs = () => {
         <div className="relative w-full max-w-125 aspect-4/3">
           <Image
             title="about image"
-            className="w-full h-full"
+            className="w-full h-full object-cover"
             src="/student4.webp"
             alt="About Us Image"
             width={500}
