@@ -225,7 +225,7 @@ const Page = () => {
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
               <Link href="/login" className="text-blue-500 hover:underline">
-                Login here
+                Login
               </Link>
             </p>
           </div>
