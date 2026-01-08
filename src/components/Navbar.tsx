@@ -144,7 +144,7 @@ const Navbar = () => {
             ) : (
               <Link
                 href="/login"
-                className="text-white bg-black hover:bg-gray-800 px-5 py-2 rounded-full font-medium transition-colors"
+                className="text-white bg-black hover:bg-gray-800 px-5 py-2 rounded-full font-semibold transition-colors"
               >
                 Login
               </Link>
@@ -259,7 +259,7 @@ const Navbar = () => {
                 <Link
                   href="/login"
                   onClick={toggleMenu}
-                  className="block text-white bg-black hover:bg-gray-800 px-4 py-3 rounded-full font-medium text-center transition-colors"
+                  className="block text-white bg-black hover:bg-gray-800 px-4 py-3 rounded-full font-semibold text-center transition-colors"
                 >
                   Login
                 </Link>
