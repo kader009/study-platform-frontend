@@ -11,6 +11,7 @@ import {
 import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { useTutorSessionQuery } from '@/redux/endApi';
+import TutorSessionTableSkeleton from '@/components/skeleton/TutorSessionTableSkeleton';
 
 interface Sessionprops {
   _id: string;
@@ -32,12 +33,7 @@ const Page = () => {
     isError,
   } = useTutorSessionQuery(user?.email, { pollingInterval: 1000 });
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  if (isLoading) return <TutorSessionTableSkeleton />;
 
   if (isError)
     return (
