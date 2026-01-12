@@ -41,12 +41,12 @@ const Banner = () => {
         <div className="bg-gray-900 text-green-400 p-6 rounded-xl shadow-lg font-mono text-sm leading-relaxed overflow-x-auto">
           <pre>
             <code>
-              {`// enroll in your first session at Edunest
-              const session = {
-                course: "Frontend Development",
-                level: "Beginner",
-                duration: "4 weeks",
-                };
+          {`// enroll in your first session at Edunest
+          const session = {
+            course: "Frontend Development",
+            level: "Beginner",
+            duration: "4 weeks",
+            };
 
             const enroll = async () => {
               try {
