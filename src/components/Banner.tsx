@@ -24,7 +24,7 @@ const Banner = () => {
           </motion.h1>
           <p className="text-lg text-gray-300 mb-8">
             Join live sessions, master in-demand skills, and build your tech
-            career the right way — one session at a time.
+            career the right way - one session at a time.
           </p>
           <Link href="/session">
             <motion.button
@@ -42,11 +42,11 @@ const Banner = () => {
           <pre>
             <code>
               {`// enroll in your first session at Edunest
-        const session = {
-          course: "Frontend Development",
-          level: "Beginner",
-          duration: "4 weeks",
-          };
+              const session = {
+                course: "Frontend Development",
+                level: "Beginner",
+                duration: "4 weeks",
+                };
 
             const enroll = async () => {
               try {
