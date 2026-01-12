@@ -17,6 +17,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
+import UploadMaterialSkeleton from '@/components/skeleton/UploadMaterialSkeleton';
 import {
   useMaterialPostMutation,
   useTutorApprovedSessionQuery,
@@ -90,12 +91,7 @@ const Page = () => {
     }
   }, [selectedUpload, dispatch]);
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  if (isLoading) return <UploadMaterialSkeleton />;
 
   if (isError)
     return (
