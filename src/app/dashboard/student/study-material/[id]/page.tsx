@@ -10,25 +10,13 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
-interface Material {
-  _id: string;
-  MaterialTitle: string;
-  SessionId: string;
-  TutorEmail: string;
-  UploadImages: string;
-  GoogledriveLink: string;
-}
+import StudyMaterialSkeleton from '@/components/skeleton/StudyMaterialSkeleton';
+import { Material } from '@/types/studyMaterial';
 
 const Page = () => {
   const { data: materials, isLoading, isError } = useAllMaterilQuery(undefined);
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600"></div>
-      </div>
-    );
+  if (isLoading) return <StudyMaterialSkeleton />;
 
   if (isError)
     return (
@@ -44,10 +32,10 @@ const Page = () => {
           A list of your material item
         </h1>
         <div className="overflow-x-auto w-full">
-          <Table className=" min-w-[600px] w-full ">
+          <Table className=" min-w-150 w-full ">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">No</TableHead>
+                <TableHead className="w-20">No</TableHead>
                 <TableHead>Material name</TableHead>
                 <TableHead>Download image</TableHead>
                 <TableHead>Drive link</TableHead>
