@@ -12,13 +12,8 @@ import { useAllMaterilQuery, useDeleteMaterialMutation } from '@/redux/endApi';
 import Link from 'next/link';
 import DynamicTitle from '@/components/DynamicTitle';
 import MaterialTableSkeleton from '@/components/skeleton/MaterialTableSkeleton';
-
-interface Materialprops {
-  _id: string;
-  MaterialTitle: string;
-  UploadImages: string;
-  GoogledriveLink: string;
-}
+import { Materialprops } from '@/types/adminMaterialprops';
+import { toast } from 'sonner';
 
 const Page = () => {
   const {
@@ -28,6 +23,11 @@ const Page = () => {
   } = useAllMaterilQuery({}, { pollingInterval: 2000 });
   const [deleteMaterial] = useDeleteMaterialMutation();
 
+  const handleDelete = (id: string) => {
+    deleteMaterial(id);
+    toast.success('Material deleted successfully');
+  };
+
   if (isLoading) return <MaterialTableSkeleton />;
 
   if (isError)
@@ -36,6 +36,7 @@ const Page = () => {
         Something went wrong
       </div>
     );
+
   return (
     <div>
       <DynamicTitle />
@@ -83,7 +84,7 @@ const Page = () => {
                     <Button
                       type="submit"
                       className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full mt-2 cursor-pointer"
-                      onClick={() => deleteMaterial(material._id)}
+                      onClick={() => handleDelete(material._id)}
                     >
                       Delete
                     </Button>
