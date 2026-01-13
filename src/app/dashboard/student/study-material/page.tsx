@@ -69,7 +69,7 @@ const Page = () => {
                       >
                         <Button
                           type="button"
-                          className="w-28 bg-black hover:bg-gray-900 text-white py-3 px-3 rounded-full mt-2"
+                          className="w-28 bg-black hover:bg-gray-900 text-white py-3 px-3 rounded-full mt-2 cursor-pointer"
                         >
                           View Detail
                         </Button>

@@ -54,7 +54,7 @@ const Page = () => {
                         className="inline-block"
                         target="_blank"
                       >
-                        <Button className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2">
+                        <Button className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full mt-2 cursor-pointer">
                           Image
                         </Button>
                       </Link>
@@ -62,7 +62,7 @@ const Page = () => {
                     <TableCell>
                       <Button
                         type="button"
-                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded mt-2 cursor-pointer"
+                        className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full mt-2 cursor-pointer"
                         onClick={() =>
                           window.open(material.GoogledriveLink, '_blank')
                         }
