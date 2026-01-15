@@ -34,7 +34,7 @@ const AboutUs = () => {
           <Image
             title="about image"
             className="w-full h-full object-cover"
-            src="/student4.webp"
+            src="/student5.webp"
             alt="About Us Image"
             width={500}
             height={600}
