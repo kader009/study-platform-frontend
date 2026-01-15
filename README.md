@@ -1,4 +1,4 @@
-# 📚 Edunest – Your Smart Study Platform
+# Edunest – Your Smart Study Platform
 
 Edunest is a full-featured online study platform built with modern technologies to enhance the learning experience for students, tutors, and admins. It provides a seamless way to manage sessions, study materials, and users with a clean and responsive UI.
 
@@ -8,27 +8,27 @@ Edunest is a full-featured online study platform built with modern technologies 
 
 ### Frontend:
 
-- ⚛️ **Next.js** (App Router)
-- 💬 **TypeScript** & **JavaScript**
-- 🎨 **Tailwind CSS** – Utility-first CSS framework
-- 🧩 **shadcn/ui** – Accessible components for modern UI
-- 🔄 **Redux Toolkit** – State management
+-  **Next.js** (App Router)
+-  **TypeScript** & **JavaScript**
+-  **Tailwind CSS** – Utility-first CSS framework
+-  **shadcn/ui** – Accessible components for modern UI
+-  **Redux Toolkit** – State management
 
 ### Backend:
 
-- 🧠 **Express.js** – Node.js backend framework
-- 🗃️ **MongoDB** – NoSQL database
-- 🔐 **JWT Authentication** – Role-based access control
+-  **Express.js** – Node.js backend framework
+-  **MongoDB** – NoSQL database
+-  **JWT Authentication** – Role-based access control
 
 ### Others:
 
-- 🌐 Hosted on **Vercel**
-- 📦 **REST APIs** integrated with backend
-- 🧾 Environment managed with `.env.local`
+-  Hosted on **Vercel**
+-  **REST APIs** integrated with backend
+-  Environment managed with `.env.local`
 
 ---
 
-## 👤 User Roles
+##  User Roles
 
 1. **Admin**
 
@@ -49,7 +49,7 @@ Edunest is a full-featured online study platform built with modern technologies 
 
 ---
 
-## 🔐 Authentication
+##  Authentication
 
 - Secure login system using **JWT tokens**
 - Role-based access for Admin, Tutor, and Student
@@ -57,18 +57,18 @@ Edunest is a full-featured online study platform built with modern technologies 
 
 ---
 
-## 📦 Features
+##  Features
 
-- 📚 Study Session Management
-- 📝 Material Upload and Viewing
-- 🧑‍🏫 Tutor-Student Communication
-- 🌐 Fully Responsive Design
-- ⚙️ Admin Dashboard
-- 📂 Organized folder structure for scalability
+-  Study Session Management
+-  Material Upload and Viewing
+-  Tutor-Student Communication
+-  Fully Responsive Design
+-  Admin Dashboard
+-  Organized folder structure for scalability
 
 ---
 
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 ```bash
 # 1. Clone the repo
@@ -86,7 +86,7 @@ npm install
 npm run dev
 ```
 
-## 🧑 Author
+##  Author
 
 **Md Abdul Kader Molla**  
 B.A Student, Bangladesh Open University  
