@@ -6,8 +6,8 @@ interface AdminLoginProps {
 
 const AdminLogin = ({ onDemoLogin }: AdminLoginProps) => {
   const handleDemoLogin = () => {
-    const DEMO_EMAIL = 'kader@gmail.com';
-    const DEMO_PASSWORD = '78757278';
+    const DEMO_EMAIL = process.env.NEXT_PUBLIC_DEMO_EMAIL || '';
+    const DEMO_PASSWORD = process.env.NEXT_PUBLIC_DEMO_PASSWORD || '';
 
     onDemoLogin(DEMO_EMAIL, DEMO_PASSWORD);
   };

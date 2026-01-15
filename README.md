@@ -4,7 +4,7 @@ Edunest is a full-featured online study platform built with modern technologies 
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend:
 
