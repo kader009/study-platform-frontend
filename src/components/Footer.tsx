@@ -34,12 +34,6 @@ function Footer() {
             <li className="hover:text-gray-400 transition cursor-default">
               Benefits of Joining
             </li>
-            <li className="hover:text-gray-400 transition cursor-default">
-              Top Features
-            </li>
-            <li className="hover:text-gray-400 transition cursor-default">
-              Our Vision
-            </li>
           </ul>
         </div>
 
