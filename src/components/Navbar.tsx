@@ -83,17 +83,13 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            {/* Dashboard only for authenticated users */}
-            {user && (
-              <Link
-                href="/dashboard"
-                className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
-              >
-                Dashboard
-              </Link>
-            )}
-
             {/* Public links visible to everyone */}
+            <Link
+              href="/"
+              className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+            >
+              Home
+            </Link>
             <Link
               href="/session"
               className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
@@ -112,6 +108,16 @@ const Navbar = () => {
             >
               Contact
             </Link>
+
+            {/* Dashboard only for authenticated users */}
+            {user && (
+              <Link
+                href="/dashboard"
+                className="text-black hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+              >
+                Dashboard
+              </Link>
+            )}
 
             {/* Profile / Auth actions */}
             {user ? (
@@ -213,18 +219,14 @@ const Navbar = () => {
             )}
 
             <div className="flex flex-col space-y-2 mt-4">
-              {/* Dashboard only for authenticated users */}
-              {user && (
-                <Link
-                  href="/dashboard"
-                  onClick={toggleMenu}
-                  className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Dashboard
-                </Link>
-              )}
-
               {/* Public links visible to everyone */}
+              <Link
+                href="/"
+                onClick={toggleMenu}
+                className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
+              >
+                Home
+              </Link>
               <Link
                 href="/session"
                 onClick={toggleMenu}
@@ -246,6 +248,17 @@ const Navbar = () => {
               >
                 Contact
               </Link>
+
+              {/* Dashboard only for authenticated users */}
+              {user && (
+                <Link
+                  href="/dashboard"
+                  onClick={toggleMenu}
+                  className="block text-black hover:bg-blue-50 hover:text-blue-600 px-3 py-3 rounded-lg font-medium transition-colors"
+                >
+                  Dashboard
+                </Link>
+              )}
 
               {/* Auth action */}
               {user ? (
