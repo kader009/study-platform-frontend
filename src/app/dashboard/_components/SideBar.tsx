@@ -5,9 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
-import { signOut } from 'next-auth/react';
+import { logout } from '@/redux/features/authentication/userSlice';
+import { toast } from 'sonner';
 
 const links = [
   {
@@ -72,6 +73,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector((state: RootState) => state.user);
   const role = useAppSelector((state) =>
     state.user.token ? state.user.user?.role : null
@@ -81,9 +83,10 @@ const Sidebar = () => {
   const defaultImage =
     'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg';
 
-  const handleLogout = async () => {
-    await signOut({ redirect: false });
-    router.push('/');
+  const handleLogout = () => {
+    dispatch(logout());
+    router.replace('/login');
+    toast.success('Logout successfully');
   };
 
   // Automatically close sidebar on route change
@@ -143,7 +146,7 @@ const Sidebar = () => {
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-full py-2 px-4 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-semibold transition cursor-pointer"
+            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition cursor-pointer"
           >
             Logout
           </button>
@@ -151,7 +154,7 @@ const Sidebar = () => {
           {/* Back to Home Button */}
           <Link
             href="/"
-            className="block w-full text-center py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-semibold transition"
+            className="block w-full text-center py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition"
           >
             Back to Home
           </Link>
