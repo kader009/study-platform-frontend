@@ -134,13 +134,15 @@ const Sidebar = () => {
         <div className="border-t border-gray-700 pt-4 mt-4 space-y-3">
           {/* User Image */}
           <div className="flex justify-center">
-            <Image
-              src={user?.photoUrl || defaultImage}
-              alt={user?.name || 'User'}
-              width={60}
-              height={60}
-              className="rounded-full object-cover"
-            />
+            <div className="w-15 h-15 rounded-full overflow-hidden">
+              <Image
+                src={user?.photoUrl || defaultImage}
+                alt={user?.name || 'User'}
+                width={60}
+                height={60}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Logout Button */}
