@@ -110,14 +110,14 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-black text-white p-4 w-48 transition-transform duration-300 z-40 flex flex-col ${
+        className={`fixed top-0 left-0 h-screen bg-black text-white p-4 w-48 transition-transform duration-300 z-40 flex flex-col overflow-hidden ${
           isOpen ? 'translate-x-0' : '-translate-x-64'
-        } md:relative md:translate-x-0`}
+        } md:translate-x-0`}
       >
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="text-2xl font-bold mb-4 shrink-0">
           <Link href={'/'}>Dashboard</Link>
         </h2>
-        <ul className="space-y-2 flex-1">
+        <ul className="space-y-2 flex-1 overflow-y-auto">
           {filterLinks.map((link) => (
             <li key={link.href}>
               <Link
@@ -148,7 +148,7 @@ const Sidebar = () => {
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition cursor-pointer"
+            className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-600 rounded-full text-sm font-semibold transition cursor-pointer"
           >
             Logout
           </button>
@@ -156,7 +156,7 @@ const Sidebar = () => {
           {/* Back to Home Button */}
           <Link
             href="/"
-            className="block w-full text-center py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition"
+            className="block w-full text-center py-2 px-4 bg-blue-400 hover:bg-blue-600 rounded-full text-sm font-semibold transition"
           >
             Back to Home
           </Link>
