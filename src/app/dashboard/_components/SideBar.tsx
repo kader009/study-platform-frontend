@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
+import { signOut } from 'next-auth/react';
 
 const links = [
   {
@@ -68,11 +71,20 @@ const links = [
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user } = useAppSelector((state: RootState) => state.user);
   const role = useAppSelector((state) =>
     state.user.token ? state.user.user?.role : null
   );
 
   const filterLinks = links.filter((link) => role && link.roles.includes(role));
+  const defaultImage =
+    'https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg';
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    router.push('/');
+  };
 
   // Automatically close sidebar on route change
   useEffect(() => {
@@ -95,14 +107,14 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-black text-white p-4 w-48 transition-transform duration-300 z-40 ${
+        className={`fixed top-0 left-0 h-screen bg-black text-white p-4 w-48 transition-transform duration-300 z-40 flex flex-col ${
           isOpen ? 'translate-x-0' : '-translate-x-64'
-        } md:relative md:translate-x-0 md:h-auto`}
+        } md:relative md:translate-x-0`}
       >
         <h2 className="text-2xl font-bold mb-4">
           <Link href={'/'}>Dashboard</Link>
         </h2>
-        <ul className="space-y-2">
+        <ul className="space-y-2 flex-1">
           {filterLinks.map((link) => (
             <li key={link.href}>
               <Link
@@ -114,6 +126,36 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
+
+        {/* User Profile Section */}
+        <div className="border-t border-gray-700 pt-4 mt-4 space-y-3">
+          {/* User Image */}
+          <div className="flex justify-center">
+            <Image
+              src={user?.photoUrl || defaultImage}
+              alt={user?.name || 'User'}
+              width={60}
+              height={60}
+              className="rounded-full object-cover"
+            />
+          </div>
+
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="w-full py-2 px-4 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-semibold transition cursor-pointer"
+          >
+            Logout
+          </button>
+
+          {/* Back to Home Button */}
+          <Link
+            href="/"
+            className="block w-full text-center py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-semibold transition"
+          >
+            Back to Home
+          </Link>
+        </div>
       </aside>
 
       {/* Overlay */}

@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Providers from '@/Provider/Provider';
 import PersistProvider from '@/redux/PersistProvider';
 import { SessionProvider } from 'next-auth/react';
-import AIChatbot from '@/components/AIChatbot';
+import LayoutWrapper from '@/components/LayoutWrapper';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -41,10 +39,9 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <Providers>
           <PersistProvider>
-            <Navbar />
-            <SessionProvider>{children}</SessionProvider>
-            <Footer />
-            <AIChatbot />
+            <SessionProvider>
+              <LayoutWrapper>{children}</LayoutWrapper>
+            </SessionProvider>
           </PersistProvider>
         </Providers>
       </body>

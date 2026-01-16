@@ -8,7 +8,7 @@ import {
 
 function Footer() {
   return (
-    <footer className=" bg-black text-gray-300 py-12">
+    <footer className="bg-black text-gray-300 py-12">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* About Edunest */}
         <div className="space-y-4">
