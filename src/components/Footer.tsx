@@ -32,7 +32,7 @@ function Footer() {
               Benefits of Joining
             </li>
             <li className="hover:text-gray-400 transition cursor-default">
-              Terms of Service
+              <Link href="/termsofservices">Terms of Service</Link>
             </li>
           </ul>
         </div>
