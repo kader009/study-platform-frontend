@@ -26,13 +26,13 @@ function Footer() {
           <h2 className="text-xl font-bold text-white">Explore</h2>
           <ul className="space-y-2 text-sm text-gray-300">
             <li className="hover:text-gray-400 transition cursor-default">
-              Why Choose Us?
-            </li>
-            <li className="hover:text-gray-400 transition cursor-default">
               How It Works
             </li>
             <li className="hover:text-gray-400 transition cursor-default">
               Benefits of Joining
+            </li>
+            <li className="hover:text-gray-400 transition cursor-default">
+              Terms of Service
             </li>
           </ul>
         </div>
