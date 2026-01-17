@@ -119,19 +119,43 @@ function Footer() {
             <span className="hover:underline">+880 1234-567890</span>
           </p>
 
-          <div className="flex space-x-4 mt-2 cursor-pointer">
-            <div className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition hover:transition-y-[-6px]">
+          <div className="flex space-x-4 mt-2">
+            <Link
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition hover:-translate-y-1"
+              aria-label="Facebook"
+            >
               <FaFacebookF />
-            </div>
-            <div className="p-2 bg-gray-800 rounded-full hover:bg-blue-400 transition">
+            </Link>
+            <Link
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-gray-800 rounded-full hover:bg-blue-400 transition hover:-translate-y-1"
+              aria-label="Twitter"
+            >
               <FaTwitter />
-            </div>
-            <div className="p-2 bg-gray-800 rounded-full hover:bg-pink-500 transition">
+            </Link>
+            <Link
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-gray-800 rounded-full hover:bg-pink-500 transition hover:-translate-y-1"
+              aria-label="Instagram"
+            >
               <FaInstagram />
-            </div>
-            <div className="p-2 bg-gray-800 rounded-full hover:bg-blue-700 transition">
+            </Link>
+            <Link
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-gray-800 rounded-full hover:bg-blue-700 transition hover:-translate-y-1"
+              aria-label="LinkedIn"
+            >
               <FaLinkedinIn />
-            </div>
+            </Link>
           </div>
         </div>
       </div>
