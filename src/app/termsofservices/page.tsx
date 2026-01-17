@@ -15,7 +15,7 @@ const TermsOfServices = () => {
             terms.
           </p>
         </div>
-        <div className="bg-white dark:bg-[#1a2632] rounded-2xl shadow-sm border border-[#e7edf3] dark:border-[#2a3845] p-8 md:p-16">
+        <div className="bg-white dark:bg-[#1a2632] rounded-lg shadow-sm border border-[#e7edf3] dark:border-[#2a3845] p-8 md:p-16">
           <section className="mb-14">
             <h2 className="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight pb-4 mb-6 border-b border-[#e7edf3] dark:border-[#2a3845]">
               1. Introduction
