@@ -18,16 +18,20 @@ export default function BlogSection() {
           {blogPosts.map((post) => (
             <Card
               key={post.id}
-              className="hover:shadow-xl transition-shadow duration-300 rounded-xl p-0"
+              className="hover:shadow-xl transition-shadow duration-300 rounded-xl p-0 overflow-hidden"
             >
-              <Image
-                src={post.image}
-                alt={post.title}
-                width={400}
-                height={400}
-                className="w-full object-cover rounded-t-xl"
-              />
-              <CardContent className="p-4 pt-0">
+              <div className="p-4 pb-0">
+                <div className="overflow-hidden rounded-md">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={400}
+                    height={400}
+                    className="w-full object-cover"
+                  />
+                </div>
+              </div>
+              <CardContent className="p-4 pt-4">
                 <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                 <p className="text-sm text-gray-600 mb-4">{post.excerpt}</p>
                 <Link href={`${post.slug}`} target="_blank">
