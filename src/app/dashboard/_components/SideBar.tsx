@@ -76,7 +76,7 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state: RootState) => state.user);
   const role = useAppSelector((state) =>
-    state.user.token ? state.user.user?.role : null
+    state.user.token ? state.user.user?.role : null,
   );
 
   const filterLinks = links.filter((link) => role && link.roles.includes(role));
@@ -114,9 +114,7 @@ const Sidebar = () => {
           isOpen ? 'translate-x-0' : '-translate-x-64'
         } md:translate-x-0`}
       >
-        <h1 className="text-2xl font-bold mb-4 shrink-0">
-          Dashboard
-        </h1>
+        <h1 className="text-2xl font-bold mb-4 shrink-0">Dashboard</h1>
         <ul className="space-y-2 flex-1 overflow-y-auto">
           {filterLinks.map((link) => (
             <li key={link.href}>
@@ -145,14 +143,6 @@ const Sidebar = () => {
             </div>
           </div>
 
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-600 rounded-full text-sm font-semibold transition cursor-pointer"
-          >
-            Logout
-          </button>
-
           {/* Back to Home Button */}
           <Link
             href="/"
@@ -160,6 +150,14 @@ const Sidebar = () => {
           >
             Back to Home
           </Link>
+
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-600 rounded-full text-sm font-semibold transition cursor-pointer"
+          >
+            Logout
+          </button>
         </div>
       </aside>
 
