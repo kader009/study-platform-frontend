@@ -1,6 +1,7 @@
 import React from 'react';
 import { whyChooseData } from '@/data/whyChoose';
 import { StudentReview } from '@/data/studentReview';
+import Link from 'next/link';
 
 const Commitment = () => {
   return (
@@ -119,8 +120,8 @@ const Commitment = () => {
               Join thousands of learners who have chosen Edunest to achieve
               their personal and professional goals.
             </p>
-            <button className="bg-black text-white font-semibold px-4 py-3 rounded-full text-md hover:shadow-sm transition-all hover:scale-105">
-              Join Today
+            <button className="bg-black text-white font-semibold px-4 py-3 rounded-full text-md hover:shadow-sm">
+              <Link href="/register">Get Started Now</Link>
             </button>
           </div>
         </div>
