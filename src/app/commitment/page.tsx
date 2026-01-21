@@ -120,7 +120,7 @@ const Commitment = () => {
               Join thousands of learners who have chosen Edunest to achieve
               their personal and professional goals.
             </p>
-            <button className="bg-black text-white font-semibold px-4 py-3 rounded-full text-md hover:shadow-sm">
+            <button className="bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-4 py-3 rounded-full text-md hover:shadow-sm">
               <Link href="/register">Get Started Now</Link>
             </button>
           </div>

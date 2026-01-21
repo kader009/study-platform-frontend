@@ -146,7 +146,7 @@ const Sidebar = () => {
           {/* Back to Home Button */}
           <Link
             href="/"
-            className="block w-full text-center py-2 px-4 bg-blue-400 hover:bg-blue-600 rounded-full text-sm font-semibold transition"
+            className="block w-full text-center py-2 px-4 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-full text-sm font-semibold transition"
           >
             Back to Home
           </Link>
@@ -154,7 +154,7 @@ const Sidebar = () => {
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-600 rounded-full text-sm font-semibold transition cursor-pointer"
+            className="w-full py-2 px-4 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-full text-sm font-semibold transition cursor-pointer"
           >
             Logout
           </button>

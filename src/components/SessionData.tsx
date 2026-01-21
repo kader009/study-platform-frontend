@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const SessionData = async () => {
   const data = await fetch(
-    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved'
+    'https://study-platform-backend-drxm.onrender.com/api/v1/session/approved',
   );
 
   const sessions = await data.json();
@@ -64,7 +64,7 @@ const SessionData = async () => {
       </div>
       <div className="mt-10 text-center">
         <Link href="/session">
-          <span className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-8 rounded-full transition duration-300">
+          <span className="inline-block bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-2.5 px-8 rounded-full transition duration-300">
             View All Sessions
           </span>
         </Link>
