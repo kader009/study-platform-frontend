@@ -1,4 +1,4 @@
-import About from '@/components/About';
+import About from '@/shared/About';
 import Banner from '@/components/Banner';
 import SessionData from '@/components/SessionData';
 import Testimonial from '@/components/Testimonial';

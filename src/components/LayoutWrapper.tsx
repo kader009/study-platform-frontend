@@ -1,8 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/shared/Navbar';
+import Footer from '@/shared/Footer';
 import AIChatbot from '@/components/AIChatbot';
 
 export default function LayoutWrapper({
