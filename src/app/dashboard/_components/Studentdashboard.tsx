@@ -59,7 +59,7 @@ export default function StudentDashboard() {
             <h2 className="text-lg font-semibold mb-4">Recent Activities</h2>
             <ul className="space-y-2">
               <li>Booked a session</li>
-              <li>Uploaded study material</li>
+              <li>Create study note</li>
               <li>Joined CSS class</li>
               <li>Completed React Quiz</li>
             </ul>
