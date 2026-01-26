@@ -49,6 +49,8 @@ const Page = () => {
       return;
     }
 
+    // Clear any previous validation errors on successful validation
+    setErrors({});
     try {
       const { data } = await signIn({ email, password });
 
@@ -116,13 +118,16 @@ const Page = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Your Email"
                 value={email}
-                onChange={(e) => dispatch(SetEmail(e.target.value))}
+                onChange={(e) => {
+                  dispatch(SetEmail(e.target.value));
+                  if (errors.email)
+                    setErrors((prev) => ({ ...prev, email: undefined }));
+                }}
               />
-            {errors.email && (
-              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-            )}
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
             </div>
-
 
             {/* Password */}
             <div className="mb-4">
@@ -153,9 +158,9 @@ const Page = () => {
                   )}
                 </button>
               </div>
-            {errors.password && (
-              <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-            )}
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+              )}
             </div>
 
             {/* Submit Button */}
