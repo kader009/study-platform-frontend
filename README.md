@@ -32,20 +32,20 @@ Edunest is a full-featured online study platform built with modern technologies 
 
 1. **Admin**
 
-   - Manage all users (approve/block/delete)
-   - View statistics
-   - Monitor sessions and materials
+- Manage all users (approve/block/delete)
+- View statistics
+- Monitor sessions and materials
 
 2. **Tutor**
 
-   - Create, edit, and manage study sessions
-   - Upload study materials
-   - Communicate with students
+- Create, edit, and manage study sessions
+- Upload study materials
+- Communicate with students
 
 3. **Student**
-   - Join sessions
-   - Access materials
-   - Interact with tutors
+- Join sessions
+- Access materials
+- Interact with tutors
 
 ---
 
@@ -90,5 +90,5 @@ npm run dev
 
 **Md Abdul Kader Molla**  
 B.A Student, Bangladesh Open University  
-📧 **Email:** [kadermollarasel000@gmail.com](mailto:kadermollarasel000@gmail.com)  
-🌐 **Portfolio:** [https://modern-portfolio-phi-flame.vercel.app/](https://modern-portfolio-phi-flame.vercel.app/)
+**Email:** [kadermollarasel000@gmail.com](mailto:kadermollarasel000@gmail.com)  
+**Portfolio:** [https://modern-portfolio-phi-flame.vercel.app/](https://modern-portfolio-phi-flame.vercel.app/)
