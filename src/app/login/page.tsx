@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
 import AdminLogin from '@/shared/AdminAccess';
 import SocialLogin from '@/shared/Socialogin';
+import { loginSchema } from '@/validation/authSchema';
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -22,9 +23,31 @@ const Page = () => {
   const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
+    {},
+  );
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // Validate form data using Zod
+    const validationResult = loginSchema.safeParse({
+      email,
+      password,
+    });
+
+    if (!validationResult.success) {
+      // Collect and set validation errors
+      const newErrors: { email?: string; password?: string } = {};
+      validationResult.error.issues.forEach((error) => {
+        const field = error.path[0] as 'email' | 'password';
+        if (!newErrors[field]) {
+          newErrors[field] = error.message;
+        }
+      });
+      setErrors(newErrors);
+      return;
+    }
 
     try {
       const { data } = await signIn({ email, password });
@@ -95,7 +118,11 @@ const Page = () => {
                 value={email}
                 onChange={(e) => dispatch(SetEmail(e.target.value))}
               />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
             </div>
+
 
             {/* Password */}
             <div className="mb-4">
@@ -126,6 +153,9 @@ const Page = () => {
                   )}
                 </button>
               </div>
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+            )}
             </div>
 
             {/* Submit Button */}
