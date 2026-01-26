@@ -44,8 +44,8 @@ const Banner = () => {
           {`// enroll in your first session at Edunest
           const session = {
             course: "Frontend Development",
-            level: "Beginner",
-            duration: "4 weeks",
+              level: "Beginner",
+              duration: "4 weeks",
             };
 
             const enroll = async () => {
