@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import { logout } from '@/redux/features/authentication/userSlice';
 import { toast } from 'sonner';
+import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 
 const links = [
   {
@@ -146,17 +147,19 @@ const Sidebar = () => {
           {/* Back to Home Button */}
           <Link
             href="/"
-            className="block w-full text-center py-2 px-4 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-full text-sm font-semibold transition"
+            className="w-full py-2 px-4 rounded-full text-sm font-semibold transition flex items-center justify-center gap-2 hover:bg-gray-700 cursor-pointer"
           >
-            Back to Home
+            <FaHome className="w-5 h-5" />
+            <span>Back to Home</span>
           </Link>
 
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-full py-2 px-4 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-full text-sm font-semibold transition cursor-pointer"
+            className="w-full py-2 px-4 rounded-full text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2 hover:bg-gray-700"
           >
-            Logout
+            <FaSignOutAlt className="w-5 h-5" />
+            <span>Logout</span>
           </button>
         </div>
       </aside>
