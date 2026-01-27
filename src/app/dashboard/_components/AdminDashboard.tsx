@@ -1,4 +1,5 @@
 'use client';
+import { useMemo } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import {
   useAllSessionQuery,
@@ -8,6 +9,7 @@ import {
 } from '@/redux/endApi';
 import { format, subDays, eachDayOfInterval } from 'date-fns';
 import { Userprops } from '@/types/userProps';
+import { Session } from '@/types/routeSession';
 
 export default function AdminDashboard() {
   const { data: sessionsData, isLoading: sessionsLoading } =
@@ -66,15 +68,51 @@ export default function AdminDashboard() {
     ],
   };
 
-  const pieData = {
-    labels: ['NextJs', 'ReactJs', 'Typescript'],
-    datasets: [
-      {
-        data: [10, 20, 30],
-        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
-      },
-    ],
-  };
+  const pieData = useMemo(() => {
+    if (!Array.isArray(sessionsData) || sessionsData.length === 0) {
+      return {
+        labels: ['No data'],
+        datasets: [
+          {
+            data: [1],
+            backgroundColor: ['#e5e7eb'],
+          },
+        ],
+      };
+    }
+
+    const counts = new Map<string, number>();
+    sessionsData.forEach((session: Session) => {
+      const title =
+        session.sessionTitle || 'Unknown';
+      const key = String(title).trim() || 'Unknown';
+      counts.set(key, (counts.get(key) || 0) + 1);
+    });
+
+    const labels = Array.from(counts.keys());
+    const data = labels.map((lbl) => counts.get(lbl) || 0);
+
+    const palette = [
+      '#ff6384',
+      '#36a2eb',
+      '#ffce56',
+      '#4ade80',
+      '#a78bfa',
+      '#f97316',
+      '#60a5fa',
+    ];
+    const backgroundColor = labels.map((_, i) => palette[i % palette.length]);
+
+    return {
+      labels,
+      datasets: [
+        {
+          data,
+          backgroundColor,
+        },
+      ],
+    };
+  }, [sessionsData]);
 
   return (
     <div className="flex flex-col min-h-screen">
