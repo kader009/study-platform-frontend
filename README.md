@@ -80,7 +80,7 @@ cd study-platform-frontend
 # 3. Install dependencies
 npm install
 
-# 4. Add your environment variables in `.env.local`
+# 4. Add your environment variables in `.env.example` update from `.env.local`
 
 # 5. Run the app
 npm run dev
