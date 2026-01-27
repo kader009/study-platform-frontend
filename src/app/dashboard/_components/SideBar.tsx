@@ -76,7 +76,7 @@ const Sidebar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state: RootState) => state.user);
-  const role = useAppSelector((state) =>
+  const role = useAppSelector((state:RootState) =>
     state.user.token ? state.user.user?.role : null,
   );
 

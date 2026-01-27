@@ -4,4 +4,9 @@ export interface Userprops {
   name: string;
   email: string;
   role: string;
+  // optional created timestamp fields (some backends use different names)
+  createdAt?: string;
+  created_at?: string;
+  created?: string;
+  createdAtTimestamp?: number;
 }

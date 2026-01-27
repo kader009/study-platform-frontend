@@ -6,6 +6,8 @@ import {
   useAllTutorQuery,
   useAllMaterilQuery,
 } from '@/redux/endApi';
+import { format, subDays, eachDayOfInterval } from 'date-fns';
+import { Userprops } from '@/types/userProps';
 
 export default function AdminDashboard() {
   const { data: sessionsData, isLoading: sessionsLoading } =
@@ -23,14 +25,43 @@ export default function AdminDashboard() {
   const totalMaterials = Array.isArray(materialsData)
     ? materialsData.length
     : 0;
+  // Aggregate users into daily counts for the last `rangeDays`
+  const rangeDays = 30;
+  const endDate = new Date();
+  const startDate = subDays(endDate, rangeDays - 1);
+  const dateList = eachDayOfInterval({ start: startDate, end: endDate });
+
+  // initialize map with zero counts for each day
+  const dailyCountsMap = new Map<string, number>();
+  dateList.forEach((date) => dailyCountsMap.set(format(date, 'yyyy-MM-dd'), 0));
+
+  if (Array.isArray(usersData)) {
+    usersData.forEach((user: Userprops) => {
+      const createdValue =
+        user.createdAt ||
+        user.created_at ||
+        user.created ||
+        (user.createdAtTimestamp ? String(user.createdAtTimestamp) : undefined);
+      if (!createdValue) return;
+      const createdDate = new Date(createdValue);
+      if (Number.isNaN(createdDate.getTime())) return;
+      const dateKey = format(createdDate, 'yyyy-MM-dd');
+      if (dailyCountsMap.has(dateKey)) {
+        dailyCountsMap.set(dateKey, (dailyCountsMap.get(dateKey) || 0) + 1);
+      }
+    });
+  }
+
   const lineData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    labels: dateList.map((date) => format(date, 'MMM d')),
     datasets: [
       {
         label: 'New Users',
-        data: [5, 10, 15, 20, 25],
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        data: dateList.map(
+          (date) => dailyCountsMap.get(format(date, 'yyyy-MM-dd')) || 0,
+        ),
+        borderColor: 'rgb(59,130,246)',
+        backgroundColor: 'rgba(59,130,246,0.12)',
       },
     ],
   };
