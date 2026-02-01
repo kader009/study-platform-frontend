@@ -13,13 +13,7 @@ import StudyMaterialSkeleton from '@/components/skeleton/StudyMaterialSkeleton';
 import { RootState } from '@/redux/store/store';
 import { useAppSelector } from '@/redux/hook';
 import Link from 'next/link';
-
-interface SessionProps {
-  _id: string;
-  sessionId: string;
-  tutorEmail: string;
-  registrationFee: string;
-}
+import { SessionProps } from '@/types/userSessionProps';
 
 const Page = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
