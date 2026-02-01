@@ -22,7 +22,7 @@ const TestimonialCarousel = () => {
             <FaQuoteLeft className="text-blue-400 text-3xl mb-4 group-hover:scale-105 transition-transform duration-300" />
 
             <blockquote className="text-gray-700 mb-6 text-sm leading-relaxed">
-              “{testimonial.message}”
+              {testimonial.message}
             </blockquote>
 
             <div className="border-t border-gray-300 pt-4">

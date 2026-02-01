@@ -23,7 +23,7 @@ const Banner = () => {
             Where Curiosity Meets Code
           </motion.h1>
           <p className="text-lg text-gray-300 mb-8">
-            Join live sessions, master in-demand skills, and build your tech
+            Join live sessions, master in demand skills, and build your tech
             career the right way - one session at a time.
           </p>
           <Link href="/session">
