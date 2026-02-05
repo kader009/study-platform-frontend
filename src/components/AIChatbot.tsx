@@ -89,7 +89,6 @@ export default function AIChatbot() {
       }
 
       const data = await response.json();
-      console.log('API Response:', data);
 
       const botResponse: Message = {
         id: messages.length + 2,
