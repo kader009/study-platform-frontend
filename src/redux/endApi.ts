@@ -194,7 +194,6 @@ const EduNestApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-
   }),
 });
 
@@ -221,5 +220,5 @@ export const {
   useAllMaterilQuery,
   useUpdateSessionMutation,
   useBookPostMutation,
-  useGetbookByemailQuery
+  useGetbookByemailQuery,
 } = EduNestApi;

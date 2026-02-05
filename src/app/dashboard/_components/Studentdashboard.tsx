@@ -42,11 +42,11 @@ export default function StudentDashboard() {
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold">Completed Sessions</h2>
+            <h3 className="text-lg font-semibold">Completed Sessions</h3>
             <p className="text-2xl font-bold">{completedSessions}</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold">Study Materials</h2>
+            <h4 className="text-lg font-semibold">Study Materials</h4>
             <p className="text-2xl font-bold">
               {loading ? '...' : materialsCount}
             </p>
@@ -56,7 +56,7 @@ export default function StudentDashboard() {
         {/* Student Specific Content */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Recent Activities</h2>
+            <h5 className="text-lg font-semibold mb-4">Recent Activities</h5>
             <ul className="space-y-2">
               <li>Booked a session</li>
               <li>Create study note</li>
@@ -66,7 +66,7 @@ export default function StudentDashboard() {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Upcoming Sessions</h2>
+            <h6 className="text-lg font-semibold mb-4">Upcoming Sessions</h6>
             <table className="w-full table-auto border-collapse">
               <thead>
                 <tr>
@@ -95,7 +95,7 @@ export default function StudentDashboard() {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4">My Progress</h2>
+            <h1 className="text-lg font-semibold mb-4">My Progress</h1>
             <ul className="space-y-2">
               <li>React Course: 0% Complete</li>
               <li>TypeScript: 0% Complete</li>
