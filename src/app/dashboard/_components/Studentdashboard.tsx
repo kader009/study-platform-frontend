@@ -20,6 +20,8 @@ export default function StudentDashboard() {
       skip: !email,
     });
 
+    console.log(myMaterials);
+
   const bookedCount = Array.isArray(bookedSessions) ? bookedSessions.length : 0;
   const materialsCount = Array.isArray(myMaterials) ? myMaterials.length : 0;
   const completedSessions = Array.isArray(bookedSessions)
