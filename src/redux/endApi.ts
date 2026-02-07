@@ -194,7 +194,15 @@ const EduNestApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    
+
+    // update user profile (name, photoUrl)
+    updateUserProfile: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/api/v1/user/profile/${id}`,
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -222,4 +230,5 @@ export const {
   useUpdateSessionMutation,
   useBookPostMutation,
   useGetbookByemailQuery,
+  useUpdateUserProfileMutation,
 } = EduNestApi;

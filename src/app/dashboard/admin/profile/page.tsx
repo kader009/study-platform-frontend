@@ -1,9 +1,10 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { RootState } from '@/redux/store/store';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ChatBubbleLeftIcon,
   HandThumbUpIcon,
@@ -17,7 +18,19 @@ import {
   useAllSessionQuery,
   useAllUserQuery,
   useAllMaterilQuery,
+  useUpdateUserProfileMutation,
 } from '@/redux/endApi';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { setUser } from '@/redux/features/authentication/userSlice';
+import { toast } from 'sonner';
 
 export default function AdminProfilePage() {
   const admin = useSelector((state: RootState) => state?.user?.user);
@@ -33,6 +46,47 @@ export default function AdminProfilePage() {
   const totalMaterials = Array.isArray(materialsData)
     ? materialsData.length
     : 0;
+
+  const dispatch = useDispatch();
+  const token = useSelector((state: RootState) => state?.user?.token);
+  const [updateUserProfile] = useUpdateUserProfileMutation();
+  const [openEdit, setOpenEdit] = useState(false);
+  const [editName, setEditName] = useState(admin?.name || '');
+  const [editImage, setEditImage] = useState(admin?.photoUrl || '');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (admin) {
+      setEditName(admin.name || '');
+      setEditImage(admin.photoUrl || '');
+    }
+  }, [admin]);
+
+  const handleProfileUpdate = async () => {
+    if (!admin?._id) return;
+    setIsSubmitting(true);
+    try {
+      await updateUserProfile({
+        id: admin._id,
+        body: { name: editName, photoUrl: editImage },
+      }).unwrap();
+
+      dispatch(
+        setUser({
+          user: { ...admin, name: editName, photoUrl: editImage },
+          token: token || '',
+        }),
+      );
+
+      toast.success('Profile updated successfully');
+      setOpenEdit(false);
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to update profile');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const adminInfo = {
     name: admin?.name || 'Md Abdul Kader Molla',
@@ -72,6 +126,74 @@ export default function AdminProfilePage() {
               <span className="mt-2 inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
                 {adminInfo.role}
               </span>
+
+              <div className="mt-4">
+                <button
+                  onClick={() => setOpenEdit(true)}
+                  className="bg-black text-white py-2 px-6 rounded-full shadow hover:bg-gray-600 transition-all cursor-pointer"
+                >
+                  Edit Profile
+                </button>
+              </div>
+
+              {/* Edit Profile Dialog */}
+              <Dialog open={openEdit} onOpenChange={setOpenEdit}>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Edit Profile</DialogTitle>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-4 py-2">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">
+                        Name
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="Enter your name"
+                        value={editName}
+                        onChange={(e) => setEditName(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">
+                        Profile Image URL
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="Enter image URL"
+                        value={editImage}
+                        onChange={(e) => setEditImage(e.target.value)}
+                      />
+                    </div>
+                    {editImage && (
+                      <div className="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-blue-300">
+                        <Image
+                          src={editImage}
+                          alt="Preview"
+                          width={80}
+                          height={80}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <DialogFooter>
+                    <Button
+                      variant="outline"
+                      onClick={() => setOpenEdit(false)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={handleProfileUpdate}
+                      disabled={isSubmitting}
+                      className="bg-black hover:bg-gray-800 text-white"
+                    >
+                      {isSubmitting ? 'Saving...' : 'Save Changes'}
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
 
               {/* Facebook Post */}
               <div className="mt-8 p-4 bg-white rounded-lg shadow-md text-left">
@@ -150,19 +272,25 @@ export default function AdminProfilePage() {
               {/* Widgets */}
               <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                 <div className="bg-yellow-100 p-5 rounded-xl shadow-sm text-center">
-                  <h6 className="text-xl font-bold text-yellow-800">{sessionsLoading ? '...' : totalSessions}</h6>
+                  <h6 className="text-xl font-bold text-yellow-800">
+                    {sessionsLoading ? '...' : totalSessions}
+                  </h6>
                   <p className="text-sm text-yellow-700">
                     Total Sessions Created
                   </p>
                 </div>
                 <div className="bg-purple-100 p-5 rounded-xl shadow-sm text-center">
-                  <h1 className="text-xl font-bold text-purple-800">{materialsLoading ? '...' : totalMaterials}</h1>
+                  <h1 className="text-xl font-bold text-purple-800">
+                    {materialsLoading ? '...' : totalMaterials}
+                  </h1>
                   <p className="text-sm text-purple-700">
                     Study Materials Uploaded
                   </p>
                 </div>
                 <div className="bg-green-100 p-5 rounded-xl shadow-sm text-center">
-                  <h2 className="text-xl font-bold text-green-800">{usersLoading ? '...' : totalUsers}</h2>
+                  <h2 className="text-xl font-bold text-green-800">
+                    {usersLoading ? '...' : totalUsers}
+                  </h2>
                   <p className="text-sm text-green-700">
                     Total Users Registered
                   </p>
