@@ -3,10 +3,19 @@
 import DynamicTitle from '@/components/DynamicTitle';
 import UserTableSkeleton from '@/components/skeleton/UserTableSkeleton';
 import { Input } from '@/components/ui/input';
-import { useAllUserQuery } from '@/redux/endApi';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { useAllUserQuery, useUpdateUserProfileMutation } from '@/redux/endApi';
 import { Userprops } from '@/types/userProps';
 import { useState } from 'react';
-import { FaUserTie, FaUserShield } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
+import { toast } from 'sonner';
 
 const Page = () => {
   const {
@@ -17,11 +26,43 @@ const Page = () => {
     {},
     {
       pollingInterval: 1000,
-    }
+    },
   );
 
   const [searchTerm, setsearchTerm] = useState('');
   const [visibleCount, setVisibleCount] = useState(8);
+  const [updateUserProfile] = useUpdateUserProfileMutation();
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<Userprops | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editImage, setEditImage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleEditClick = (user: Userprops) => {
+    setSelectedUser(user);
+    setEditName(user.name || '');
+    setEditImage('');
+    setOpenEdit(true);
+  };
+
+  const handleUpdateSubmit = async () => {
+    if (!selectedUser?._id) return;
+    setIsSubmitting(true);
+    try {
+      const body: { name?: string; photoUrl?: string } = {};
+      if (editName.trim()) body.name = editName;
+      if (editImage.trim()) body.photoUrl = editImage;
+
+      await updateUserProfile({ id: selectedUser._id, body }).unwrap();
+      toast.success('User updated successfully');
+      setOpenEdit(false);
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to update user');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const Handleview = () => {
     setVisibleCount((prev) => prev + 5);
@@ -40,7 +81,7 @@ const Page = () => {
   const filterUser = visibleData?.filter(
     (user: Userprops) =>
       user?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user?.email?.toLowerCase().includes(searchTerm.toLowerCase())
+      user?.email?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -67,7 +108,7 @@ const Page = () => {
                   <th className="px-4 py-2 border">User Name</th>
                   <th className="px-4 py-2 border">User Email</th>
                   <th className="px-4 py-2 border">Role</th>
-                  <th className="px-4 py-2 border">Status</th>
+                  <th className="px-4 py-2 border">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,30 +120,13 @@ const Page = () => {
                       <td className="px-4 py-2 border">{user.email}</td>
                       <td className="px-4 py-2 border">{user.role}</td>
                       <td className="px-4 py-2 border">
-                        <div className="flex items-center gap-2">
-                          {user.role === 'admin' ? (
-                            <>
-                              <FaUserShield className="text-black" />
-                              <span className="text-black font-medium">
-                                Admin
-                              </span>
-                            </>
-                          ) : user.role === 'tutor' ? (
-                            <>
-                              <FaUserTie className="text-black" />
-                              <span className="text-black font-medium">
-                                Tutor
-                              </span>
-                            </>
-                          ) : (
-                            <>
-                              <FaUserTie className="text-black" />
-                              <span className="text-black font-medium">
-                                Student
-                              </span>
-                            </>
-                          )}
-                        </div>
+                        <button
+                          onClick={() => handleEditClick(user)}
+                          className="p-2 hover:bg-gray-200 rounded-full transition cursor-pointer"
+                          title="Edit user"
+                        >
+                          <FiEdit className="w-5 h-5 text-black" />
+                        </button>
                       </td>
                     </tr>
                   ))
@@ -129,6 +153,70 @@ const Page = () => {
           </div>
         </div>
       </div>
+
+      {/* Edit User Dialog */}
+      <Dialog open={openEdit} onOpenChange={setOpenEdit}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit User</DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col gap-4 py-2">
+            <div>
+              <label className="text-sm font-medium text-gray-700 mb-1 block">
+                Email
+              </label>
+              <Input type="text" value={selectedUser?.email || ''} disabled />
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 mb-1 block">
+                Name
+              </label>
+              <Input
+                type="text"
+                placeholder="Enter new name"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+              />
+            </div>
+            {selectedUser?.photoUrl && (
+              <div>
+                <label className="text-sm font-medium text-gray-700 mb-1 block">
+                  Current Image URL
+                </label>
+                <Input
+                  type="text"
+                  value={selectedUser.photoUrl}
+                  disabled
+                  className="text-gray-500"
+                />
+              </div>
+            )}
+            <div>
+              <label className="text-sm font-medium text-gray-700 mb-1 block">
+                New Image URL
+              </label>
+              <Input
+                type="text"
+                placeholder="Enter new image URL"
+                value={editImage}
+                onChange={(e) => setEditImage(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setOpenEdit(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleUpdateSubmit}
+              disabled={isSubmitting}
+              className="bg-black hover:bg-gray-800 text-white"
+            >
+              {isSubmitting ? 'Saving...' : 'Save Changes'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
