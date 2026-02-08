@@ -143,6 +143,9 @@ const Sidebar = () => {
               />
             </div>
           </div>
+          <div className='text-center'>
+            <span>{user?.name}</span>
+          </div>
 
           {/* Back to Home Button */}
           <Link
