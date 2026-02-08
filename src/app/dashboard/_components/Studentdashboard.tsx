@@ -20,10 +20,8 @@ export default function StudentDashboard() {
       skip: !email,
     });
 
-    console.log(myMaterials);
-
   const bookedCount = Array.isArray(bookedSessions) ? bookedSessions.length : 0;
-  const materialsCount = Array.isArray(myMaterials) ? myMaterials.length : 0;
+  const materialsCount = myMaterials?.totalMaterials || 0;
   const completedSessions = Array.isArray(bookedSessions)
     ? bookedSessions.length
     : 0;
@@ -47,7 +45,9 @@ export default function StudentDashboard() {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold">Completed Sessions</h3>
-            <p className="text-2xl font-bold">{loading ? '...' : completedSessions}</p>
+            <p className="text-2xl font-bold">
+              {loading ? '...' : completedSessions}
+            </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h4 className="text-lg font-semibold">Study Materials</h4>

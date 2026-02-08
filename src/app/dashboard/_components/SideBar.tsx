@@ -130,7 +130,7 @@ const Sidebar = () => {
         </ul>
 
         {/* User Profile Section */}
-        <div className="border-t border-gray-700 pt-4 mt-4 space-y-3">
+        <div className="border-t border-gray-700 pt-4 mt-4 space-y-2">
           {/* User Image */}
           <div className="flex justify-center">
             <div className="w-15 h-15 rounded-full overflow-hidden">
