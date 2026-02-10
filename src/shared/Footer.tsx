@@ -29,7 +29,7 @@ function Footer() {
               How It Works
             </li>
             <li className="hover:text-gray-400 transition cursor-default">
-              Benefits of Joining
+              <Link href="/benefit">Benefits of Joining</Link>
             </li>
             <li className="hover:text-gray-400 transition cursor-default">
               <Link href="/termsofservices">Terms of Service</Link>
