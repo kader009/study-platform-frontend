@@ -2,19 +2,21 @@ import { Award, Infinity, Layers, Brain } from 'lucide-react';
 import { HiOutlineViewGrid } from 'react-icons/hi';
 import { FiCircle, FiZap } from 'react-icons/fi';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const BenefitOfJoining = () => {
   return (
     <div>
       <main className="min-h-screen flex flex-col lg:flex-row">
-        <div className="lg:w-5/12 relative h-100 lg:h-auto overflow-hidden">
+        <div className="lg:w-5/12 relative min-h-125 lg:min-h-screen overflow-hidden">
           <div className="absolute inset-0 bg-primary/10 z-10"></div>
           <Image
             alt="Students learning together"
             className="absolute inset-0 w-full h-full object-cover"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_j5zgbwKr0cV99OY1BL1be3YIksZHQ1Q1TIH0PdHu7b4o11RhIS9vsdcOAEGINQozRfuJaXi98MkBEzgEd_Uz_J3pTRiw1q72L--VO6MrcD9ayRA7BMbwqtDfLsNeVugAWJPHl542pvHNjBnQLM1wKGNzn5qQbNTSLLkpv7hHlnIex2Fiy2hZelJ7jtmyuHHLCdqoJMAkUJNtAt1WgSB9yHvnj3Aqa3bAOdbecQJEPMfh6qe9fh9K1nbcpZGxKn6pCMLwUXTiiA"
             fill
-            sizes="(max-width: 1024px) 100vw, 42vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 42vw, 600px"
+            quality={100}
             priority
           />
           <div className="absolute bottom-12 left-12 right-12 z-20 p-8 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 hidden lg:block">
@@ -43,7 +45,7 @@ const BenefitOfJoining = () => {
                 />
               </div>
               <span className="text-white text-sm font-medium">
-                Joined by 12,000+ learners today
+                Join now today
               </span>
             </div>
             <p className="text-white/90 italic text-lg leading-relaxed font-light">
@@ -51,7 +53,7 @@ const BenefitOfJoining = () => {
               career path in ways I never imagined possible.
             </p>
             <div className="mt-4 text-white font-semibold">
-              — Sarah Jenkins, Senior UI Designer
+              — Sarah Jenkins, React Trainer
             </div>
           </div>
         </div>
@@ -132,11 +134,15 @@ const BenefitOfJoining = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-10 py-4 bg-primary text-white rounded-full font-bold text-lg shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all">
-                Get Started Today
+              <button className="px-10 py-4 bg-primary text-white rounded-full font-bold text-lg shadow-sm shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all">
+                <Link href="/signup" className="block w-full h-full">
+                  Get Started Today
+                </Link>
               </button>
               <button className="px-10 py-4 border-2 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-full font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
-                View All Courses
+                <Link href="/session" className="block w-full h-full">
+                  View All Courses
+                </Link>
               </button>
             </div>
             <div className="mt-16 pt-8 border-t border-slate-100 dark:border-slate-800">
