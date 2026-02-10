@@ -26,7 +26,7 @@ function Footer() {
           <h2 className="text-xl font-bold text-white">Explore</h2>
           <ul className="space-y-2 text-sm text-gray-300">
             <li className="hover:text-gray-400 transition cursor-default">
-              How It Works
+              <Link href="/howitwork">How It Works</Link>
             </li>
             <li className="hover:text-gray-400 transition cursor-default">
               <Link href="/benefit">Benefits of Joining</Link>
