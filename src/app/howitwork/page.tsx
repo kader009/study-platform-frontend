@@ -16,35 +16,35 @@ const HowItWork = () => {
   return (
     <div>
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6 mt-20">
-          <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
+          <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider sm:tracking-widest mb-6">
             Next-Gen Education
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Master the Skills of <span className="text-primary">Tomorrow</span>
           </h1>
-          <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
             Step into a high-tech ecosystem designed to accelerate your career.
             Experience a revolutionary learning path from enrollment to industry
             certification.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm px-8 py-4 rounded-xl transition-all group">
-              <PlayCircle className="w-6 h-6 text-primary" />
+            <button className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm px-5 sm:px-8 py-3 sm:py-4 rounded-xl transition-all group text-sm sm:text-base">
+              <PlayCircle className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               <span className="font-semibold">Watch the Experience</span>
             </button>
             <Link
-              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-semibold shadow-sm shadow-primary/30 transition-all flex items-center justify-center"
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-5 sm:px-8 py-3 rounded-full font-semibold shadow-sm shadow-primary/30 transition-all flex items-center justify-center text-sm sm:text-base"
               href="#process"
             >
               See the Process
-              <ArrowDown className="w-5 h-5 ml-2" />
+              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
-      <main className="py-24 px-6 relative overflow-hidden" id="process">
+      <main className="py-12 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto space-y-32">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="order-2 md:order-1 space-y-8">
@@ -59,7 +59,7 @@ const HowItWork = () => {
                 <p className="text-slate-400 text-lg leading-relaxed">
                   Our AI-driven placement test analyzes your current skill level
                   and career goals to recommend the perfect learning path. No
-                  more guessing—get a personalized curriculum tailored just for
+                  more guessing get a personalized curriculum tailored just for
                   you.
                 </p>
               </div>
@@ -68,35 +68,31 @@ const HowItWork = () => {
                   <span className="text-primary bg-primary/10 p-1 rounded-full">
                     <Check className="w-4 h-4" />
                   </span>
-                  <span className="text-slate-300">Smart skill assessment</span>
+                  <span>Smart skill assessment</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <span className="text-primary bg-primary/10 p-1 rounded-full">
                     <Check className="w-4 h-4" />
                   </span>
-                  <span className="text-slate-300">
-                    One-click registration via GitHub/LinkedIn
-                  </span>
+                  <span>One-click registration via GitHub/LinkedIn</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <span className="text-primary bg-primary/10 p-1 rounded-full">
                     <Check className="w-4 h-4" />
                   </span>
-                  <span className="text-slate-300">
-                    Financial aid &amp; scholarship options
-                  </span>
+                  <span>Financial aid &amp; scholarship options</span>
                 </li>
               </ul>
-              <button className="bg-primary border border-primary/30 text-white px-8 py-3 rounded-lg font-medium hover:bg-primary transition-all">
+              <button className="bg-primary border border-primary/30 text-white px-8 py-3 rounded-full font-medium hover:bg-primary transition-all">
                 Take the Assessment
               </button>
             </div>
             <div className="order-1 md:order-2 relative">
-              <div className="relative bg-slate-900 rounded-2xl overflow-hidden neon-border shadow-2xl">
+              <div className="relative bg-slate-900 rounded-xl overflow-hidden neon-border shadow-2xl">
                 <Image
                   alt="Student enrolling"
                   className="w-full aspect-video object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq-C2KzRldnn-bFXQ1miEc7062GT6qv8e-zISufVuhsvyJPXX5OQn1LMIlekJLojtCwml4zvP1XGx1D1NVhrOQ7GeNvw_IcwucLx_mXZLIRMQdWJ3Flk0XTQ8QzGbUPRSEjDUAdFtkqb2s7wv-D9a9-rOUDzEWI0xKE3R5ikC71hTGVSJ1Gd22oSlWkyabn7bRpVddASeznotXuo5zlAXJHBHoiGqSLsq4BcAtmeljrcy_1w7kJmyOS70H9PDCbPEImJnr8RmJ1g"
+                  src="https://miro.medium.com/v2/resize:fit:1400/1*f4KhNVZe733KQEVZpz1YKg.png"
                   width={800}
                   height={450}
                 />
@@ -105,7 +101,7 @@ const HowItWork = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="relative bg-slate-900 rounded-2xl overflow-hidden neon-border shadow-2xl">
+              <div className="relative bg-slate-900 rounded-xl overflow-hidden neon-border shadow-2xl">
                 <Image
                   alt="Collaborative learning"
                   className="w-full aspect-video object-cover opacity-80"
@@ -198,7 +194,7 @@ const HowItWork = () => {
               </div>
             </div>
             <div className="order-1 md:order-2 relative">
-              <div className="relative bg-slate-900 rounded-2xl overflow-hidden neon-border shadow-2xl">
+              <div className="relative bg-slate-900 rounded-xl overflow-hidden neon-border shadow-2xl">
                 <Image
                   alt="Coding workspace"
                   className="w-full aspect-video object-cover opacity-80"
@@ -211,7 +207,7 @@ const HowItWork = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="relative bg-slate-900 p-8 rounded-2xl overflow-hidden neon-border shadow-2xl flex items-center justify-center min-h-100">
+              <div className="relative bg-slate-900 p-8 rounded-xl overflow-hidden neon-border shadow-2xl flex items-center justify-center min-h-100">
                 <div className="w-full max-w-sm aspect-[1.4/1] bg-white text-slate-900 p-8 rounded shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                   <div className="border-4 border-primary/20 h-full p-4 flex flex-col justify-between">
                     <div className="flex justify-between items-start">
