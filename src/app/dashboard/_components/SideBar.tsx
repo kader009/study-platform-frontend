@@ -76,7 +76,7 @@ const Sidebar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state: RootState) => state.user);
-  const role = useAppSelector((state:RootState) =>
+  const role = useAppSelector((state: RootState) =>
     state.user.token ? state.user.user?.role : null,
   );
 
@@ -143,8 +143,13 @@ const Sidebar = () => {
               />
             </div>
           </div>
-          <div className='text-center'>
+
+          <div className="text-center">
             <span>{user?.name}</span>
+          </div>
+
+          <div className="text-center">
+            <span>{user?.role}</span>
           </div>
 
           {/* Back to Home Button */}
