@@ -54,7 +54,7 @@ export default function AdminProfilePage() {
   const [editName, setEditName] = useState(admin?.name || '');
   const [editImage, setEditImage] = useState(admin?.photoUrl || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [lastLogin, setLastLogin] = useState<string>('N/A');
+  const [lastLogin, setLastLogin] = useState<string>(new Date().toISOString());
 
   useEffect(() => {
     if (admin) {
