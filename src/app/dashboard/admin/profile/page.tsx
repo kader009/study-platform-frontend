@@ -54,11 +54,26 @@ export default function AdminProfilePage() {
   const [editName, setEditName] = useState(admin?.name || '');
   const [editImage, setEditImage] = useState(admin?.photoUrl || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastLogin, setLastLogin] = useState<string>('N/A');
 
   useEffect(() => {
     if (admin) {
       setEditName(admin.name || '');
       setEditImage(admin.photoUrl || '');
+
+      // Last login: show previous login, then save current
+      const loginKey = `lastLogin_${admin.email}`;
+      const previousLogin = localStorage.getItem(loginKey);
+      if (previousLogin) {
+        setLastLogin(
+          new Date(previousLogin).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }),
+        );
+      }
+      localStorage.setItem(loginKey, new Date().toISOString());
     }
   }, [admin]);
 
@@ -92,8 +107,8 @@ export default function AdminProfilePage() {
     name: admin?.name || 'Md Abdul Kader Molla',
     email: admin?.email || 'admin@edunest.com',
     role: admin?.role || 'Admin',
-    joined: 'May 5, 2025',
-    lastLogin: 'June 27, 2025',
+    joined: 'July 25, 2025',
+    lastLogin: lastLogin,
     bio: 'Building a better education platform for all learners.',
     profilePic:
       admin?.photoUrl ||
