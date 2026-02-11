@@ -2,14 +2,20 @@
 
 import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
-import { useTutorSessionQuery } from '@/redux/endApi';
+import {
+  useTutorSessionQuery,
+  useTutorSessionWithCountQuery,
+} from '@/redux/endApi';
 
 export default function TutorDashboard() {
   const { user } = useAppSelector((state: RootState) => state.user);
   const { data: sessions, isLoading } = useTutorSessionQuery(user?.email);
+  const { data: bookedData, isLoading: bookedLoading } =
+    useTutorSessionWithCountQuery(user?.email);
 
   const sessionCount = sessions?.length || 0;
-
+  const studentCount = bookedData?.totalStudents ?? bookedData?.length ?? 0;
+  console.log(bookedData);
   return (
     <div className="flex flex-col min-h-screen">
       <main className="grow">
@@ -27,7 +33,9 @@ export default function TutorDashboard() {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold">My Students</h2>
-            <p className="text-2xl font-bold">0</p>
+            <p className="text-2xl font-bold">
+              {bookedLoading ? '...' : studentCount}
+            </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold">Average Rating</h2>

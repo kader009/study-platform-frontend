@@ -203,6 +203,14 @@ const EduNestApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+
+    // tutor session get student count with email query
+    tutorSessionWithCount: build.query({
+      query: (email) => ({
+        url: `/api/v1/session/booked/${email}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -231,4 +239,5 @@ export const {
   useBookPostMutation,
   useGetbookByemailQuery,
   useUpdateUserProfileMutation,
+  useTutorSessionWithCountQuery,
 } = EduNestApi;
