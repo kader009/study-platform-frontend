@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -74,7 +75,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white py-3 px-6 shadow-md sticky top-0 z-50">
+      <nav className="bg-white py-3 px-6 shadow-xs sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="text-black text-xl font-bold">
