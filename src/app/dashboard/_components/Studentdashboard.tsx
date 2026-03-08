@@ -10,6 +10,17 @@ import {
 } from '@/redux/endApi';
 import Link from 'next/link';
 import { Session } from '@/types/routeSession';
+import {
+  BarChart3,
+  CircleCheckBig,
+  Clock,
+  Trophy,
+  Target,
+  CircleCheck,
+  Flame,
+  Medal,
+  TrendingUp,
+} from 'lucide-react';
 
 interface BookedSession {
   _id: string;
@@ -82,7 +93,7 @@ export default function StudentDashboard() {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold">Completed</h3>
-            <p className="text-2xl font-bold text-green-600">
+            <p className="text-2xl font-bold">
               {loading ? '...' : completedCount}
             </p>
           </div>
@@ -94,7 +105,7 @@ export default function StudentDashboard() {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h4 className="text-lg font-semibold">Overall Progress</h4>
-            <p className="text-2xl font-bold text-blue-600">
+            <p className="text-2xl font-bold">
               {loading ? '...' : `${progressPercent}%`}
             </p>
           </div>
@@ -104,7 +115,10 @@ export default function StudentDashboard() {
         <div className="p-6">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">📊 My Progress Tracker</h2>
+              <h2 className="text-lg font-semibold flex items-center gap-2">
+                <BarChart3 className="w-5 h-5" />
+                My Progress Tracker
+              </h2>
               <span className="text-sm text-gray-500">
                 {completedCount}/{bookedCount} sessions completed
               </span>
@@ -113,7 +127,7 @@ export default function StudentDashboard() {
             {/* Overall Progress Bar */}
             <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
               <div
-                className="bg-linear-to-r from-blue-500 to-green-500 h-4 rounded-full transition-all duration-500"
+                className="bg-black h-4 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -131,8 +145,8 @@ export default function StudentDashboard() {
                         key={booked._id}
                         className={`flex items-center justify-between p-4 rounded-lg border transition-all ${
                           isCompleted
-                            ? 'bg-green-50 border-green-200'
-                            : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                            ? 'bg-gray-100 border-gray-300'
+                            : 'bg-white border-gray-200 hover:bg-gray-50'
                         }`}
                       >
                         <div className="flex items-center gap-4">
@@ -140,8 +154,8 @@ export default function StudentDashboard() {
                             onClick={() => toggleComplete(booked.sessionId)}
                             className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all cursor-pointer ${
                               isCompleted
-                                ? 'bg-green-500 border-green-500 text-white'
-                                : 'border-gray-400 hover:border-blue-500'
+                                ? 'bg-black border-black text-white'
+                                : 'border-gray-400 hover:border-black'
                             }`}
                           >
                             {isCompleted && (
@@ -176,11 +190,20 @@ export default function StudentDashboard() {
                         <span
                           className={`text-xs font-semibold px-3 py-1 rounded-full ${
                             isCompleted
-                              ? 'bg-green-100 text-green-700'
-                              : 'bg-yellow-100 text-yellow-700'
+                              ? 'bg-black text-white'
+                              : 'bg-gray-200 text-gray-600'
                           }`}
                         >
-                          {isCompleted ? '✅ Completed' : '⏳ In Progress'}
+                          {isCompleted ? (
+                            <span className="flex items-center gap-1">
+                              <CircleCheckBig className="w-3.5 h-3.5" />{' '}
+                              Completed
+                            </span>
+                          ) : (
+                            <span className="flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5" /> In Progress
+                            </span>
+                          )}
                         </span>
                       </div>
                     );
@@ -190,7 +213,10 @@ export default function StudentDashboard() {
             ) : (
               <p className="text-gray-500 text-center py-8">
                 No booked sessions yet.{' '}
-                <Link href="/session" className="text-blue-600 hover:underline">
+                <Link
+                  href="/session"
+                  className="text-black font-semibold hover:underline"
+                >
                   Browse Sessions
                 </Link>
               </p>
@@ -240,13 +266,16 @@ export default function StudentDashboard() {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h1 className="text-lg font-semibold mb-4">🏆 Achievements</h1>
+            <h1 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <Trophy className="w-5 h-5" />
+              Achievements
+            </h1>
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <span
-                  className={`text-2xl ${bookedCount >= 1 ? '' : 'grayscale opacity-40'}`}
+                  className={`${bookedCount >= 1 ? 'text-black' : 'text-gray-300'}`}
                 >
-                  🎯
+                  <Target className="w-7 h-7" />
                 </span>
                 <div>
                   <p className="font-medium">First Step</p>
@@ -255,16 +284,16 @@ export default function StudentDashboard() {
                   </p>
                 </div>
                 {bookedCount >= 1 && (
-                  <span className="ml-auto text-green-600 text-xs font-bold">
+                  <span className="ml-auto text-black text-xs font-bold">
                     Unlocked!
                   </span>
                 )}
               </li>
               <li className="flex items-center gap-3">
                 <span
-                  className={`text-2xl ${completedCount >= 1 ? '' : 'grayscale opacity-40'}`}
+                  className={`${completedCount >= 1 ? 'text-black' : 'text-gray-300'}`}
                 >
-                  ✅
+                  <CircleCheck className="w-7 h-7" />
                 </span>
                 <div>
                   <p className="font-medium">Session Master</p>
@@ -273,32 +302,32 @@ export default function StudentDashboard() {
                   </p>
                 </div>
                 {completedCount >= 1 && (
-                  <span className="ml-auto text-green-600 text-xs font-bold">
+                  <span className="ml-auto text-black text-xs font-bold">
                     Unlocked!
                   </span>
                 )}
               </li>
               <li className="flex items-center gap-3">
                 <span
-                  className={`text-2xl ${completedCount >= 5 ? '' : 'grayscale opacity-40'}`}
+                  className={`${completedCount >= 5 ? 'text-black' : 'text-gray-300'}`}
                 >
-                  🔥
+                  <Flame className="w-7 h-7" />
                 </span>
                 <div>
                   <p className="font-medium">Dedicated Learner</p>
                   <p className="text-xs text-gray-500">Complete 5 sessions</p>
                 </div>
                 {completedCount >= 5 && (
-                  <span className="ml-auto text-green-600 text-xs font-bold">
+                  <span className="ml-auto text-black text-xs font-bold">
                     Unlocked!
                   </span>
                 )}
               </li>
               <li className="flex items-center gap-3">
                 <span
-                  className={`text-2xl ${progressPercent === 100 ? '' : 'grayscale opacity-40'}`}
+                  className={`${progressPercent === 100 ? 'text-black' : 'text-gray-300'}`}
                 >
-                  🏅
+                  <Medal className="w-7 h-7" />
                 </span>
                 <div>
                   <p className="font-medium">100% Complete</p>
@@ -307,7 +336,7 @@ export default function StudentDashboard() {
                   </p>
                 </div>
                 {progressPercent === 100 && (
-                  <span className="ml-auto text-green-600 text-xs font-bold">
+                  <span className="ml-auto text-black text-xs font-bold">
                     Unlocked!
                   </span>
                 )}
@@ -316,7 +345,10 @@ export default function StudentDashboard() {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4">📈 Stats Summary</h2>
+            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5" />
+              Stats Summary
+            </h2>
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between text-sm mb-1">
@@ -325,7 +357,7 @@ export default function StudentDashboard() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-blue-500 h-2 rounded-full"
+                    className="bg-black h-2 rounded-full"
                     style={{
                       width: `${Math.min(bookedCount * 10, 100)}%`,
                     }}
@@ -339,7 +371,7 @@ export default function StudentDashboard() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-green-500 h-2 rounded-full"
+                    className="bg-black h-2 rounded-full"
                     style={{
                       width: `${progressPercent}%`,
                     }}
@@ -353,7 +385,7 @@ export default function StudentDashboard() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-purple-500 h-2 rounded-full"
+                    className="bg-black h-2 rounded-full"
                     style={{
                       width: `${Math.min(materialsCount * 10, 100)}%`,
                     }}
