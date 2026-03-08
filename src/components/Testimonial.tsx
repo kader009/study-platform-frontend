@@ -16,7 +16,7 @@ const TestimonialCarousel = () => {
         {testimonials.map((testimonial) => (
           <div
             key={testimonial.id}
-            className="relative bg-white/60 backdrop-blur-lg border border-gray-200 rounded-2xl shadow p-6 hover:shadow-2xl transition-shadow duration-300 group"
+            className="relative bg-white/60 backdrop-blur-sm border border-gray-200 rounded-2xl shadow p-6 hover:shadow-lg transition-shadow duration-300 group"
           >
             {/* Floating Quote Icon */}
             <FaQuoteLeft className="text-blue-400 text-3xl mb-4 group-hover:scale-105 transition-transform duration-300" />

@@ -73,7 +73,7 @@ const Page = () => {
                 return (
                   <div
                     key={session._id}
-                    className="bg-white rounded-lg shadow-xs p-4 transition transform hover:scale-95"
+                    className="bg-white rounded-lg shadow-sm p-4 transition transform hover:scale-95"
                   >
                     <div className="mt-2 mb-3">
                       {isSessionEnded ? (

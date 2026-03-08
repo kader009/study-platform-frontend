@@ -26,7 +26,7 @@ const SessionData = async () => {
           return (
             <div
               key={session?._id}
-              className="bg-white rounded-lg shadow-xs p-6 transition-transform hover:scale-105"
+              className="bg-white rounded-lg shadow-sm p-6 transition-transform hover:scale-105"
             >
               <div className="mt-2 mb-3">
                 {isSessionEnded ? (
