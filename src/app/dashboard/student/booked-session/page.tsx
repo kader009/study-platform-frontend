@@ -1,4 +1,6 @@
 'use client';
+
+import { useMemo } from 'react';
 import {
   Table,
   TableBody,
@@ -7,25 +9,33 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useGetbookByemailQuery } from '../../../../redux/endApi';
+import { useGetbookByemailQuery, useAllSessionQuery } from '@/redux/endApi';
 import BookedSessionSkeleton from '@/components/skeleton/BookedSessionSkeleton';
 import { RootState } from '@/redux/store/store';
 import { useAppSelector } from '@/redux/hook';
-
-interface SessionProps {
-  _id: string;
-  sessionId: string;
-  tutorEmail: string;
-  registrationFee: string;
-}
+import type { BookedSession, SessionInfo } from '@/types/bookedSession';
 
 const Page = () => {
   const { user } = useAppSelector((state: RootState) => state.user);
+
   const {
-    data: sessions,
+    data: bookedSessions,
     isLoading,
     isError,
   } = useGetbookByemailQuery(user?.email, { pollingInterval: 1000 });
+
+  const { data: allSessions } = useAllSessionQuery(undefined);
+
+  // Map sessionId → sessionTitle for quick lookup
+  const titleBySessionId = useMemo(() => {
+    const map = new Map<string, string>();
+    if (Array.isArray(allSessions)) {
+      allSessions.forEach((session: SessionInfo) => {
+        map.set(session._id, session.sessionTitle);
+      });
+    }
+    return map;
+  }, [allSessions]);
 
   if (isLoading) return <BookedSessionSkeleton />;
   if (isError) return <div>Something went wrong..</div>;
@@ -41,24 +51,30 @@ const Page = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-20">No</TableHead>
-                <TableHead>Session id</TableHead>
-                <TableHead>Tutor email</TableHead>
+                <TableHead>Session Title</TableHead>
+                <TableHead>Session ID</TableHead>
+                <TableHead>Tutor Email</TableHead>
                 <TableHead>Transaction (free/paid)</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sessions?.length > 0 ? (
-                sessions.map((session: SessionProps, index: number) => (
-                  <TableRow key={session._id}>
+              {bookedSessions?.length > 0 ? (
+                bookedSessions.map((booking: BookedSession, index: number) => (
+                  <TableRow key={booking._id}>
                     <TableCell className="font-medium">{index + 1}</TableCell>
-                    <TableCell>{session.sessionId}</TableCell>
-                    <TableCell>{session.tutorEmail}</TableCell>
-                    <TableCell>${session.registrationFee}</TableCell>
+                    <TableCell>
+                      {titleBySessionId.get(booking.sessionId) || 'Loading...'}
+                    </TableCell>
+                    <TableCell className="text-xs">
+                      {booking.sessionId}
+                    </TableCell>
+                    <TableCell>{booking.tutorEmail}</TableCell>
+                    <TableCell>${booking.registrationFee}</TableCell>
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-4">
+                  <TableCell colSpan={5} className="text-center py-4">
                     No sessions found
                   </TableCell>
                 </TableRow>
