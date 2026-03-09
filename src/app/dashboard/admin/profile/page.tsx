@@ -119,12 +119,12 @@ export default function AdminProfilePage() {
     <div>
       <DynamicTitle />
       <section className="min-h-screen bg-gray-100 py-12 px-4 md:px-12">
-        <div className="max-w-344 mx-auto bg-white rounded-2xl shadow-md p-8">
+        <div className="max-w-344 mx-auto bg-white rounded-2xl shadow-sm p-8">
           <h1 className="text-3xl font-bold mb-10">Admin Profile</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Profile Info Card */}
-            <div className="bg-blue-50 p-6 rounded-xl shadow-md text-center w-full max-w-md mx-auto">
+            <div className="bg-blue-50 p-6 rounded-xl shadow-sm text-center w-full max-w-md mx-auto">
               <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-blue-300">
                 <Image
                   src={adminInfo.profilePic}
@@ -211,7 +211,7 @@ export default function AdminProfilePage() {
               </Dialog>
 
               {/* Facebook Post */}
-              <div className="mt-8 p-4 bg-white rounded-lg shadow-md text-left">
+              <div className="mt-8 p-4 bg-white rounded-lg shadow-sm text-left">
                 <h3 className="text-lg font-semibold mb-2 text-blue-600">
                   Facebook Post
                 </h3>
@@ -237,7 +237,7 @@ export default function AdminProfilePage() {
               </div>
 
               {/* Twitter Post */}
-              <div className="mt-6 p-4 bg-white rounded-lg shadow-md text-left">
+              <div className="mt-6 p-4 bg-white rounded-lg shadow-sm text-left">
                 <h3 className="text-lg font-semibold mb-2 text-blue-500">
                   Twitter Post
                 </h3>

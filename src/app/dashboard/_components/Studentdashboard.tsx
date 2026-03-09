@@ -85,25 +85,25 @@ export default function StudentDashboard() {
 
         {/* Stats Cards */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">Booked Sessions</h2>
             <p className="text-2xl font-bold">
               {loading ? '...' : bookedCount}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h3 className="text-lg font-semibold">Completed</h3>
             <p className="text-2xl font-bold">
               {loading ? '...' : completedCount}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h4 className="text-lg font-semibold">Study Materials</h4>
             <p className="text-2xl font-bold">
               {loading ? '...' : materialsCount}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h4 className="text-lg font-semibold">Overall Progress</h4>
             <p className="text-2xl font-bold">
               {loading ? '...' : `${progressPercent}%`}
@@ -113,7 +113,7 @@ export default function StudentDashboard() {
 
         {/* Progress Tracker */}
         <div className="p-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold flex items-center gap-2">
                 <BarChart3 className="w-5 h-5" />
@@ -226,7 +226,7 @@ export default function StudentDashboard() {
 
         {/* Student Specific Content */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h5 className="text-lg font-semibold mb-4">Recent Activities</h5>
             <ul className="space-y-2">
               <li>Booked a session</li>
@@ -236,7 +236,7 @@ export default function StudentDashboard() {
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h6 className="text-lg font-semibold mb-4">Upcoming Sessions</h6>
             <table className="w-full table-auto border-collapse">
               <thead>
@@ -265,7 +265,7 @@ export default function StudentDashboard() {
             </table>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h1 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <Trophy className="w-5 h-5" />
               Achievements
@@ -344,7 +344,7 @@ export default function StudentDashboard() {
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
               Stats Summary

@@ -4,7 +4,7 @@ const SessionSkeleton = () => {
       {Array.from({ length: 7 }).map((_, i) => (
         <div
           key={i}
-          className="bg-white rounded-lg shadow-md p-4 animate-pulse space-y-3"
+          className="bg-white rounded-lg shadow-sm p-4 animate-pulse space-y-3"
         >
           <div className="h-5 w-3/4 bg-gray-300 rounded"></div>
           <div className="h-4 w-full bg-gray-200 rounded"></div>

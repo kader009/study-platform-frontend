@@ -25,19 +25,19 @@ export default function TutorDashboard() {
 
         {/* Stats Cards - Tutor specific */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">My Sessions</h2>
             <p className="text-2xl font-bold">
               {isLoading ? '...' : sessionCount}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">My Students</h2>
             <p className="text-2xl font-bold">
               {bookedLoading ? '...' : studentCount}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">Average Rating</h2>
             <p className="text-2xl font-bold">0</p>
           </div>
@@ -45,7 +45,7 @@ export default function TutorDashboard() {
 
         {/* Tutor Specific Content */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">My Upcoming Sessions</h2>
             <table className="w-full table-auto border-collapse">
               <thead>
@@ -72,7 +72,7 @@ export default function TutorDashboard() {
             </table>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Earnings</h2>
             <ul className="space-y-2">
               <li>Total Earnings: $0</li>
@@ -81,7 +81,7 @@ export default function TutorDashboard() {
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">My Courses</h2>
             <ul className="space-y-2">
               <li>React Advanced - 0 students</li>
@@ -90,7 +90,7 @@ export default function TutorDashboard() {
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Recent Reviews</h2>
             <ul className="space-y-2">
               <li>Great teacher! - John</li>

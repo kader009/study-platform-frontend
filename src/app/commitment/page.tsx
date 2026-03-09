@@ -87,7 +87,7 @@ const Commitment = () => {
               {StudentReview.map((student, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-xl p-6 shadow-sm hover:shadow-xl transition-shadow"
                 >
                   <div className="flex flex-col items-center text-center gap-4">
                     <div

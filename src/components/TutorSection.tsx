@@ -25,7 +25,7 @@ const TutorSection = async () => {
                 rounded-xl shadow-sm 
                 bg-white overflow-hidden
                 transition-transform duration-300 
-                transform hover:scale-105 hover:shadow-md hover:z-10
+                transform hover:scale-105 hover:shadow-sm hover:z-10
               "
             >
               <div className="relative w-full h-72 p-4">

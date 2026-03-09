@@ -123,25 +123,25 @@ export default function AdminDashboard() {
 
         {/* Stats Cards - Admin specific */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">Total Sessions</h2>
             <p className="text-2xl font-bold">
               {sessionsLoading ? '...' : totalSessions}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">Total Users</h2>
             <p className="text-2xl font-bold">
               {usersLoading ? '...' : totalUsers}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">Total Tutors</h2>
             <p className="text-2xl font-bold">
               {tutorsLoading ? '...' : totalTutors}
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">Study Materials</h2>
             <p className="text-2xl font-bold">
               {materialsLoading ? '...' : totalMaterials}
@@ -151,7 +151,7 @@ export default function AdminDashboard() {
 
         {/* Charts Section */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">User Growth</h2>
             <div className="w-full h-64 relative">
               <Line
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Session Categories</h2>
             <div className="w-full h-64 relative">
               <Pie
@@ -177,7 +177,7 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">User Management</h2>
             <ul className="space-y-2">
               <li>Active Users: 10</li>
@@ -186,7 +186,7 @@ export default function AdminDashboard() {
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Revenue</h2>
             <ul className="space-y-2">
               <li>Total Revenue: $400</li>

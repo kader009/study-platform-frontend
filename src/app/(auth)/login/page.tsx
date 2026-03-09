@@ -83,7 +83,7 @@ const Page = () => {
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+        <div className="bg-white shadow-sm rounded-lg p-8 w-full max-w-md">
           <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             Login Your Account
           </h1>
