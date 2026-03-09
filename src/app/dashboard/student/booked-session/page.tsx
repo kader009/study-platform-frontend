@@ -25,7 +25,7 @@ const Page = () => {
     data: sessions,
     isLoading,
     isError,
-  } = useGetbookByemailQuery(user?.email);
+  } = useGetbookByemailQuery(user?.email, { pollingInterval: 1000 });
 
   if (isLoading) return <BookedSessionSkeleton />;
   if (isError) return <div>Something went wrong..</div>;
