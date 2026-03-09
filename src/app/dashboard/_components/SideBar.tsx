@@ -135,45 +135,44 @@ const Sidebar = () => {
         </ul>
 
         {/* User Profile Section */}
-        <div className="border-t border-gray-700 pt-4 mt-4 space-y-2">
-          {/* User Image */}
-          <div className="flex justify-center">
-            <div className="w-15 h-15 rounded-full overflow-hidden">
+        <div className="border-t border-gray-800 pt-4 mt-4 space-y-3 shrink-0">
+          {/* User Card */}
+          <div className="flex flex-col items-center gap-2 px-2">
+            <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-gray-700 shrink-0">
               <Image
                 src={user?.photoUrl || defaultImage}
                 alt={user?.name || 'User'}
-                width={60}
-                height={60}
+                width={40}
+                height={40}
                 className="w-full h-full object-cover"
               />
             </div>
+            <div className="text-center">
+              <p className="text-sm font-semibold">{user?.name || 'User'}</p>
+              <p className="text-xs text-gray-400 capitalize">
+                {user?.role || 'Role'}
+              </p>
+            </div>
           </div>
 
-          <div className="text-center">
-            <span>{user?.name}</span>
+          {/* Action Buttons */}
+          <div className="space-y-1">
+            <Link
+              href="/"
+              className="w-full py-2 px-3 rounded-lg text-sm transition flex items-center gap-3 hover:bg-gray-800"
+            >
+              <FaHome className="w-4 h-4 text-gray-400" />
+              <span>Back to Home</span>
+            </Link>
+
+            <button
+              onClick={handleLogout}
+              className="w-full py-2 px-3 rounded-lg text-sm transition cursor-pointer flex items-center gap-3 hover:bg-gray-800 text-red-400 hover:text-red-300"
+            >
+              <FaSignOutAlt className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
           </div>
-
-          <div className="text-center">
-            <span>{user?.role}</span>
-          </div>
-
-          {/* Back to Home Button */}
-          <Link
-            href="/"
-            className="w-full py-2 px-4 rounded-full text-sm font-semibold transition flex items-center justify-center gap-2 hover:bg-gray-700 cursor-pointer"
-          >
-            <FaHome className="w-5 h-5" />
-            <span>Back to Home</span>
-          </Link>
-
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="w-full py-2 px-4 rounded-full text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2 hover:bg-gray-700"
-          >
-            <FaSignOutAlt className="w-5 h-5" />
-            <span>Logout</span>
-          </button>
         </div>
       </aside>
 
