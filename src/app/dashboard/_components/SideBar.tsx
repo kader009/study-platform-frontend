@@ -115,7 +115,12 @@ const Sidebar = () => {
           isOpen ? 'translate-x-0' : '-translate-x-64'
         } md:translate-x-0`}
       >
-        <h1 className="text-2xl font-bold mb-4 shrink-0">Dashboard</h1>
+        <Link
+          href="/dashboard"
+          className="text-2xl font-bold mb-4 shrink-0 block hover:text-gray-300 transition"
+        >
+          Dashboard
+        </Link>
         <ul className="space-y-2 flex-1 overflow-y-auto">
           {filterLinks.map((link) => (
             <li key={link.href}>
