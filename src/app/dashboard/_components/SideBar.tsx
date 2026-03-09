@@ -138,18 +138,18 @@ const Sidebar = () => {
         <div className="border-t border-gray-800 pt-4 mt-4 space-y-3 shrink-0">
           {/* User Card */}
           <div className="flex flex-col items-center gap-2 px-2">
-            <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-gray-700 shrink-0">
+            <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-gray-700 shrink-0">
               <Image
                 src={user?.photoUrl || defaultImage}
                 alt={user?.name || 'User'}
-                width={40}
-                height={40}
+                width={56}
+                height={56}
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="text-center">
               <p className="text-sm font-semibold">{user?.name || 'User'}</p>
-              <p className="text-xs text-gray-400 capitalize">
+              <p className="text-sm text-gray-400 capitalize">
                 {user?.role || 'Role'}
               </p>
             </div>

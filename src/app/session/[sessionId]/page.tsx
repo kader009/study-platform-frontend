@@ -1,27 +1,13 @@
 'use client';
+
 import DynamicTitle from '@/components/DynamicTitle';
 import { useBookPostMutation } from '@/redux/endApi';
 import { useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
+import { SessionData } from '@/types/sessionData';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-
-interface SessionData {
-  _id: string;
-  sessionTitle: string;
-  sessionDescription: string;
-  tutorName: string;
-  tutorEmail: string;
-  averageRating?: number;
-  registrationStartDate: string;
-  registrationEndDate: string;
-  classStartDate: string;
-  classEndDate: string;
-  sessionDuration: number;
-  registrationFee: string;
-  reviews: string[];
-}
 
 const SessionDetails = () => {
   const params = useParams();
@@ -29,13 +15,12 @@ const SessionDetails = () => {
   const [data, setData] = useState<SessionData | null>(null);
   const [booksession, { isLoading }] = useBookPostMutation();
   const { user } = useAppSelector((state: RootState) => state.user);
-  console.log(user);
 
   useEffect(() => {
     const fetchSession = async () => {
       try {
         const res = await fetch(
-          `https://study-platform-backend-drxm.onrender.com/api/v1/session/${sessionId}`
+          `https://study-platform-backend-drxm.onrender.com/api/v1/session/${sessionId}`,
         );
         if (!res.ok) throw new Error('Failed to fetch session');
         const json = await res.json();
@@ -69,7 +54,7 @@ const SessionDetails = () => {
     <div>
       <DynamicTitle />
       <div className="my-8 mx-5">
-        <div className="max-w-lg w-full mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4">
+        <div className="max-w-lg w-full mx-auto bg-white shadow-sm rounded-2xl p-6 space-y-4">
           <h1 className="text-2xl font-bold">{data?.sessionTitle}</h1>
           <p className="text-md font-semibold text-gray-700">
             <span className="font-bold">Tutor:</span> {data?.tutorName}
@@ -137,7 +122,7 @@ const SessionDetails = () => {
               user?.role === 'admin' ||
               user?.role === 'tutor'
             }
-            className={`cursor-pointer w-36 font-semibold py-2 rounded 
+            className={`cursor-pointer w-36 font-semibold py-2 rounded-full 
         ${
           isLoading || !user || user?.role === 'admin' || user?.role === 'tutor'
             ? 'bg-gray-400 cursor-not-allowed'
