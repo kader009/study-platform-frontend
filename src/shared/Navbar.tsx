@@ -124,8 +124,8 @@ const Navbar = () => {
             {user ? (
               <div className="relative" ref={profileRef}>
                 <button
-                  onClick={() => setShowProfileMenu((s) => !s)}
-                  className="rounded-full overflow-hidden border-0 p-0"
+                  onClick={() => setShowProfileMenu((show) => !show)}
+                  className="rounded-full overflow-hidden border-0 p-0 cursor-pointer"
                   aria-label="Open profile menu"
                 >
                   <Image
