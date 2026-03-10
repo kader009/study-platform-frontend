@@ -61,15 +61,15 @@ const Page = () => {
               {bookedSessions?.length > 0 ? (
                 bookedSessions.map((booking: BookedSession, index: number) => (
                   <TableRow key={booking._id}>
-                    <TableCell className="font-medium">{index + 1}</TableCell>
-                    <TableCell>
+                    <TableCell className="font-medium text-sm">{index + 1}</TableCell>
+                    <TableCell className="text-sm">
                       {titleBySessionId.get(booking.sessionId) || 'Loading...'}
                     </TableCell>
-                    <TableCell className="text-xs">
+                    <TableCell className="text-sm">
                       {booking.sessionId}
                     </TableCell>
-                    <TableCell>{booking.tutorEmail}</TableCell>
-                    <TableCell>${booking.registrationFee}</TableCell>
+                    <TableCell className="text-sm">{booking.tutorEmail}</TableCell>
+                    <TableCell className="text-sm">${booking.registrationFee}</TableCell>
                   </TableRow>
                 ))
               ) : (
