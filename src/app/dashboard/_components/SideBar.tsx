@@ -149,7 +149,7 @@ const Sidebar = () => {
             </div>
             <div className="text-center">
               <p className="text-sm font-semibold">{user?.name || 'User'}</p>
-              <p className="text-sm text-gray-400 capitalize">
+              <p className="text-sm capitalize">
                 {user?.role || 'Role'}
               </p>
             </div>
@@ -162,7 +162,7 @@ const Sidebar = () => {
               className="w-full py-2 px-3 rounded-lg text-sm transition flex items-center gap-3 hover:bg-gray-800"
             >
               <FaHome className="w-4 h-4 text-gray-400" />
-              <span>Back to Home</span>
+              <span className="font-semibold">Back to Home</span>
             </Link>
 
             <button
@@ -170,7 +170,7 @@ const Sidebar = () => {
               className="w-full py-2 px-3 rounded-lg text-sm transition cursor-pointer flex items-center gap-3 hover:bg-gray-800 text-red-400 hover:text-red-300"
             >
               <FaSignOutAlt className="w-4 h-4" />
-              <span>Logout</span>
+              <span className="font-semibold">Logout</span>
             </button>
           </div>
         </div>
