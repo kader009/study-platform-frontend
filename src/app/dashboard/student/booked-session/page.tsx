@@ -22,7 +22,7 @@ const Page = () => {
     data: bookedSessions,
     isLoading,
     isError,
-  } = useGetbookByemailQuery(user?.email, { pollingInterval: 1000 });
+  } = useGetbookByemailQuery(user?.email, { pollingInterval: 30000 });
 
   const { data: allSessions } = useAllSessionQuery(undefined);
 
@@ -61,15 +61,21 @@ const Page = () => {
               {bookedSessions?.length > 0 ? (
                 bookedSessions.map((booking: BookedSession, index: number) => (
                   <TableRow key={booking._id}>
-                    <TableCell className="font-medium text-sm">{index + 1}</TableCell>
+                    <TableCell className="font-medium text-sm">
+                      {index + 1}
+                    </TableCell>
                     <TableCell className="text-sm">
                       {titleBySessionId.get(booking.sessionId) || 'Loading...'}
                     </TableCell>
                     <TableCell className="text-sm">
                       {booking.sessionId}
                     </TableCell>
-                    <TableCell className="text-sm">{booking.tutorEmail}</TableCell>
-                    <TableCell className="text-sm">${booking.registrationFee}</TableCell>
+                    <TableCell className="text-sm">
+                      {booking.tutorEmail}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      ${booking.registrationFee}
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (

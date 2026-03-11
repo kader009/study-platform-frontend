@@ -2,11 +2,9 @@ import { Session } from '@/types/routeSession';
 import { NextResponse } from 'next/server';
 
 function extractTutorNames(sessions: Session[]): string[] {
-  console.log('Extracting tutors from sessions:', sessions.length);
 
   const tutors = sessions
     .map((session) => {
-      console.log('Session data:', JSON.stringify(session, null, 2));
 
       if (session.tutorName && typeof session.tutorName === 'string') {
         return session.tutorName;
