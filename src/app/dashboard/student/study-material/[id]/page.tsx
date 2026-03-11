@@ -1,5 +1,7 @@
 'use client';
-import { useAllMaterilQuery } from '@/redux/endApi';
+import { useMemo } from 'react';
+import { useParams } from 'next/navigation';
+import { useAllMaterilQuery, useGetbookByemailQuery } from '@/redux/endApi';
 import {
   Table,
   TableBody,
@@ -12,11 +14,32 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import StudyMaterialSkeleton from '@/components/skeleton/StudyMaterialSkeleton';
 import { Material } from '@/types/studyMaterial';
+import { useAppSelector } from '@/redux/hook';
+import { RootState } from '@/redux/store/store';
+import type { BookedSession } from '@/types/bookedSession';
 
 const Page = () => {
-  const { data: materials, isLoading, isError } = useAllMaterilQuery(undefined);
+  const { id } = useParams(); // booking _id from the URL
+  const { email } = useAppSelector((state: RootState) => state.user.user) || {};
 
-  if (isLoading) return <StudyMaterialSkeleton />;
+  const { data: bookedSessions, isLoading: bookingsLoading } =
+    useGetbookByemailQuery(email, { skip: !email });
+
+  const { data: allMaterials, isLoading: materialsLoading, isError } =
+    useAllMaterilQuery(email, { skip: !email });
+
+  // Get sessionId of the booking the user clicked on,
+  // then flatMap all materials to keep only the ones that match that sessionId
+  const filteredMaterials = useMemo(() => {
+    if (!Array.isArray(bookedSessions) || !Array.isArray(allMaterials)) return [];
+    return bookedSessions
+      .filter((book: BookedSession) => book._id === id)
+      .flatMap((book: BookedSession) =>
+        allMaterials.filter((material: Material) => material.SessionId === book.sessionId)
+      );
+  }, [bookedSessions, allMaterials, id]);
+
+  if (bookingsLoading || materialsLoading) return <StudyMaterialSkeleton />;
 
   if (isError)
     return (
@@ -42,8 +65,8 @@ const Page = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {materials?.length > 0 ? (
-                materials.map((material: Material, index: number) => (
+              {filteredMaterials.length > 0 ? (
+                filteredMaterials.map((material: Material, index: number) => (
                   <TableRow key={material._id}>
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>{material.MaterialTitle}</TableCell>
@@ -75,7 +98,7 @@ const Page = () => {
               ) : (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-4">
-                    No material found
+                    No material found for this session
                   </TableCell>
                 </TableRow>
               )}

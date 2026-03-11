@@ -99,9 +99,7 @@ const Page = () => {
           {/* Social Login Buttons */}
           <SocialLogin />
 
-          <div className="text-center text-gray-500 mb-4">
-            Or continue with email & password
-          </div>
+          <div className="text-center text-gray-500 mb-4">Or continue</div>
 
           <form onSubmit={handleSubmit}>
             {/* Email */}
