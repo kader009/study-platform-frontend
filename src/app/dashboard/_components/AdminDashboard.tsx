@@ -83,8 +83,7 @@ export default function AdminDashboard() {
 
     const counts = new Map<string, number>();
     sessionsData.forEach((session: Session) => {
-      const title =
-        session.sessionTitle || 'Unknown';
+      const title = session.sessionTitle || 'Unknown';
       const key = String(title).trim() || 'Unknown';
       counts.set(key, (counts.get(key) || 0) + 1);
     });
@@ -172,6 +171,11 @@ export default function AdminDashboard() {
                 options={{
                   responsive: true,
                   maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                      display: false,
+                    },
+                  },
                 }}
               />
             </div>
