@@ -208,6 +208,7 @@ const Page = () => {
                 type="number"
                 placeholder="session duration"
                 value={sessionDuration}
+                required
                 onChange={(e) => {
                   dispatch(SetsessionDuration(e.target.value));
                 }}
