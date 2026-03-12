@@ -51,6 +51,10 @@ const Page = () => {
   const [selectedSession, setSelectedSession] = useState<Sessionprops | null>(
     null
   );
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [sessionToDelete, setSessionToDelete] = useState<Sessionprops | null>(
+    null,
+  );
   const [isFree, setIsFree] = useState(true);
   const [fee, setFee] = useState('');
   const [updateSession] = useUpdateSessionMutation();
@@ -66,6 +70,39 @@ const Page = () => {
     setIsFree(isFreeSession);
     setFee(session.registrationFee);
     setIsOpen(true);
+  };
+
+  const handleApprove = async (session: Sessionprops) => {
+    try {
+      await approveSession(session._id);
+      toast.success(`Session approved: ${session.sessionTitle}`);
+    } catch (err) {
+      console.error('Approve failed', err);
+      toast.error('Failed to approve session');
+    }
+  };
+
+  const handleDeleteClick = (session: Sessionprops) => {
+    setSessionToDelete(session);
+    setIsDeleteOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!sessionToDelete) return;
+    try {
+      await deleteSession(sessionToDelete._id);
+      toast.success('Session deleted');
+      setIsDeleteOpen(false);
+      setSessionToDelete(null);
+    } catch (err) {
+      console.error('Delete failed', err);
+      toast.error('Failed to delete session');
+    }
+  };
+
+  const cancelDelete = () => {
+    setIsDeleteOpen(false);
+    setSessionToDelete(null);
   };
 
   const handleUpdateSubmit = async () => {
@@ -128,7 +165,7 @@ const Page = () => {
                       ) : (
                         <Button
                           className="bg-black text-white py-1 px-3 rounded-full cursor-pointer"
-                          onClick={() => approveSession(session._id)}
+                          onClick={() => handleApprove(session)}
                         >
                           Pending
                         </Button>
@@ -146,7 +183,7 @@ const Page = () => {
                       <Button
                         type="submit"
                         className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full mt-2 cursor-pointer"
-                        onClick={() => deleteSession(session._id)}
+                        onClick={() => handleDeleteClick(session)}
                       >
                         Delete
                       </Button>
@@ -232,6 +269,31 @@ const Page = () => {
 
           <DialogFooter>
             <Button onClick={handleUpdateSubmit}>Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+        <DialogContent className="sm:max-w-125">
+          <DialogHeader>
+            <DialogTitle>Delete Session</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this session?
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="py-4">
+            <p className="text-sm text-gray-700">
+              {sessionToDelete?.sessionTitle}
+            </p>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={cancelDelete} className="mr-2">
+              Cancel
+            </Button>
+            <Button onClick={confirmDelete}>Yes, delete</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
