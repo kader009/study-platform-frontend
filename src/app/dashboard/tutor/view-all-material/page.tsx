@@ -48,6 +48,7 @@ const Page = () => {
   } = useGetMaterialByemailQuery(user?.email, {
     pollingInterval: 2000,
   });
+  console.log(materials);
   const [deleteMaterial] = useDeleteMaterialMutation();
   const [openModal, setOpenModal] = useState(false);
   const [selectedMaterial, setSelectedMaterial] =

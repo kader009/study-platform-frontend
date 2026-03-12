@@ -14,8 +14,10 @@ export default function TutorDashboard() {
     useTutorSessionWithCountQuery(user?.email);
 
   const sessionCount = sessions?.length || 0;
-  const studentCount = bookedData?.totalStudents ?? bookedData?.length ?? 0;
-  console.log(bookedData);
+  // bookedData shape: { message, totalUniqueStudents, totalBookings, students: [] }
+  const studentCount = bookedData?.totalUniqueStudents ?? 0;
+  const totalBookings = bookedData?.totalBookings ?? 0;
+  const bookingMessage = bookedData?.message ?? '';
   return (
     <div className="flex flex-col min-h-screen">
       <main className="grow">
@@ -24,7 +26,7 @@ export default function TutorDashboard() {
         </div>
 
         {/* Stats Cards - Tutor specific */}
-        <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h2 className="text-lg font-semibold">My Sessions</h2>
             <p className="text-2xl font-bold">
@@ -35,6 +37,13 @@ export default function TutorDashboard() {
             <h2 className="text-lg font-semibold">My Students</h2>
             <p className="text-2xl font-bold">
               {bookedLoading ? '...' : studentCount}
+            </p>
+            <p className="text-sm text-gray-500 mt-2">{bookingMessage}</p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h2 className="text-lg font-semibold">Total Bookings</h2>
+            <p className="text-2xl font-bold">
+              {bookedLoading ? '...' : totalBookings}
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -73,12 +82,47 @@ export default function TutorDashboard() {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h2 className="text-lg font-semibold mb-4">Earnings</h2>
-            <ul className="space-y-2">
-              <li>Total Earnings: $0</li>
-              <li>This Month: $0</li>
-              <li>Pending Payment: $0</li>
-            </ul>
+            <h2 className="text-lg font-semibold mb-4">Students</h2>
+            {bookedLoading ? (
+              <p>Loading students…</p>
+            ) : bookedData?.students && bookedData.students.length > 0 ? (
+              <ul className="space-y-3">
+                {bookedData.students.map(
+                  (s: {
+                    name: string;
+                    email: string;
+                    image?: string;
+                    totalBookings?: number;
+                  }) => (
+                    <li key={s.email} className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                        {s.image ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={s.image}
+                            alt={s.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-xs text-gray-500">
+                            {s.name?.charAt(0) || ''}
+                          </span>
+                        )}
+                      </div>
+                      <div>
+                        <p className="font-medium">{s.name}</p>
+                        <p className="text-xs text-gray-500">{s.email}</p>
+                      </div>
+                      <div className="ml-auto text-sm text-gray-600">
+                        {s.totalBookings} bookings
+                      </div>
+                    </li>
+                  ),
+                )}
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-500">No student bookings yet.</p>
+            )}
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm">
