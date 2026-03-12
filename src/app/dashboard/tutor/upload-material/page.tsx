@@ -127,7 +127,7 @@ const Page = () => {
                     </TableCell>
                     <Button
                       type="submit"
-                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded my-2"
+                      className="w-24 bg-black hover:bg-gray-900 text-white py-2 rounded-full my-2"
                       onClick={() => handleOpenModal(approve)}
                     >
                       Upload

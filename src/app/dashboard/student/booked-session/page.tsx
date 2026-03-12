@@ -22,7 +22,7 @@ const Page = () => {
     data: bookedSessions,
     isLoading,
     isError,
-  } = useGetbookByemailQuery(user?.email, { pollingInterval: 30000 });
+  } = useGetbookByemailQuery(user?.email, { pollingInterval: 3000 });
 
   const { data: allSessions } = useAllSessionQuery(undefined);
 
