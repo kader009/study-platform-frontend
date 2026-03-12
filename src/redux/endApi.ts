@@ -148,7 +148,7 @@ const EduNestApi = baseApi.injectEndpoints({
     // get material based on the email
     getMaterialByemail: build.query({
       query: (email) => ({
-        url: `/api/v1/material/student/${email}`,
+        url: `/api/v1/material/${email}`,
         method: 'GET',
       }),
     }),

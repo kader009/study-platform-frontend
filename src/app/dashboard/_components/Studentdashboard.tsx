@@ -62,9 +62,35 @@ export default function StudentDashboard() {
     [email],
   );
 
+  // Cleanup: ensure completedIds only contains sessionIds that belong to
+  useEffect(() => {
+    if (!email) return;
+    if (!Array.isArray(bookedSessions) || bookedSessions.length === 0) return;
+    if (!Array.isArray(completedIds) || completedIds.length === 0) return;
+
+    const validIds = (bookedSessions as BookedSession[]).map(
+      (book) => book.sessionId,
+    );
+    const filtered = completedIds.filter((id) => validIds.includes(id));
+
+    if (filtered.length !== completedIds.length) {
+      setCompletedIds(filtered);
+      try {
+        localStorage.setItem(`progress_${email}`, JSON.stringify(filtered));
+      } catch {
+        // ignore localStorage errors
+      }
+    }
+  }, [bookedSessions, completedIds, email]);
+
   const bookedCount = Array.isArray(bookedSessions) ? bookedSessions.length : 0;
   const materialsCount = myMaterials?.totalMaterials || 0;
-  const completedCount = completedIds.length;
+  // Count only those completed IDs that belong to current booked sessions
+  const completedCount = Array.isArray(bookedSessions)
+    ? (bookedSessions as BookedSession[]).filter((b) =>
+        completedIds.includes(b.sessionId),
+      ).length
+    : 0;
   const progressPercent =
     bookedCount > 0 ? Math.round((completedCount / bookedCount) * 100) : 0;
 
