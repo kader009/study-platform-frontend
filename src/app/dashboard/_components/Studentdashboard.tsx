@@ -256,41 +256,31 @@ export default function StudentDashboard() {
         {/* Student Specific Content */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h5 className="text-lg font-semibold mb-4">Recent Activities</h5>
-            <ul className="space-y-2">
-              {bookedCount > 0 && (
-                <li>
-                  Booked {bookedCount} session{bookedCount > 1 ? 's' : ''}
+            <h5 className="text-lg font-semibold mb-4">Recent book session</h5>
+            <ul className="space-y-2 text-sm">
+              {(bookedSessions as BookedSession[])
+                .slice(0, 3)
+                .map((booked: BookedSession) => {
+                  const session = sessionMap.get(booked.sessionId);
+                  return (
+                    <li key={booked._id}>
+                      {session?.sessionTitle ||
+                        session?.subject ||
+                        'Booked a session'}
+                    </li>
+                  );
+                })}
+              {bookedCount === 0 && (
+                <li className="text-gray-500 text-sm">
+                  No activities yet.{' '}
+                  <Link
+                    href="/session"
+                    className="text-black font-semibold hover:underline"
+                  >
+                    Start by booking a session
+                  </Link>
                 </li>
               )}
-              {completedCount > 0 && (
-                <li>
-                  Completed {completedCount} session
-                  {completedCount > 1 ? 's' : ''}
-                </li>
-              )}
-              {materialsCount > 0 && (
-                <li>
-                  Accessed {materialsCount} study material
-                  {materialsCount > 1 ? 's' : ''}
-                </li>
-              )}
-              {progressPercent === 100 && bookedCount > 0 && (
-                <li>Achieved 100% progress on all sessions</li>
-              )}
-              {bookedCount === 0 &&
-                completedCount === 0 &&
-                materialsCount === 0 && (
-                  <li className="text-gray-500 text-sm">
-                    No activities yet.{' '}
-                    <Link
-                      href="/session"
-                      className="text-black font-semibold hover:underline"
-                    >
-                      Start by booking a session
-                    </Link>
-                  </li>
-                )}
             </ul>
           </div>
 
