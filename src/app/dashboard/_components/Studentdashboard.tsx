@@ -204,6 +204,9 @@ export default function StudentDashboard() {
                             <p
                               className={`font-medium ${isCompleted ? 'line-through text-gray-400' : 'text-gray-800'}`}
                             >
+                              Booked session {index + 1}
+                            </p>
+                            <p className="text-xs text-gray-500">
                               {session?.sessionTitle ||
                                 session?.title ||
                                 `Session #${index + 1}`}
@@ -255,10 +258,39 @@ export default function StudentDashboard() {
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h5 className="text-lg font-semibold mb-4">Recent Activities</h5>
             <ul className="space-y-2">
-              <li>Booked a session</li>
-              <li>Create study note</li>
-              <li>Joined CSS class</li>
-              <li>Completed React Quiz</li>
+              {bookedCount > 0 && (
+                <li>
+                  Booked {bookedCount} session{bookedCount > 1 ? 's' : ''}
+                </li>
+              )}
+              {completedCount > 0 && (
+                <li>
+                  Completed {completedCount} session
+                  {completedCount > 1 ? 's' : ''}
+                </li>
+              )}
+              {materialsCount > 0 && (
+                <li>
+                  Accessed {materialsCount} study material
+                  {materialsCount > 1 ? 's' : ''}
+                </li>
+              )}
+              {progressPercent === 100 && bookedCount > 0 && (
+                <li>Achieved 100% progress on all sessions</li>
+              )}
+              {bookedCount === 0 &&
+                completedCount === 0 &&
+                materialsCount === 0 && (
+                  <li className="text-gray-500 text-sm">
+                    No activities yet.{' '}
+                    <Link
+                      href="/session"
+                      className="text-black font-semibold hover:underline"
+                    >
+                      Start by booking a session
+                    </Link>
+                  </li>
+                )}
             </ul>
           </div>
 
@@ -273,20 +305,52 @@ export default function StudentDashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="border px-4 py-2 text-center">Upcoming</td>
-                  <td className="border px-4 py-2 text-center">
-                    Redux Toolkit
-                  </td>
-                  <td className="border px-4 py-2 text-center">Martin Jack</td>
-                </tr>
-                <tr>
-                  <td className="border px-4 py-2 text-center">Upcoming</td>
-                  <td className="border px-4 py-2 text-center">TypeScript</td>
-                  <td className="border px-4 py-2 text-center">
-                    Michael Brown
-                  </td>
-                </tr>
+                {(bookedSessions as BookedSession[]).length > 0 ? (
+                  (bookedSessions as BookedSession[])
+                    .filter(
+                      (booked) => !completedIds.includes(booked.sessionId),
+                    )
+                    .slice(0, 3)
+                    .map((booked: BookedSession) => {
+                      const session = sessionMap.get(booked.sessionId);
+                      return (
+                        <tr key={booked._id}>
+                          <td className="border px-4 py-2 text-center text-sm">
+                            {session?.classStartDate
+                              ? new Date(
+                                  session.classStartDate,
+                                ).toLocaleDateString()
+                              : session?.date
+                                ? new Date(session.date).toLocaleDateString()
+                                : 'TBA'}
+                          </td>
+                          <td className="border px-4 py-2 text-center text-sm">
+                            {session?.sessionTitle ||
+                              session?.subject ||
+                              'Untitled'}
+                          </td>
+                          <td className="border px-4 py-2 text-center text-sm">
+                            {session?.tutorName || booked.tutorEmail}
+                          </td>
+                        </tr>
+                      );
+                    })
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={3}
+                      className="border px-4 py-2 text-center text-gray-500 text-sm"
+                    >
+                      No upcoming sessions.{' '}
+                      <Link
+                        href="/session"
+                        className="text-black font-semibold hover:underline"
+                      >
+                        Browse sessions
+                      </Link>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
