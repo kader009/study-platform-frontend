@@ -20,12 +20,21 @@ const Page = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state: RootState) => state.login);
   const error = useAppSelector((state: RootState) => state.user.error);
+  const user = useAppSelector((state: RootState) => state.user.user);
+  const token = useAppSelector((state: RootState) => state.user.token);
   const [signIn, { isLoading }] = useLoginMutation();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {},
   );
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (user && token) {
+      router.replace('/dashboard');
+    }
+  }, [user, token, router]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
