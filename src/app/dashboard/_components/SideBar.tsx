@@ -122,16 +122,23 @@ const Sidebar = () => {
           Dashboard
         </Link>
         <ul className="space-y-2 flex-1 overflow-y-auto">
-          {filterLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="block py-2 px-4 hover:bg-gray-700 rounded cursor-pointer"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {filterLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`block py-2 px-4 rounded-full cursor-pointer transition duration-200 ${
+                    isActive
+                      ? 'bg-gray-500 text-white font-semibold shadow-lg'
+                      : 'text-gray-300 hover:bg-gray-700'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* User Profile Section */}
@@ -149,9 +156,7 @@ const Sidebar = () => {
             </div>
             <div className="text-center">
               <p className="text-sm font-semibold">{user?.name || 'User'}</p>
-              <p className="text-sm capitalize">
-                {user?.role || 'Role'}
-              </p>
+              <p className="text-sm capitalize">{user?.role || 'Role'}</p>
             </div>
           </div>
 
