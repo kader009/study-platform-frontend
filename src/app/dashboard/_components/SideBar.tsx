@@ -164,7 +164,7 @@ const Sidebar = () => {
           <div className="space-y-1">
             <Link
               href="/"
-              className="w-full py-2 px-3 rounded-lg text-sm transition flex items-center gap-3 hover:bg-gray-800"
+              className="w-full py-2 px-3 rounded-full text-sm transition flex items-center gap-3 hover:bg-gray-800"
             >
               <FaHome className="w-4 h-4 text-gray-400" />
               <span className="font-semibold">Back to Home</span>
@@ -172,7 +172,7 @@ const Sidebar = () => {
 
             <button
               onClick={handleLogout}
-              className="w-full py-2 px-3 rounded-lg text-sm transition cursor-pointer flex items-center gap-3 hover:bg-gray-800 text-red-400 hover:text-red-300"
+              className="w-full py-2 px-3 rounded-full text-sm transition cursor-pointer flex items-center gap-3 hover:bg-gray-800 text-red-400 hover:text-red-300"
             >
               <FaSignOutAlt className="w-4 h-4" />
               <span className="font-semibold">Logout</span>

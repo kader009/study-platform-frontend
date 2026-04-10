@@ -1,5 +1,5 @@
 'use client';
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { RootState } from '@/redux/store/store';
 import {
@@ -22,8 +22,6 @@ const Page = () => {
   const { name, email, photoUrl, password, role } = useAppSelector(
     (state: RootState) => state.register,
   );
-  const user = useAppSelector((state: RootState) => state.user.user);
-  const token = useAppSelector((state: RootState) => state.user.token);
   const [signUp] = useSignUpMutation();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -34,13 +32,6 @@ const Page = () => {
     photoUrl?: string;
     role?: string;
   }>({});
-
-  // Redirect if user is already logged in
-  useEffect(() => {
-    if (user && token) {
-      router.replace('/dashboard');
-    }
-  }, [user, token, router]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
