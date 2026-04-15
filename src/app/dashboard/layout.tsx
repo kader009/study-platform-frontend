@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen w-full">
       <Sidebar />
-      <main className="md:ml-48 min-h-screen overflow-y-auto">{children}</main>
+      <main className="md:ml-56 min-h-screen overflow-y-auto">{children}</main>
     </div>
   );
 };

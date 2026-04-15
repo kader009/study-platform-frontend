@@ -111,8 +111,8 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-black text-white p-4 w-48 transition-transform duration-300 z-40 flex flex-col overflow-hidden ${
-          isOpen ? 'translate-x-0' : '-translate-x-64'
+        className={`fixed top-0 left-0 h-screen bg-black text-white p-4 w-56 transition-transform duration-300 z-40 flex flex-col overflow-hidden ${
+          isOpen ? 'translate-x-0' : '-translate-x-56'
         } md:translate-x-0`}
       >
         <Link
